@@ -20,68 +20,69 @@ using System.Collections.Generic;
 
 namespace PackageStore.Managed
 {
-    public class DownloadManager
-    {
-        #region フィールド
+  public class DownloadManager
+  {
+    #region フィールド
 
-        private FrmDownload _instanceForms;
+    private FrmDownload _instanceForms;
 
-        public static List<Scheduler> _scheduleList;
+    public static List<Scheduler> _scheduleList;
 
-        #endregion
+    #endregion
 
-        #region プロパティ
+    #region プロパティ
 
-        public FrmDownload DownloadForms {
-            get {
-                if (this._instanceForms == null || this._instanceForms.IsDisposed) {
-                    this._instanceForms = new FrmDownload();
-                }
-
-                this._instanceForms.Activate();
-                return this._instanceForms;
-            }
-            set {
-                this._instanceForms = value;
-            }
+    public FrmDownload DownloadForms {
+      get {
+        if (this._instanceForms == null || this._instanceForms.IsDisposed) {
+          this._instanceForms = new FrmDownload();
         }
 
-        public static List<Scheduler> Schedules {
-            get {
-                if (_scheduleList == null) {
-                    _scheduleList = new List<Scheduler>();
-                }
-                return _scheduleList;
-            }
-            set {
-                _scheduleList = value;
-            }
-        }
-
-        #endregion
-
-        #region イベント
-
-        public static event EventHandler<SchedulerAddEventArgs> SchedulerAdd;
-
-        #endregion
-
-        protected virtual void OnSchedulerAdd(Scheduler scheduler)
-        {
-            SchedulerAdd?.Invoke(this, new SchedulerAddEventArgs(scheduler));
-        }
-
-        public void Add(Scheduler scheduler)
-        {
-            Schedules.Add(scheduler);
-            OnSchedulerAdd(scheduler);
-        }
-
-        public void QueueDownload()
-        {
-            Schedules.ForEach(x => {
-                if (x.Status == DownloadStatus.Pending) x.DownloadAsync();
-            });
-        }
+        this._instanceForms.Activate();
+        return this._instanceForms;
+      }
+      set {
+        this._instanceForms = value;
+      }
     }
+
+    public static List<Scheduler> Schedules {
+      get {
+        if (_scheduleList == null) {
+          _scheduleList = new List<Scheduler>();
+        }
+        return _scheduleList;
+      }
+      set {
+        _scheduleList = value;
+      }
+    }
+
+    #endregion
+
+    #region イベント
+
+    public static event EventHandler<SchedulerAddEventArgs> SchedulerAdd;
+
+    #endregion
+
+    protected virtual void OnSchedulerAdd(Scheduler scheduler)
+    {
+      SchedulerAdd?.Invoke(this, new SchedulerAddEventArgs(scheduler));
+    }
+
+    public void Add(Scheduler scheduler)
+    {
+      Schedules.Add(scheduler);
+      OnSchedulerAdd(scheduler);
+    }
+
+    public void QueueDownload()
+    {
+      Schedules.ForEach(x => {
+        if (x.Status == DownloadStatus.Pending)
+          x.DownloadAsync();
+      });
+    }
+  }
 }

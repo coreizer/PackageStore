@@ -17,12 +17,12 @@
 
 namespace PackageStore.Managed
 {
-    public enum DownloadStatus : int
-    {
-        Downloading = 0x06,
-        Pending = 0x00,
-        Failed = 0xFF,
-        Completed = 0x04,
-        Cancel = 0x05,
-    }
+  public enum DownloadStatus : int
+  {
+    Downloading = 0x06,
+    Pending = 0x00,
+    Failed = 0xFF,
+    Completed = 0x04,
+    Cancel = 0x05,
+  }
 }

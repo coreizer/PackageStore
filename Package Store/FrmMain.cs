@@ -75,7 +75,7 @@ namespace PackageStore
 
           if (this.packages != null && this.packages.Count != 0) {
             this.packages.ForEach(x => {
-              var item = new ListViewItem { Text = x.FileName };
+              ListViewItem item = new ListViewItem { Text = x.FileName };
               item.SubItems.AddRange(new[] { SizeOf(x.Size), x.Version, x.SupportVersion, x.Hash });
               this.listViewPackages.Items.Add(item);
             });
@@ -101,11 +101,11 @@ namespace PackageStore
     private List<PackageInfo> PackageSearch(string packageId)
     {
       ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(this.OnRemoteCertificateValidationCallback);
-      var packages = new List<PackageInfo>();
+      List<PackageInfo> packages = new List<PackageInfo>();
 
-      foreach (var server in this.Servers) {
+      foreach (string server in this.Servers) {
         try {
-          var xml = new XmlTextReader(server + packageId + "/" + packageId + "-ver.xml");
+          XmlTextReader xml = new XmlTextReader(server + packageId + "/" + packageId + "-ver.xml");
           do {
             if (xml.NodeType == XmlNodeType.Element && xml.Name == "package") {
               packages.Add(XmlToPackageConvert(ref xml));
@@ -117,7 +117,7 @@ namespace PackageStore
         }
         catch (WebException ex) {
           if (ex.Status == WebExceptionStatus.ProtocolError) {
-            var response = (HttpWebResponse)ex.Response;
+            HttpWebResponse response = (HttpWebResponse)ex.Response;
             switch (response.StatusCode) {
               case HttpStatusCode.NotFound:
               case HttpStatusCode.Forbidden:
@@ -143,7 +143,7 @@ namespace PackageStore
     private PackageInfo XmlToPackageConvert(ref XmlTextReader reader)
     {
       PackageInfo package = new PackageInfo();
-      for (var i = 0; i < reader.AttributeCount; i++) {
+      for (int i = 0; i < reader.AttributeCount; i++) {
         reader.MoveToNextAttribute();
         switch (reader.Name) {
           case "version":
@@ -159,8 +159,7 @@ namespace PackageStore
             package.SupportVersion = reader.Value;
             break;
           case "url":
-            var name = Path.GetFileName(reader.Value);
-            package.FileName = name;
+            package.FileName = Path.GetFileName(reader.Value);
             package.Address = new Uri(reader.Value);
             break;
         }
@@ -193,7 +192,7 @@ namespace PackageStore
       if (this.listViewPackages.SelectedIndices.Count == 0)
         return;
 
-      var FBD = new FolderBrowserDialog();
+      FolderBrowserDialog FBD = new FolderBrowserDialog();
       if (FBD.ShowDialog() == DialogResult.OK) {
         foreach (ListViewItem item in this.listViewPackages.SelectedItems) {
           this.downloader.Add(new Scheduler(this.packages[item.Index], FBD.SelectedPath));
@@ -216,7 +215,7 @@ namespace PackageStore
 
     private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      Process.Start("https://www.github.com/AlphaNyne/PackageStore");
+      Process.Start("https://www.github.com/AlphaNyne/Package-Store");
     }
   }
 }

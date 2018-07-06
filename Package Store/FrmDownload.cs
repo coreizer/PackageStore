@@ -26,38 +26,39 @@ using PackageStore.Managed;
 
 namespace PackageStore
 {
-    public partial class FrmDownload : Form
+  public partial class FrmDownload : Form
+  {
+    public FrmDownload()
     {
-        public FrmDownload()
-        {
-            InitializeComponent();
-      
-            DownloadManager.SchedulerAdd += this.DownloadManager_SchedulerAdd;
-        }
+      InitializeComponent();
 
-        private void DownloadManager_SchedulerAdd(object sender, SchedulerAddEventArgs e)
-        {
-            this.listViewPackages.Items.Clear();
-            DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
-        }
-
-        private void FrmDownload_Load(object sender, EventArgs e)
-        {
-            DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
-        }
-
-        private void ListViewPackages_ItemActivate(object sender, EventArgs e)
-        {
-            if (this.listViewPackages.SelectedIndices.Count == 0) return;
-
-            try {
-                var name = this.listViewPackages.SelectedItems[0].Text;
-                var scheduler = DownloadManager.Schedules.Where(x => x.Package.FileName == name).First();
-                Process.Start(Directory.GetParent(scheduler.Directory).FullName);
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+      DownloadManager.SchedulerAdd += this.DownloadManager_SchedulerAdd;
     }
+
+    private void DownloadManager_SchedulerAdd(object sender, SchedulerAddEventArgs e)
+    {
+      this.listViewPackages.Items.Clear();
+      DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
+    }
+
+    private void FrmDownload_Load(object sender, EventArgs e)
+    {
+      DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
+    }
+
+    private void ListViewPackages_ItemActivate(object sender, EventArgs e)
+    {
+      if (this.listViewPackages.SelectedIndices.Count == 0)
+        return;
+
+      try {
+        string name = this.listViewPackages.SelectedItems[0].Text;
+        Scheduler scheduler = DownloadManager.Schedules.Where(x => x.Package.FileName == name).First();
+        Process.Start(Directory.GetParent(scheduler.Directory).FullName);
+      }
+      catch (Exception ex) {
+        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
+  }
 }

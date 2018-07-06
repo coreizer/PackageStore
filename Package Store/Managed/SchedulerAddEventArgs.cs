@@ -19,27 +19,12 @@ using System;
 
 namespace PackageStore.Managed
 {
-    public class SchedulerAddEventArgs : EventArgs
-    {
-        #region フィールド
-
-        private Scheduler _scheduler;
-
-        #endregion
-
-        #region プロパティ
-
-        public Scheduler Scheduler {
-            get {
-                return this._scheduler;
-            }
-        }
-
-        #endregion
-
-        public SchedulerAddEventArgs(Scheduler scheduler)
-        {
-            this._scheduler = scheduler;
-        }
+  public class SchedulerAddEventArgs : EventArgs
+  {
+    public Scheduler Scheduler {
+      get;
     }
+
+    public SchedulerAddEventArgs(Scheduler scheduler) => this.Scheduler = scheduler;
+  }
 }

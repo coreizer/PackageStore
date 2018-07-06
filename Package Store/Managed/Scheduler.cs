@@ -22,91 +22,91 @@ using System.Windows.Forms;
 
 namespace PackageStore.Managed
 {
-    public class Scheduler
-    {
-        #region フィールド
+  public class Scheduler
+  {
+    #region フィールド
 
-        private string _fileName;
+    private string _fileName;
 
-        private WebClient _httpClient;
-        private ListViewItem _viewItem;
-        private PackageInfo _packageInfo;
+    private WebClient _httpClient;
+    private ListViewItem _viewItem;
+    private PackageInfo _packageInfo;
 
-        private DownloadStatus _status;
+    private DownloadStatus _status;
 
-        #endregion
+    #endregion
 
-        public DownloadStatus Status {
-            get {
-                return this._status;
-            }
-        }
-
-        public ListViewItem Item {
-            get {
-                return this._viewItem;
-            }
-        }
-
-        public PackageInfo Package {
-            get {
-                return this._packageInfo;
-            }
-        }
-
-        public string Directory {
-            get {
-                return this._fileName;
-            }
-        }
-
-        public Scheduler(PackageInfo packageInfo, string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName)) {
-                throw new ArgumentNullException();
-            }
-
-            this._packageInfo = packageInfo;
-            this._fileName = fileName;
-
-            var newItem = new ListViewItem { Text = packageInfo.FileName };
-            newItem.SubItems.AddRange(new[] {
-                Enum.GetName(typeof(DownloadStatus), this._status),
-                "0"
-            });
-            this._viewItem = newItem;
-
-            this._httpClient = new WebClient();
-            this._httpClient.DownloadFileCompleted += this.DownloadFileCompleted;
-            this._httpClient.DownloadProgressChanged += this.DownloadProgressChanged;
-        }
-
-        private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            this._viewItem.SubItems[1].Text = Enum.GetName(typeof(DownloadStatus), this._status);
-            this._viewItem.SubItems[2].Text = e.ProgressPercentage + "%";
-        }
-
-        private void DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            this._status = (!e.Cancelled && e.Error == null) ? DownloadStatus.Completed : DownloadStatus.Failed;
-            this._viewItem.SubItems[1].Text = Enum.GetName(typeof(DownloadStatus), this._status);
-        }
-
-        public void DownloadAsync()
-        {
-            this._status = DownloadStatus.Downloading;
-
-            if (!File.Exists(this._fileName)) {
-                this._fileName = Path.Combine(this._fileName, this._packageInfo.FileName);
-            }
-            this._httpClient.DownloadFileAsync(this._packageInfo.Address, this._fileName);
-        }
-
-        public void CancelAsync()
-        {
-            this._status = DownloadStatus.Cancel;
-            this._httpClient.CancelAsync();
-        }
+    public DownloadStatus Status {
+      get {
+        return this._status;
+      }
     }
+
+    public ListViewItem Item {
+      get {
+        return this._viewItem;
+      }
+    }
+
+    public PackageInfo Package {
+      get {
+        return this._packageInfo;
+      }
+    }
+
+    public string Directory {
+      get {
+        return this._fileName;
+      }
+    }
+
+    public Scheduler(PackageInfo packageInfo, string fileName)
+    {
+      if (string.IsNullOrWhiteSpace(fileName)) {
+        throw new ArgumentNullException();
+      }
+
+      this._packageInfo = packageInfo;
+      this._fileName = fileName;
+
+      ListViewItem newItem = new ListViewItem { Text = packageInfo.FileName };
+      newItem.SubItems.AddRange(new[] {
+        Enum.GetName(typeof(DownloadStatus), this._status),
+        "0"
+      });
+      this._viewItem = newItem;
+
+      this._httpClient = new WebClient();
+      this._httpClient.DownloadFileCompleted += this.DownloadFileCompleted;
+      this._httpClient.DownloadProgressChanged += this.DownloadProgressChanged;
+    }
+
+    private void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+    {
+      this._viewItem.SubItems[1].Text = Enum.GetName(typeof(DownloadStatus), this._status);
+      this._viewItem.SubItems[2].Text = e.ProgressPercentage + "%";
+    }
+
+    private void DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+    {
+      this._status = (!e.Cancelled && e.Error == null) ? DownloadStatus.Completed : DownloadStatus.Failed;
+      this._viewItem.SubItems[1].Text = Enum.GetName(typeof(DownloadStatus), this._status);
+    }
+
+    public void DownloadAsync()
+    {
+      this._status = DownloadStatus.Downloading;
+
+      if (!File.Exists(this._fileName)) {
+        this._fileName = Path.Combine(this._fileName, this._packageInfo.FileName);
+      }
+      this._httpClient.DownloadFileAsync(this._packageInfo.Address, this._fileName);
+    }
+
+    public void CancelAsync()
+    {
+      this._status = DownloadStatus.Cancel;
+      this._httpClient.CancelAsync();
+    }
+  }
 }

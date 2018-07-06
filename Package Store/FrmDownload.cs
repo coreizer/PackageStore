@@ -48,8 +48,9 @@ namespace PackageStore
 
     private void ListViewPackages_ItemActivate(object sender, EventArgs e)
     {
-      if (this.listViewPackages.SelectedIndices.Count == 0)
+      if (this.listViewPackages.SelectedIndices.Count == 0) {
         return;
+      }
 
       try {
         string name = this.listViewPackages.SelectedItems[0].Text;

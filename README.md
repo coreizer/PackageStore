@@ -1,3 +1,3 @@
 #LOL
 
-<img src="./img/PackageStore.png">
+<img src="./doc/PackageStore.png">

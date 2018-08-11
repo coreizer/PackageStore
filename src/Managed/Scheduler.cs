@@ -27,8 +27,7 @@ namespace PackageStore.Managed
     private readonly WebClient client;
 
     public DownloadStatus Status {
-      get;
-      private set;
+      get; private set;
     }
 
     public ListViewItem Item {
@@ -40,8 +39,7 @@ namespace PackageStore.Managed
     }
 
     public string Directory {
-      get;
-      private set;
+      get; private set;
     }
 
     public Scheduler(PackageInfo packageInfo, string fileName)
@@ -89,7 +87,7 @@ namespace PackageStore.Managed
 
     public void CancelAsync()
     {
-      this.Status = DownloadStatus.Cancel;
+      this.Status = DownloadStatus.Cancelled;
       this.client.CancelAsync();
     }
   }

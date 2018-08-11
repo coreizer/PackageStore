@@ -199,13 +199,13 @@ namespace PackageStore
         }
 
         this.downloader.QueueDownload();
-        this.downloader.DownloadForms.Show();
+        this.downloader.Form.Show();
       }
     }
 
     private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      this.downloader.DownloadForms.Show();
+      this.downloader.Form.Show();
     }
 
     private void AboutToolStripMenuItem_Click(object sender, EventArgs e)

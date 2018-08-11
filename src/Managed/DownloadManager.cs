@@ -22,49 +22,37 @@ namespace PackageStore.Managed
 {
   public class DownloadManager
   {
-    #region フィールド
+    private FrmDownload form;
 
-    private FrmDownload _instanceForms;
+    private static List<Scheduler> SchedulerCollection;
 
-    public static List<Scheduler> _scheduleList;
-
-    #endregion
-
-    #region プロパティ
-
-    public FrmDownload DownloadForms {
+    public FrmDownload Form {
       get {
-        if (this._instanceForms == null || this._instanceForms.IsDisposed) {
-          this._instanceForms = new FrmDownload();
+        if (this.form == null || this.form.IsDisposed) {
+          this.form = new FrmDownload();
         }
 
-        this._instanceForms.Activate();
-        return this._instanceForms;
+        this.form.Activate();
+        return this.form;
       }
       set {
-        this._instanceForms = value;
+        this.form = value;
       }
     }
 
     public static List<Scheduler> Schedules {
       get {
-        if (_scheduleList == null) {
-          _scheduleList = new List<Scheduler>();
+        if (SchedulerCollection == null) {
+          SchedulerCollection = new List<Scheduler>();
         }
-        return _scheduleList;
+        return SchedulerCollection;
       }
       set {
-        _scheduleList = value;
+        SchedulerCollection = value;
       }
     }
 
-    #endregion
-
-    #region イベント
-
     public static event EventHandler<SchedulerAddEventArgs> SchedulerAdd;
-
-    #endregion
 
     protected virtual void OnSchedulerAdd(Scheduler scheduler)
     {

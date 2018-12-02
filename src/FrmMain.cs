@@ -32,23 +32,25 @@ namespace PackageStore
 {
   public partial class FrmMain : Form
   {
+    const string Github = "https://www.github.com/AlphaNyne/Package-Store";
+
     private readonly string[] SizePrefix = {
       "K", "KB", "MB",
       "GB", "TB", "PB",
       "EB", "ZB", "YB"
     };
 
-    private readonly string[] Servers = {
+    private readonly string[] SonyServers = {
       "https://a0.ww.np.dl.playstation.net/tpl/np/",
       "http://b0.ww.np.dl.playstation.net/tppkg/np/",
       "https://sonycoment-1-ht.ocs.llnw.net/tppkg/np/",
-      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
+      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/",
     };
 
     private string packageId;
     private string packageName;
 
-    private List<PackageInfo> packages = new List<PackageInfo>();
+    private List<PackageInfo> packageItems = new List<PackageInfo>();
     private DownloadManager downloader = new DownloadManager();
 
     public FrmMain()
@@ -61,6 +63,7 @@ namespace PackageStore
     private async void ButtonSearch_Click(object sender, EventArgs e)
     {
       try {
+        this.UseWaitCursor = true;
         this.textBoxPackageId.Text = this.textBoxPackageId.Text.ToUpper();
         this.packageId = this.textBoxPackageId.Text.ToUpper();
 
@@ -68,13 +71,13 @@ namespace PackageStore
           this.buttonSearch.Enabled = false;
           this.listViewPackages.Items.Clear();
 
-          this.packages.Clear();
-          this.packages = await Task<List<PackageInfo>>.Factory.StartNew(() => {
+          this.packageItems.Clear();
+          this.packageItems = await Task<List<PackageInfo>>.Factory.StartNew(() => {
             return PackageSearch(this.packageId);
           });
 
-          if (this.packages != null && this.packages.Count != 0) {
-            this.packages.ForEach(x => {
+          if (this.packageItems != null && this.packageItems.Count != 0) {
+            this.packageItems.ForEach(x => {
               ListViewItem item = new ListViewItem { Text = x.FileName };
               item.SubItems.AddRange(new[] { SizeOf(x.Size), x.Version, x.SupportVersion, x.Hash });
               this.listViewPackages.Items.Add(item);
@@ -93,6 +96,7 @@ namespace PackageStore
       }
       finally {
         this.buttonSearch.Enabled = true;
+        this.UseWaitCursor = false;
       }
     }
 
@@ -103,7 +107,7 @@ namespace PackageStore
       ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(this.OnRemoteCertificateValidationCallback);
       List<PackageInfo> packages = new List<PackageInfo>();
 
-      foreach (string server in this.Servers) {
+      foreach (string server in this.SonyServers) {
         try {
           XmlTextReader xml = new XmlTextReader(server + packageId + "/" + packageId + "-ver.xml");
           do {
@@ -195,7 +199,7 @@ namespace PackageStore
       FolderBrowserDialog FBD = new FolderBrowserDialog();
       if (FBD.ShowDialog() == DialogResult.OK) {
         foreach (ListViewItem item in this.listViewPackages.SelectedItems) {
-          this.downloader.Add(new Scheduler(this.packages[item.Index], FBD.SelectedPath));
+          this.downloader.Push(new Scheduler(this.packageItems[item.Index], FBD.SelectedPath));
         }
 
         this.downloader.QueueDownload();
@@ -215,7 +219,7 @@ namespace PackageStore
 
     private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      Process.Start("https://www.github.com/AlphaNyne/Package-Store");
+      Process.Start(Github);
     }
   }
 }

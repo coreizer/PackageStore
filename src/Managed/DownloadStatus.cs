@@ -17,34 +17,12 @@
 
 namespace PackageStore.Managed
 {
-  /// <summary>
-  /// ダウンロードステータス
-  /// </summary>
-  public enum DownloadStatus : int
+  public enum DownloadStatus
   {
-    /// <summary>
-    /// ダウンロードしています
-    /// </summary>
-    Downloading = 0x06,
-
-    /// <summary>
-    /// 中断しています
-    /// </summary>
-    Pending = 0x00,
-
-    /// <summary>
-    /// 失敗しました
-    /// </summary>
-    Failed = 0xFF,
-
-    /// <summary>
-    /// 完了しました
-    /// </summary>
-    Completed = 0x04,
-
-    /// <summary>
-    /// キャンセルされた
-    /// </summary>
-    Cancelled = 0x05,
+    Downloading,
+    Pending,
+    Failed,
+    Completed,
+    Cancelled,
   }
 }

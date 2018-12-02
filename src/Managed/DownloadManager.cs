@@ -24,7 +24,7 @@ namespace PackageStore.Managed
   {
     private FrmDownload form;
 
-    private static List<Scheduler> SchedulerCollection;
+    private static List<Scheduler> SchedulerItems;
 
     public FrmDownload Form {
       get {
@@ -42,27 +42,27 @@ namespace PackageStore.Managed
 
     public static List<Scheduler> Schedules {
       get {
-        if (SchedulerCollection == null) {
-          SchedulerCollection = new List<Scheduler>();
+        if (SchedulerItems == null) {
+          SchedulerItems = new List<Scheduler>();
         }
-        return SchedulerCollection;
+        return SchedulerItems;
       }
       set {
-        SchedulerCollection = value;
+        SchedulerItems = value;
       }
     }
 
     public static event EventHandler<SchedulerAddEventArgs> SchedulerAdd;
 
-    protected virtual void OnSchedulerAdd(Scheduler scheduler)
+    protected virtual void OnSchedulerAdd(Scheduler item)
     {
-      SchedulerAdd?.Invoke(this, new SchedulerAddEventArgs(scheduler));
+      SchedulerAdd?.Invoke(this, new SchedulerAddEventArgs(item));
     }
 
-    public void Add(Scheduler scheduler)
+    public void Push(Scheduler item)
     {
-      Schedules.Add(scheduler);
-      OnSchedulerAdd(scheduler);
+      Schedules.Add(item);
+      OnSchedulerAdd(item);
     }
 
     public void QueueDownload()

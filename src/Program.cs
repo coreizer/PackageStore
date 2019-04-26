@@ -30,6 +30,12 @@ namespace PackageStore
     {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
+
+      // ネットワークが利用可能どうかを確認します。
+      if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
+        throw new System.Net.NetworkInformation.NetworkInformationException();
+      }
+
       Application.Run(new FrmMain());
     }
   }

@@ -40,7 +40,7 @@ namespace PackageStore
       "EB", "ZB", "YB"
     };
 
-    private readonly string[] SonyServers = {
+    private readonly string[] SonyServer = {
       "https://a0.ww.np.dl.playstation.net/tpl/np/",
       "http://b0.ww.np.dl.playstation.net/tppkg/np/",
       "https://sonycoment-1-ht.ocs.llnw.net/tppkg/np/",
@@ -55,7 +55,7 @@ namespace PackageStore
 
     public FrmMain()
     {
-      InitializeComponent();
+      this.InitializeComponent();
 
       ServicePointManager.DefaultConnectionLimit = 30;
     }
@@ -67,19 +67,19 @@ namespace PackageStore
         this.textBoxPackageId.Text = this.textBoxPackageId.Text.ToUpper();
         this.packageId = this.textBoxPackageId.Text.ToUpper();
 
-        if (IsValid(this.packageId) || this.checkBoxForce.Checked) {
+        if (this.IsValid(this.packageId) || this.checkBoxForce.Checked) {
           this.buttonSearch.Enabled = false;
           this.listViewPackages.Items.Clear();
 
           this.packageItems.Clear();
           this.packageItems = await Task<List<PackageInfo>>.Factory.StartNew(() => {
-            return PackageSearch(this.packageId);
+            return this.PackageSearch(this.packageId);
           });
 
           if (this.packageItems != null && this.packageItems.Count != 0) {
             this.packageItems.ForEach(x => {
               ListViewItem item = new ListViewItem { Text = x.FileName };
-              item.SubItems.AddRange(new[] { SizeOf(x.Size), x.Version, x.SupportVersion, x.Hash });
+              item.SubItems.AddRange(new[] { this.SizeOf(x.Size), x.Version, x.SupportVersion, x.Hash });
               this.listViewPackages.Items.Add(item);
             });
           }
@@ -107,12 +107,12 @@ namespace PackageStore
       ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(this.OnRemoteCertificateValidationCallback);
       List<PackageInfo> packages = new List<PackageInfo>();
 
-      foreach (string server in this.SonyServers) {
+      foreach (string server in this.SonyServer) {
         try {
           XmlTextReader xml = new XmlTextReader(server + packageId + "/" + packageId + "-ver.xml");
           do {
             if (xml.NodeType == XmlNodeType.Element && xml.Name == "package") {
-              packages.Add(XmlToPackageConvert(ref xml));
+              packages.Add(this.XmlToPackageConvert(ref xml));
             }
             else if (xml.NodeType == XmlNodeType.Text) {
               this.packageName = xml.Value;
@@ -147,7 +147,8 @@ namespace PackageStore
     private PackageInfo XmlToPackageConvert(ref XmlTextReader reader)
     {
       PackageInfo package = new PackageInfo();
-      for (int i = 0; i < reader.AttributeCount; i++) {
+
+      for (int i = 0 ;i < reader.AttributeCount ;i++) {
         reader.MoveToNextAttribute();
         switch (reader.Name) {
           case "version":
@@ -207,19 +208,13 @@ namespace PackageStore
       }
     }
 
-    private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e) =>
       this.downloader.Form.Show();
-    }
 
-    private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void AboutToolStripMenuItem_Click(object sender, EventArgs e) =>
       MessageBox.Show("Made by AlphaNyne", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-    }
 
-    private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
-    {
+    private void GithubToolStripMenuItem_Click(object sender, EventArgs e) =>
       Process.Start(Github);
-    }
   }
 }

@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2018 AlphaNyne
+ * Copyright (c) 2017-2019 AlphaNyne
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,8 @@ namespace PackageStore.Managed
     private readonly WebClient client;
 
     public DownloadStatus Status {
-      get; private set;
+      get;
+      private set;
     }
 
     public ListViewItem Item {
@@ -39,19 +40,20 @@ namespace PackageStore.Managed
     }
 
     public string Directory {
-      get; private set;
+      get;
+      private set;
     }
 
-    public Scheduler(PackageInfo packageInfo, string fileName)
+    public Scheduler(PackageInfo package, string fileName)
     {
       if (string.IsNullOrWhiteSpace(fileName)) {
         throw new ArgumentNullException();
       }
 
-      this.Package = packageInfo;
+      this.Package = package;
       this.Directory = fileName;
 
-      ListViewItem newItem = new ListViewItem { Text = packageInfo.FileName };
+      ListViewItem newItem = new ListViewItem { Text = package.FileName };
       newItem.SubItems.AddRange(new[] {
         Enum.GetName(typeof(DownloadStatus), this.Status),
         "0"
@@ -82,7 +84,7 @@ namespace PackageStore.Managed
       if (!File.Exists(this.Directory)) {
         this.Directory = Path.Combine(this.Directory, this.Package.FileName);
       }
-      this.client.DownloadFileAsync(this.Package.Address, this.Directory);
+      this.client.DownloadFileAsync(this.Package.Url, this.Directory);
     }
 
     public void CancelAsync()

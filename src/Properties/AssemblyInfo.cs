@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2018 AlphaNyne
+ * Copyright (c) 2017-2019 AlphaNyne
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +23,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Package Store")]
+[assembly: AssemblyTitle("PackageStore")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Package Store")]
-[assembly: AssemblyCopyright("© AlphaNyne 2017")]
+[assembly: AssemblyProduct("PackageStore")]
+[assembly: AssemblyCopyright("© AlphaNyne 2017-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

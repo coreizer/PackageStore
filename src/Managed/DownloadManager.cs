@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2018 AlphaNyne
+ * Copyright (c) 2017-2019 AlphaNyne
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ namespace PackageStore.Managed
     public void Push(Scheduler item)
     {
       Schedules.Add(item);
-      OnSchedulerAdd(item);
+      this.OnSchedulerAdd(item);
     }
 
     public void QueueDownload()

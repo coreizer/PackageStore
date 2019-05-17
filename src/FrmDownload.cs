@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2018 AlphaNyne
+ * Copyright (c) 2017-2019 AlphaNyne
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ namespace PackageStore
   {
     public FrmDownload()
     {
-      InitializeComponent();
+      this.InitializeComponent();
 
       DownloadManager.SchedulerAdd += this.DownloadManager_SchedulerAdd;
     }
@@ -41,10 +41,8 @@ namespace PackageStore
       DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
     }
 
-    private void FrmDownload_Load(object sender, EventArgs e)
-    {
+    private void FrmDownload_Load(object sender, EventArgs e) =>
       DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
-    }
 
     private void ListViewPackages_ItemActivate(object sender, EventArgs e)
     {

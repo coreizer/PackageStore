@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2018 AlphaNyne
+ * Copyright (c) 2017-2019 AlphaNyne
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -105,14 +105,14 @@ namespace PackageStore
     private List<PackageInfo> PackageSearch(string packageId)
     {
       ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(this.OnRemoteCertificateValidationCallback);
-      List<PackageInfo> packages = new List<PackageInfo>();
+      List<PackageInfo> package = new List<PackageInfo>();
 
       foreach (string server in this.SonyServer) {
         try {
           XmlTextReader xml = new XmlTextReader(server + packageId + "/" + packageId + "-ver.xml");
           do {
             if (xml.NodeType == XmlNodeType.Element && xml.Name == "package") {
-              packages.Add(this.XmlToPackageConvert(ref xml));
+              package.Add(this.XmlToPackageConvert(ref xml));
             }
             else if (xml.NodeType == XmlNodeType.Text) {
               this.packageName = xml.Value;
@@ -141,7 +141,7 @@ namespace PackageStore
         }
       }
 
-      return packages;
+      return package;
     }
 
     private PackageInfo XmlToPackageConvert(ref XmlTextReader reader)
@@ -165,7 +165,7 @@ namespace PackageStore
             break;
           case "url":
             package.FileName = Path.GetFileName(reader.Value);
-            package.Address = new Uri(reader.Value);
+            package.Url = new Uri(reader.Value);
             break;
         }
       }
@@ -178,6 +178,7 @@ namespace PackageStore
       if (packageId.Length == 9) {
         return System.Text.RegularExpressions.Regex.IsMatch(packageId, "^[A-Z0-9]");
       }
+
       return false;
     }
 

@@ -15,14 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
+
 namespace PackageStore.Managed
 {
-  public enum DownloadStatus
+  public sealed class JobAddEventArgs : EventArgs
   {
-    Downloading,
-    Pending,
-    Failed,
-    Completed,
-    Cancelled,
+    public JobContainer Job {
+      get;
+    }
+
+    public JobAddEventArgs(JobContainer job) => this.Job = job;
   }
 }

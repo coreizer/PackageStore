@@ -15,17 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-
-namespace PackageStore
+namespace PackageStore.Enums
 {
-  public struct PackageInfo
+  public enum DownloadStatus
   {
-    public string FileName;
-    public string Version;
-    public string SupportVersion;
-    public long Size;
-    public string Hash;
-    public Uri Url;
+    /// <summary>
+    /// Download has failed.
+    /// </summary>
+    Failed,
+
+    /// <summary>
+    /// Download is waiting to start.
+    /// </summary>
+    Pending,
+
+    /// <summary>
+    /// Download is currently running.
+    /// </summary>
+    Downloading,
+
+    /// <summary>
+    /// Download has successfully completed.
+    /// </summary>
+    Successful,
   }
 }

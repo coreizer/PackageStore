@@ -18,59 +18,59 @@
 using System;
 using System.Collections.Generic;
 
+using PackageStore.Enums;
+
 namespace PackageStore.Managed
 {
   public class DownloadManager
   {
-    private FrmDownload form;
+    public static event EventHandler<JobAddEventArgs> JobAdd;
 
-    private static List<Scheduler> SchedulerItems;
+    private static List<JobContainer> _jobItems;
 
-    public FrmDownload Form {
+    public static List<JobContainer> JobItems {
       get {
-        if (this.form == null || this.form.IsDisposed) {
-          this.form = new FrmDownload();
+        if (_jobItems == null) {
+          _jobItems = new List<JobContainer>();
+        }
+        return _jobItems;
+      }
+      set => _jobItems = value;
+    }
+
+    public static string Directory {
+      get;
+      set;
+    }
+
+    private frmDownloader _instance;
+    public frmDownloader Form {
+      get {
+        if (this._instance == null || this._instance.IsDisposed) {
+          this._instance = new frmDownloader();
         }
 
-        this.form.Activate();
-        return this.form;
+        this._instance.Activate();
+        this._instance.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+
+        return this._instance;
       }
-      set {
-        this.form = value;
-      }
+      set => this._instance = value;
     }
 
-    public static List<Scheduler> Schedules {
-      get {
-        if (SchedulerItems == null) {
-          SchedulerItems = new List<Scheduler>();
-        }
-        return SchedulerItems;
-      }
-      set {
-        SchedulerItems = value;
-      }
-    }
-
-    public static event EventHandler<SchedulerAddEventArgs> SchedulerAdd;
-
-    protected virtual void OnSchedulerAdd(Scheduler item)
-    {
-      SchedulerAdd?.Invoke(this, new SchedulerAddEventArgs(item));
-    }
-
-    public void Push(Scheduler item)
-    {
-      Schedules.Add(item);
-      this.OnSchedulerAdd(item);
-    }
-
-    public void QueueDownload()
-    {
-      Schedules.ForEach(x => {
-        if (x.Status == DownloadStatus.Pending)
+    public void Start() =>
+      JobItems.ForEach(x => {
+        if (x.Status != DownloadStatus.Successful)
           x.DownloadAsync();
       });
+
+    public void Add(JobContainer job)
+    {
+      JobItems.Add(job);
+      this.OnJobItemAdd(job);
     }
+
+    protected virtual void OnJobItemAdd(JobContainer job) =>
+      JobAdd?.Invoke(this, new JobAddEventArgs(job));
   }
 }

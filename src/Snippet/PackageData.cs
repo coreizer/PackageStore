@@ -16,15 +16,19 @@
  */
 
 using System;
+using System.Windows.Forms;
 
-namespace PackageStore.Managed
+using ByteSizeLib;
+
+namespace PackageStore.Snippet
 {
-  public class SchedulerAddEventArgs : EventArgs
+  public struct PackageData
   {
-    public Scheduler Scheduler {
-      get;
-    }
-
-    public SchedulerAddEventArgs(Scheduler scheduler) => this.Scheduler = scheduler;
+    public string Name;
+    public string Version;
+    public string SupportVersion;
+    public string Size;
+    public string Hash;
+    public Uri Url;
   }
 }

@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+      this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,13 +40,20 @@
       this.checkBoxForce = new System.Windows.Forms.CheckBox();
       this.buttonSearch = new System.Windows.Forms.Button();
       this.labelPackageId = new System.Windows.Forms.Label();
-      this.listViewPackages = new System.Windows.Forms.ListView();
+      this.listViewPackage = new System.Windows.Forms.ListView();
       this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
       this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+      this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+      this.copyToURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+      this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
       this.menuStrip1.SuspendLayout();
+      this.contextMenuStrip1.SuspendLayout();
+      this.statusStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
       // menuStrip1
@@ -53,25 +61,20 @@
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-      this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+      resources.ApplyResources(this.menuStrip1, "menuStrip1");
       this.menuStrip1.Name = "menuStrip1";
-      this.menuStrip1.Size = new System.Drawing.Size(705, 24);
-      this.menuStrip1.TabIndex = 0;
-      this.menuStrip1.Text = "menuStrip1";
       // 
       // toolsToolStripMenuItem
       // 
       this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.downloadManagerToolStripMenuItem});
       this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-      this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-      this.toolsToolStripMenuItem.Text = "Tools";
+      resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
       // 
       // downloadManagerToolStripMenuItem
       // 
       this.downloadManagerToolStripMenuItem.Name = "downloadManagerToolStripMenuItem";
-      this.downloadManagerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-      this.downloadManagerToolStripMenuItem.Text = "Download Manager";
+      resources.ApplyResources(this.downloadManagerToolStripMenuItem, "downloadManagerToolStripMenuItem");
       this.downloadManagerToolStripMenuItem.Click += new System.EventHandler(this.DownloadManagerToolStripMenuItem_Click);
       // 
       // helpToolStripMenuItem
@@ -81,128 +84,137 @@
             this.toolStripSeparator1,
             this.githubToolStripMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-      this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-      this.helpToolStripMenuItem.Text = "Help";
+      resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
       // 
       // aboutToolStripMenuItem
       // 
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-      this.aboutToolStripMenuItem.Text = "About";
+      resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(107, 6);
+      resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
       // 
       // githubToolStripMenuItem
       // 
       this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-      this.githubToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
-      this.githubToolStripMenuItem.Text = "Github";
+      resources.ApplyResources(this.githubToolStripMenuItem, "githubToolStripMenuItem");
       this.githubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItem_Click);
       // 
       // textBoxPackageId
       // 
-      this.textBoxPackageId.Location = new System.Drawing.Point(87, 41);
+      resources.ApplyResources(this.textBoxPackageId, "textBoxPackageId");
       this.textBoxPackageId.Name = "textBoxPackageId";
-      this.textBoxPackageId.Size = new System.Drawing.Size(216, 19);
-      this.textBoxPackageId.TabIndex = 1;
       // 
       // checkBoxForce
       // 
-      this.checkBoxForce.AutoSize = true;
-      this.checkBoxForce.Location = new System.Drawing.Point(309, 44);
+      resources.ApplyResources(this.checkBoxForce, "checkBoxForce");
       this.checkBoxForce.Name = "checkBoxForce";
-      this.checkBoxForce.Size = new System.Drawing.Size(53, 16);
-      this.checkBoxForce.TabIndex = 2;
-      this.checkBoxForce.Text = "Force";
       this.checkBoxForce.UseVisualStyleBackColor = true;
       // 
       // buttonSearch
       // 
-      this.buttonSearch.Location = new System.Drawing.Point(574, 38);
+      resources.ApplyResources(this.buttonSearch, "buttonSearch");
       this.buttonSearch.Name = "buttonSearch";
-      this.buttonSearch.Size = new System.Drawing.Size(119, 25);
-      this.buttonSearch.TabIndex = 3;
-      this.buttonSearch.Text = "Search";
       this.buttonSearch.UseVisualStyleBackColor = true;
       this.buttonSearch.Click += new System.EventHandler(this.ButtonSearch_Click);
       // 
       // labelPackageId
       // 
-      this.labelPackageId.AutoSize = true;
-      this.labelPackageId.Location = new System.Drawing.Point(10, 45);
+      resources.ApplyResources(this.labelPackageId, "labelPackageId");
       this.labelPackageId.Name = "labelPackageId";
-      this.labelPackageId.Size = new System.Drawing.Size(71, 12);
-      this.labelPackageId.TabIndex = 4;
-      this.labelPackageId.Text = "Package Id : ";
       // 
-      // listViewPackages
+      // listViewPackage
       // 
-      this.listViewPackages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.listViewPackages.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+      resources.ApplyResources(this.listViewPackage, "listViewPackage");
+      this.listViewPackage.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
-      this.listViewPackages.FullRowSelect = true;
-      this.listViewPackages.GridLines = true;
-      this.listViewPackages.Location = new System.Drawing.Point(12, 69);
-      this.listViewPackages.Name = "listViewPackages";
-      this.listViewPackages.Size = new System.Drawing.Size(681, 310);
-      this.listViewPackages.TabIndex = 5;
-      this.listViewPackages.UseCompatibleStateImageBehavior = false;
-      this.listViewPackages.View = System.Windows.Forms.View.Details;
-      this.listViewPackages.ItemActivate += new System.EventHandler(this.ListViewPackages_ItemActivate);
+      this.listViewPackage.ContextMenuStrip = this.contextMenuStrip1;
+      this.listViewPackage.FullRowSelect = true;
+      this.listViewPackage.GridLines = true;
+      this.listViewPackage.Name = "listViewPackage";
+      this.listViewPackage.UseCompatibleStateImageBehavior = false;
+      this.listViewPackage.View = System.Windows.Forms.View.Details;
+      this.listViewPackage.ItemActivate += new System.EventHandler(this.ListViewPackages_ItemActivate);
       // 
       // columnHeader1
       // 
-      this.columnHeader1.Text = "FileName";
-      this.columnHeader1.Width = 185;
+      resources.ApplyResources(this.columnHeader1, "columnHeader1");
       // 
       // columnHeader2
       // 
-      this.columnHeader2.Text = "Size";
-      this.columnHeader2.Width = 130;
+      resources.ApplyResources(this.columnHeader2, "columnHeader2");
       // 
       // columnHeader3
       // 
-      this.columnHeader3.Text = "Version";
+      resources.ApplyResources(this.columnHeader3, "columnHeader3");
       // 
       // columnHeader4
       // 
-      this.columnHeader4.Text = "Support Version";
+      resources.ApplyResources(this.columnHeader4, "columnHeader4");
       // 
       // columnHeader5
       // 
-      this.columnHeader5.Text = "Hash";
-      this.columnHeader5.Width = 242;
+      resources.ApplyResources(this.columnHeader5, "columnHeader5");
+      // 
+      // contextMenuStrip1
+      // 
+      this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToURLToolStripMenuItem});
+      this.contextMenuStrip1.Name = "contextMenuStrip1";
+      resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+      // 
+      // copyToURLToolStripMenuItem
+      // 
+      this.copyToURLToolStripMenuItem.Name = "copyToURLToolStripMenuItem";
+      resources.ApplyResources(this.copyToURLToolStripMenuItem, "copyToURLToolStripMenuItem");
+      this.copyToURLToolStripMenuItem.Click += new System.EventHandler(this.CopyToURLToolStripMenuItem_Click);
+      // 
+      // statusStrip1
+      // 
+      this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
+      resources.ApplyResources(this.statusStrip1, "statusStrip1");
+      this.statusStrip1.Name = "statusStrip1";
+      // 
+      // toolStripStatusLabel1
+      // 
+      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+      resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+      // 
+      // toolStripStatusLabel2
+      // 
+      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+      resources.ApplyResources(this.toolStripStatusLabel2, "toolStripStatusLabel2");
+      this.toolStripStatusLabel2.Spring = true;
       // 
       // FrmMain
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+      resources.ApplyResources(this, "$this");
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(705, 391);
-      this.Controls.Add(this.listViewPackages);
+      this.Controls.Add(this.statusStrip1);
+      this.Controls.Add(this.listViewPackage);
       this.Controls.Add(this.labelPackageId);
       this.Controls.Add(this.buttonSearch);
       this.Controls.Add(this.checkBoxForce);
       this.Controls.Add(this.textBoxPackageId);
       this.Controls.Add(this.menuStrip1);
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MainMenuStrip = this.menuStrip1;
       this.MaximizeBox = false;
       this.Name = "FrmMain";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Package Store";
+      this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
+      this.contextMenuStrip1.ResumeLayout(false);
+      this.statusStrip1.ResumeLayout(false);
+      this.statusStrip1.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -220,13 +232,18 @@
         private System.Windows.Forms.CheckBox checkBoxForce;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label labelPackageId;
-        private System.Windows.Forms.ListView listViewPackages;
+        private System.Windows.Forms.ListView listViewPackage;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-    }
+    private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+    private System.Windows.Forms.ToolStripMenuItem copyToURLToolStripMenuItem;
+    private System.Windows.Forms.StatusStrip statusStrip1;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+  }
 }
 

@@ -118,6 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBoxForce.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 16</value>
+  </data>
+  <data name="checkBoxForce.Text" xml:space="preserve">
+    <value>強制</value>
+  </data>
+  <data name="buttonSearch.Text" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="labelPackageId.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 12</value>
+  </data>
+  <data name="labelPackageId.Text" xml:space="preserve">
+    <value>パッケージ Id : </value>
+  </data>
+  <data name="columnHeader1.Text" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="columnHeader2.Text" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="columnHeader3.Text" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="columnHeader4.Text" xml:space="preserve">
+    <value>サポートバージョン</value>
+  </data>
+  <data name="columnHeader5.Text" xml:space="preserve">
+    <value>ハッシュ</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAYAEBAAAAAAIABoBAAAZgAAACAgAAAAACAAqBAAAM4EAAAwMAAAAAAgAKglAAB2FQAAQEAAAAAA

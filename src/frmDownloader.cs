@@ -16,7 +16,6 @@
  */
 
 using System;
-using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -26,34 +25,33 @@ using PackageStore.Managed;
 
 namespace PackageStore
 {
-  public partial class FrmDownload : Form
+  public partial class frmDownloader : Form
   {
-    public FrmDownload()
+    public frmDownloader()
     {
       this.InitializeComponent();
 
-      DownloadManager.SchedulerAdd += this.DownloadManager_SchedulerAdd;
+      DownloadManager.JobAdd += this.DownloadManager_JobAdd;
     }
 
-    private void DownloadManager_SchedulerAdd(object sender, SchedulerAddEventArgs e)
+    private void DownloadManager_JobAdd(object sender, JobAddEventArgs e)
     {
-      this.listViewPackages.Items.Clear();
-      DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
+      this.listViewPackage.Items.Clear();
+      DownloadManager.JobItems.ForEach(x => this.listViewPackage.Items.Add(x.ViewItem));
     }
 
     private void FrmDownload_Load(object sender, EventArgs e) =>
-      DownloadManager.Schedules.ForEach(x => this.listViewPackages.Items.Add(x.Item));
+      DownloadManager.JobItems.ForEach(job => this.listViewPackage.Items.Add(job.ViewItem));
 
     private void ListViewPackages_ItemActivate(object sender, EventArgs e)
     {
-      if (this.listViewPackages.SelectedIndices.Count == 0) {
+      if (this.listViewPackage.SelectedIndices.Count == 0) {
         return;
       }
 
       try {
-        string name = this.listViewPackages.SelectedItems[0].Text;
-        Scheduler scheduler = DownloadManager.Schedules.Where(x => x.Package.FileName == name).First();
-        Process.Start(Directory.GetParent(scheduler.Directory).FullName);
+        JobContainer job = DownloadManager.JobItems.First(x => x.FileName == this.listViewPackage.SelectedItems[0].Name);
+        Process.Start(Directory.GetParent(job.FileName).FullName);
       }
       catch (Exception ex) {
         MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);

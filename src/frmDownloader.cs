@@ -25,37 +25,40 @@ using PackageStore.Managed;
 
 namespace PackageStore
 {
-  public partial class frmDownloader : Form
-  {
-    public frmDownloader()
-    {
-      this.InitializeComponent();
+	public partial class frmDownloader : Form
+	{
+		public frmDownloader()
+		{
+			this.InitializeComponent();
 
-      DownloadManager.JobAdd += this.DownloadManager_JobAdd;
-    }
+			DownloadManager.JobAdd += this.DownloadManager_JobAdd;
+		}
 
-    private void DownloadManager_JobAdd(object sender, JobAddEventArgs e)
-    {
-      this.listViewPackage.Items.Clear();
-      DownloadManager.JobItems.ForEach(x => this.listViewPackage.Items.Add(x.ViewItem));
-    }
+		private void DownloadManager_JobAdd(object sender, JobAddEventArgs e)
+		{
+			this.listViewPackage.Items.Clear();
+			DownloadManager.JobItems.ForEach(x => this.listViewPackage.Items.Add(x.ViewItem));
+		}
 
-    private void FrmDownload_Load(object sender, EventArgs e) =>
-      DownloadManager.JobItems.ForEach(job => this.listViewPackage.Items.Add(job.ViewItem));
+		private void FrmDownload_Load(object sender, EventArgs e)
+		{
+			DownloadManager.JobItems.ForEach(job => this.listViewPackage.Items.Add(job.ViewItem));
+		}
 
-    private void ListViewPackages_ItemActivate(object sender, EventArgs e)
-    {
-      if (this.listViewPackage.SelectedIndices.Count == 0) {
-        return;
-      }
+		private void ListViewPackages_ItemActivate(object sender, EventArgs e)
+		{
+			if (this.listViewPackage.SelectedIndices.Count == 0)
+				return;
 
-      try {
-        JobContainer job = DownloadManager.JobItems.First(x => x.FileName == this.listViewPackage.SelectedItems[0].Name);
-        Process.Start(Directory.GetParent(job.FileName).FullName);
-      }
-      catch (Exception ex) {
-        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-    }
-  }
+			try
+			{
+				JobContainer job = DownloadManager.JobItems.First(x => x.FileName == this.listViewPackage.SelectedItems[0].Name);
+				Process.Start(Directory.GetParent(job.FileName).FullName);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+	}
 }

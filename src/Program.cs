@@ -20,23 +20,22 @@ using System.Windows.Forms;
 
 namespace PackageStore
 {
-  static class Program
-  {
-    /// <summary>
-    /// アプリケーションのメイン エントリ ポイントです。
-    /// </summary>
-    [STAThread]
-    static void Main()
-    {
-      Application.EnableVisualStyles();
-      Application.SetCompatibleTextRenderingDefault(false);
+	static class Program
+	{
+		/// <summary>
+		/// アプリケーションのメイン エントリ ポイントです。
+		/// </summary>
+		[STAThread]
+		static void Main()
+		{
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
 
-      // ネットワークが利用可能どうかを確認します。
-      if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
-        throw new System.Net.NetworkInformation.NetworkInformationException();
-      }
+			// ネットワークが利用可能どうかを確認します。
+			if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+				throw new System.Net.NetworkInformation.NetworkInformationException();
 
-      Application.Run(new FrmMain());
-    }
-  }
+			Application.Run(new frmMain());
+		}
+	}
 }

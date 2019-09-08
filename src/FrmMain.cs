@@ -32,214 +32,235 @@ using ByteSizeLib;
 
 namespace PackageStore
 {
-  public partial class FrmMain : Form
-  {
-    private readonly string[] ServerList = {
-      "https://a0.ww.np.dl.playstation.net/tpl/np/",
-      "http://b0.ww.np.dl.playstation.net/tppkg/np/",
-      "https://sonycoment-1-ht.ocs.llnw.net/tppkg/np/",
-      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/",
-    };
+	public partial class frmMain : Form
+	{
+		private readonly string[] ServerList = {
+	  "https://a0.ww.np.dl.playstation.net/tpl/np/",
+	  "http://b0.ww.np.dl.playstation.net/tppkg/np/",
+	  "https://sonycoment-1-ht.ocs.llnw.net/tppkg/np/",
+	  "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/",
+	};
 
-    private string packageId;
-    private string packageName;
+		private string packageId;
+		private string packageName;
 
-    private List<PackageData> packageItems;
-    private readonly DownloadManager downloadManager = new DownloadManager();
+		private List<PackageData> packageItems;
+		private readonly DownloadManager downloadManager = new DownloadManager();
 
-    public new bool UseWaitCursor {
-      get => base.UseWaitCursor;
+		public new bool UseWaitCursor {
+			get => base.UseWaitCursor;
 
-      set {
-        base.UseWaitCursor = value;
+			set {
+				base.UseWaitCursor = value;
 
-        this.buttonSearch.Enabled = !value;
-        this.textBoxPackageId.Enabled = !value;
-        this.checkBoxForce.Enabled = !value;
-      }
-    }
+				this.buttonSearch.Enabled = !value;
+				this.textBoxPackageId.Enabled = !value;
+				this.checkBoxForce.Enabled = !value;
+			}
+		}
 
-    public FrmMain()
-    {
-      this.InitializeComponent();
+		public frmMain()
+		{
+			this.InitializeComponent();
 
-      this.MinimumSize = this.Size;
+			this.MinimumSize = this.Size;
 
-      ServicePointManager.Expect100Continue = false;
-      ServicePointManager.DefaultConnectionLimit = 30;
-      ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
-    }
+			ServicePointManager.Expect100Continue = false;
+			ServicePointManager.DefaultConnectionLimit = 30;
+			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
+		}
 
-    private async void ButtonSearch_Click(object sender, EventArgs e)
-    {
-      try {
-        this.Text = Application.ProductName;
-        this.UseWaitCursor = true;
-        this.packageId = this.textBoxPackageId.Text.ToUpper();
+		private async void ButtonSearch_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				this.Text = Application.ProductName;
+				this.UseWaitCursor = true;
+				this.packageId = this.textBoxPackageId.Text.ToUpper();
 
-        this.listViewPackage.Items.Clear();
+				this.listViewPackage.Items.Clear();
 
-        if (!this.IsValid(this.packageId) && this.checkBoxForce.CheckState != CheckState.Checked) {
-          throw new Exceptions.InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
-        }
+				if (!this.IsValid(this.packageId) && this.checkBoxForce.CheckState != CheckState.Checked)
+					throw new Exceptions.InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
 
-        this.packageItems = await Task.Run(() => this.PackageSearch(this.packageId));
-        if (this.packageItems.Count <= 0) {
-          throw new Exceptions.PackageNotFoundException($"Package not found: {this.textBoxPackageId.Text}");
-        }
+				this.packageItems = await Task.Run(() => this.PackageSearch(this.packageId));
 
-        this.Text = $"{Application.ProductName} - {this.packageName}";
+				if (this.packageItems.Count <= 0)
+					throw new Exceptions.PackageNotFoundException($"Package not found: {this.textBoxPackageId.Text}");
 
-        this.packageItems.ForEach(x => {
-          ListViewItem viewItem = new ListViewItem { Text = x.Name };
-          viewItem.SubItems.AddRange(new[] {
-            ByteSize.FromBytes(double.Parse(x.Size)).ToString(),
-            x.Version,
-            x.SupportVersion,
-            x.Hash
-          });
+				this.Text = $"{Application.ProductName} - {this.packageName}";
 
-          this.listViewPackage.Items.Add(viewItem);
-        });
-      }
-      catch (Exception ex) {
-        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-      finally {
-        this.UseWaitCursor = false;
-      }
-    }
+				this.packageItems.ForEach(x =>
+				{
+					ListViewItem viewItem = new ListViewItem { Text = x.Name };
+					viewItem.SubItems.AddRange(new[] {
+						ByteSize.FromBytes(double.Parse(x.Size)).ToString(),
+						x.Version,
+						x.SupportVersion,
+						x.Hash
+					});
 
-    private List<PackageData> PackageSearch(string packageId)
-    {
-      List<PackageData> package = new List<PackageData>();
+					this.listViewPackage.Items.Add(viewItem);
+				});
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			finally
+			{
+				this.UseWaitCursor = false;
+			}
+		}
 
-      foreach (string baseUrl in this.ServerList) {
-        try {
-          XmlTextReader reader = new XmlTextReader(baseUrl + packageId + "/" + packageId + "-ver.xml");
+		private List<PackageData> PackageSearch(string packageId)
+		{
+			List<PackageData> package = new List<PackageData>();
 
-          do {
-            if (reader.NodeType == XmlNodeType.Element && reader.Name == "package") {
-              package.Add(this.MetaDataReader(ref reader));
-            }
-            else if (reader.NodeType == XmlNodeType.Text) {
-              this.packageName = reader.Value;
-            }
-          } while (reader.Read());
-        }
-        catch (WebException ex) {
-          if (ex.Status == WebExceptionStatus.ProtocolError) {
-            HttpWebResponse response = (HttpWebResponse)ex.Response;
+			foreach (string baseUrl in this.ServerList)
+			{
+				try
+				{
+					XmlTextReader reader = new XmlTextReader(baseUrl + packageId + "/" + packageId + "-ver.xml");
 
-            switch (response.StatusCode) {
-              case HttpStatusCode.NotFound:
-              case HttpStatusCode.Forbidden:
-                break;
+					do
+					{
+						if (reader.NodeType == XmlNodeType.Element && reader.Name == "package")
+						{
+							package.Add(this.MetaDataReader(ref reader));
+						}
+						else if (reader.NodeType == XmlNodeType.Text)
+						{
+							this.packageName = reader.Value;
+						}
+					} while (reader.Read());
+				}
+				catch (WebException ex)
+				{
+					if (ex.Status == WebExceptionStatus.ProtocolError)
+					{
+						HttpWebResponse response = (HttpWebResponse)ex.Response;
 
-              default:
-                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                break;
-            }
-          }
+						switch (response.StatusCode)
+						{
+							case HttpStatusCode.NotFound:
+							case HttpStatusCode.Forbidden:
+								break;
 
-          if (ex.Status == WebExceptionStatus.Timeout) {
-            MessageBox.Show("Check your connection and try again", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+							default:
+								MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+								break;
+						}
+					}
 
-            return null;
-          }
-        }
-        catch (Exception ex) {
-          MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-      }
+					if (ex.Status == WebExceptionStatus.Timeout)
+					{
+						MessageBox.Show("Check your connection and try again", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-      return package;
-    }
+						return null;
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
 
-    private PackageData MetaDataReader(ref XmlTextReader reader)
-    {
-      PackageData package = new PackageData();
+			return package;
+		}
 
-      for (int i = 0; i < reader.AttributeCount; i++) {
+		private PackageData MetaDataReader(ref XmlTextReader reader)
+		{
+			PackageData package = new PackageData();
 
-        reader.MoveToNextAttribute();
+			for (int i = 0; i < reader.AttributeCount; i++)
+			{
 
-        switch (reader.Name) {
-          case "version":
-            package.Version = reader.Value;
-            break;
+				reader.MoveToNextAttribute();
 
-          case "size":
-            package.Size = reader.Value;
-            break;
+				switch (reader.Name)
+				{
+					case "version":
+						package.Version = reader.Value;
+						break;
 
-          case "sha1sum":
-            package.Hash = reader.Value;
-            break;
+					case "size":
+						package.Size = reader.Value;
+						break;
 
-          case "ps3_system_ver":
-            package.SupportVersion = reader.Value;
-            break;
+					case "sha1sum":
+						package.Hash = reader.Value;
+						break;
 
-          case "url":
-            package.Name = Path.GetFileName(reader.Value);
-            package.Url = new Uri(reader.Value);
-            break;
-        }
-      }
+					case "ps3_system_ver":
+						package.SupportVersion = reader.Value;
+						break;
 
-      return package;
-    }
+					case "url":
+						package.Name = Path.GetFileName(reader.Value);
+						package.Url = new Uri(reader.Value);
+						break;
+				}
+			}
 
-    private bool IsValid(string packageId)
-    {
-      if (packageId.Length == 9) {
-        return System.Text.RegularExpressions.Regex.IsMatch(packageId, "^[A-Z0-9]");
-      }
+			return package;
+		}
 
-      return false;
-    }
+		private bool IsValid(string packageId)
+		{
+			if (packageId.Length == 9)
+				return System.Text.RegularExpressions.Regex.IsMatch(packageId, "^[A-Z0-9]");
 
-    private void ListViewPackages_ItemActivate(object sender, EventArgs e)
-    {
-      if (this.listViewPackage.SelectedIndices.Count == 0)
-        return;
+			return false;
+		}
 
-      FolderBrowserDialog FBD = new FolderBrowserDialog();
+		private void ListViewPackages_ItemActivate(object sender, EventArgs e)
+		{
+			if (this.listViewPackage.SelectedIndices.Count == 0)
+				return;
 
-      if (FBD.ShowDialog() == DialogResult.OK) {
+			FolderBrowserDialog FBD = new FolderBrowserDialog();
 
-        DownloadManager.Directory = FBD.SelectedPath;
+			if (FBD.ShowDialog() == DialogResult.OK)
+			{
+				DownloadManager.Directory = FBD.SelectedPath;
 
-        foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
-          this.downloadManager.Add(new JobContainer(this.packageItems[item.Index]));
-        }
+				foreach (ListViewItem item in this.listViewPackage.SelectedItems)
+					this.downloadManager.Add(new JobContainer(this.packageItems[item.Index]));
 
-        this.downloadManager.Start();
-        this.downloadManager.Form.Show();
-      }
-    }
+				this.downloadManager.Start();
+				this.downloadManager.Form.Show();
+			}
+		}
 
-    private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e) =>
-      this.downloadManager.Form.Show();
+		private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			this.downloadManager.Form.Show();
+		}
 
-    private void AboutToolStripMenuItem_Click(object sender, EventArgs e) =>
-      MessageBox.Show("Made by AlphaNyne", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			MessageBox.Show("Made by AlphaNyne", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
-    private void GithubToolStripMenuItem_Click(object sender, EventArgs e) =>
-      Process.Start("https://www.github.com/AlphaNyne/PackageStore");
+		private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Process.Start("https://www.github.com/AlphaNyne/PackageStore");
+		}
 
-    private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      if (this.listViewPackage.SelectedIndices.Count == 0)
-        return;
+		private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (this.listViewPackage.SelectedIndices.Count == 0)
+				return;
 
-      try {
-        Clipboard.SetText(this.packageItems[this.listViewPackage.SelectedItems[0].Index].Url.ToString());
-      }
-      catch (Exception ex) {
-        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }
-    }
-  }
+			try
+			{
+				Clipboard.SetText(this.packageItems[this.listViewPackage.SelectedItems[0].Index].Url.ToString());
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+	}
 }

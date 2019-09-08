@@ -1,6 +1,6 @@
 ﻿namespace PackageStore
 {
-    partial class FrmMain
+    partial class frmMain
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -28,7 +28,7 @@
         private void InitializeComponent()
         {
       this.components = new System.ComponentModel.Container();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.downloadManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();

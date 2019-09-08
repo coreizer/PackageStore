@@ -22,13 +22,13 @@ using ByteSizeLib;
 
 namespace PackageStore.Snippet
 {
-  public struct PackageData
-  {
-    public string Name;
-    public string Version;
-    public string SupportVersion;
-    public string Size;
-    public string Hash;
-    public Uri Url;
-  }
+	public struct PackageData
+	{
+		public string Name;
+		public string Version;
+		public string SupportVersion;
+		public string Size;
+		public string Hash;
+		public Uri Url;
+	}
 }

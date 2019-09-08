@@ -35,7 +35,8 @@
     <StartupObject>PackageStore.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>sen_icon_prefix.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,11 +61,11 @@
     <Compile Include="frmDownloader.Designer.cs">
       <DependentUpon>frmDownloader.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMain.cs">
+    <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMain.Designer.cs">
-      <DependentUpon>FrmMain.cs</DependentUpon>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Managed\DownloadManager.cs" />
     <Compile Include="Enums\DownloadStatus.cs" />
@@ -79,11 +80,11 @@
     <EmbeddedResource Include="frmDownloader.resx">
       <DependentUpon>frmDownloader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMain.ja-JP.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.ja-JP.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMain.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -108,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="sen_icon_prefix.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ByteSize">

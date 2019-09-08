@@ -19,12 +19,12 @@ using System;
 
 namespace PackageStore.Managed
 {
-  public sealed class JobAddEventArgs : EventArgs
-  {
-    public JobContainer Job {
-      get;
-    }
+	public sealed class JobAddEventArgs : EventArgs
+	{
+		public JobContainer Job {
+			get;
+		}
 
-    public JobAddEventArgs(JobContainer job) => this.Job = job;
-  }
+		public JobAddEventArgs(JobContainer job) => this.Job = job;
+	}
 }

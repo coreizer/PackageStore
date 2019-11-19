@@ -11,7 +11,7 @@
 
 ## 著者
 
-* **Alpha Nyne**
+* **Coreizer**
 
 ## License
 

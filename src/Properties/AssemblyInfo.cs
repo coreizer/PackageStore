@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2017-2019 AlphaNyne
+ * Copyright (c) 2017-2019 Coreizer
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PackageStore")]
-[assembly: AssemblyCopyright("© AlphaNyne 2017-2019")]
+[assembly: AssemblyCopyright("© Coreizer 2017-2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -60,37 +60,37 @@
       // 
       // menuStrip1
       // 
+      resources.ApplyResources(this.menuStrip1, "menuStrip1");
       this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
       this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem});
-      resources.ApplyResources(this.menuStrip1, "menuStrip1");
       this.menuStrip1.Name = "menuStrip1";
       // 
       // helpToolStripMenuItem
       // 
+      resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
       this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.toolStripSeparator1,
             this.githubToolStripMenuItem});
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-      resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
       // 
       // aboutToolStripMenuItem
       // 
-      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
       resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
       this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
-      this.toolStripSeparator1.Name = "toolStripSeparator1";
       resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
       // 
       // githubToolStripMenuItem
       // 
-      this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
       resources.ApplyResources(this.githubToolStripMenuItem, "githubToolStripMenuItem");
+      this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
       this.githubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItem_Click);
       // 
       // textBoxPackageId
@@ -161,43 +161,43 @@
       // 
       // contextMenuStrip1
       // 
+      resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
       this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToURLToolStripMenuItem});
       this.contextMenuStrip1.Name = "contextMenuStrip1";
-      resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
       // 
       // copyToURLToolStripMenuItem
       // 
-      this.copyToURLToolStripMenuItem.Name = "copyToURLToolStripMenuItem";
       resources.ApplyResources(this.copyToURLToolStripMenuItem, "copyToURLToolStripMenuItem");
+      this.copyToURLToolStripMenuItem.Name = "copyToURLToolStripMenuItem";
       this.copyToURLToolStripMenuItem.Click += new System.EventHandler(this.CopyToURLToolStripMenuItem_Click);
       // 
       // statusStrip1
       // 
+      resources.ApplyResources(this.statusStrip1, "statusStrip1");
       this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
       this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-      resources.ApplyResources(this.statusStrip1, "statusStrip1");
       this.statusStrip1.Name = "statusStrip1";
       // 
       // toolStripStatusLabel1
       // 
-      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
       resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
       // 
       // toolStripStatusLabel2
       // 
-      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
       resources.ApplyResources(this.toolStripStatusLabel2, "toolStripStatusLabel2");
+      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
       this.toolStripStatusLabel2.Spring = true;
       // 
       // comboBoxPlatform
       // 
+      resources.ApplyResources(this.comboBoxPlatform, "comboBoxPlatform");
       this.comboBoxPlatform.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxPlatform.FormattingEnabled = true;
-      resources.ApplyResources(this.comboBoxPlatform, "comboBoxPlatform");
       this.comboBoxPlatform.Name = "comboBoxPlatform";
       this.comboBoxPlatform.SelectedIndexChanged += new System.EventHandler(this.comboBoxPlatform_SelectedIndexChanged);
       // 
@@ -208,6 +208,7 @@
       // 
       // comboBoxEnvironments
       // 
+      resources.ApplyResources(this.comboBoxEnvironments, "comboBoxEnvironments");
       this.comboBoxEnvironments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.comboBoxEnvironments.FormattingEnabled = true;
       this.comboBoxEnvironments.Items.AddRange(new object[] {
@@ -218,7 +219,6 @@
             resources.GetString("comboBoxEnvironments.Items4"),
             resources.GetString("comboBoxEnvironments.Items5"),
             resources.GetString("comboBoxEnvironments.Items6")});
-      resources.ApplyResources(this.comboBoxEnvironments, "comboBoxEnvironments");
       this.comboBoxEnvironments.Name = "comboBoxEnvironments";
       // 
       // frmMain

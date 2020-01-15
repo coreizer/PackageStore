@@ -1,6 +1,6 @@
 # PackageStore
 
-PS Store(PS3 only) package search tools.
+PS Store(CD only) package search tools.
 
 [![Build Status](https://travis-ci.org/AlphaNyne/PackageStore.svg?branch=master)](https://travis-ci.org/AlphaNyne/PackageStore)
 [![Coverage Status](https://coveralls.io/repos/github/AlphaNyne/PackageStore/badge.svg?branch=master)](https://coveralls.io/github/AlphaNyne/PackageStore?branch=master)

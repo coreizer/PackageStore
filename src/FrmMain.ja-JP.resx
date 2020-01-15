@@ -118,11 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 29</value>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 34</value>
   </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>表示</value>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 6</value>
+  </data>
+  <data name="githubToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 34</value>
   </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 29</value>
@@ -180,7 +183,7 @@
     <value>137</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
-    <value>サポートバージョン</value>
+    <value>システム / サポート バージョン</value>
   </data>
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>173</value>

@@ -1,17 +1,16 @@
-# PackageStore
+# DevkitLibrary
+PS3, Xbox 360 Devkit
 
-PS Store(PS3 only) package search tools.
+Example:
+```
+DevKits devKits = new  DevKits();
+devkits.SetTarget(DevkitTarget.PS3, 0); // Initialize
 
-[![Build Status](https://travis-ci.org/AlphaNyne/PackageStore.svg?branch=master)](https://travis-ci.org/AlphaNyne/PackageStore)
-[![Coverage Status](https://coveralls.io/repos/github/AlphaNyne/PackageStore/badge.svg?branch=master)](https://coveralls.io/github/AlphaNyne/PackageStore?branch=master)
-[![AUR](https://img.shields.io/github/license/AlphaNyne/PackageStore.svg)](LICENSE)
-
-<img src="./doc/PackageStore.png">
+ConnectStat state = await devkits.ConnectTargetAsync();
+```
 
 ## Author
-
 * **Coreizer**
 
 ## License
-
-Public License v3.0 [Details](LICENSE)
+[Public License v3.0](LICENSE)

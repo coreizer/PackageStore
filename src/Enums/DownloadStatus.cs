@@ -19,24 +19,8 @@ namespace PackageStore.Enums
 {
 	public enum DownloadStatus
 	{
-		/// <summary>
-		/// Download has failed.
-		/// </summary>
 		Failed,
-
-		/// <summary>
-		/// Download is waiting to start.
-		/// </summary>
-		Pending,
-
-		/// <summary>
-		/// Download is currently running.
-		/// </summary>
-		Downloading,
-
-		/// <summary>
-		/// Download has successfully completed.
-		/// </summary>
+    Running,
 		Successful,
 	}
 }

@@ -26,241 +26,290 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-using PackageStore.Snippet;
-using PackageStore.Managed;
 using ByteSizeLib;
+using Newtonsoft.Json;
+using PackageStore.Enums;
+using PackageStore.Exceptions;
+using RestSharp;
 
 namespace PackageStore
 {
-	public partial class frmMain : Form
-	{
-		private readonly string[] ServerList = {
-	  "https://a0.ww.np.dl.playstation.net/tpl/np/",
-	  "http://b0.ww.np.dl.playstation.net/tppkg/np/",
-	  "https://sonycoment-1-ht.ocs.llnw.net/tppkg/np/",
-	  "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/",
-	};
+  public partial class frmMain : Form
+  {
+    // details https://www.psdevwiki.com/ps3/Environments
+    private readonly string[] Environments = {
+      "https://a0.ww.np.dl.playstation.net/tpl/np/",
+      "http://b0.ww.np.dl.playstation.net/tppkg/np/",
+      "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
+      "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
+      "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/"
+    };
 
-		private string packageId;
-		private string packageName;
+    private Platform CurrentPlatform = Platform.PS3;
+    private List<Package> PackageItems = new List<Package>();
 
-		private List<PackageData> packageItems;
-		private readonly DownloadManager downloadManager = new DownloadManager();
+    public new bool UseWaitCursor {
+      get => base.UseWaitCursor;
 
-		public new bool UseWaitCursor {
-			get => base.UseWaitCursor;
+      set {
+        base.UseWaitCursor = value;
 
-			set {
-				base.UseWaitCursor = value;
+        this.buttonSearch.Enabled = !value;
+        this.textBoxPackageId.Enabled = !value;
+        this.checkBoxForce.Enabled = !value;
+        this.comboBoxEnvironments.Enabled = !value;
+        this.comboBoxPlatform.Enabled = !value;
+        this.listViewPackage.Enabled = !value;
+      }
+    }
 
-				this.buttonSearch.Enabled = !value;
-				this.textBoxPackageId.Enabled = !value;
-				this.checkBoxForce.Enabled = !value;
-			}
-		}
+    public frmMain()
+    {
+      this.InitializeComponent();
+      this.comboBoxPlatform.DataSource = Enum.GetNames(typeof(Platform));
+      ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
+    }
 
-		public frmMain()
-		{
-			this.InitializeComponent();
+    private async void ButtonSearch_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        this.Text = Application.ProductName;
+        this.UseWaitCursor = true;
+        this.listViewPackage.Items.Clear();
 
-			this.MinimumSize = this.Size;
+        if (!this.IsValid(this.CurrentPlatform, this.textBoxPackageId.Text))
+          throw new InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
 
-			ServicePointManager.Expect100Continue = false;
-			ServicePointManager.DefaultConnectionLimit = 30;
-			ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
-		}
+        string packageId = this.textBoxPackageId.Text;
+        string environments = this.comboBoxEnvironments.Text;
 
-		private async void ButtonSearch_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				this.Text = Application.ProductName;
-				this.UseWaitCursor = true;
-				this.packageId = this.textBoxPackageId.Text.ToUpper();
+        this.PackageItems = await Task.Run(() => this.PackageSearch(this.CurrentPlatform, packageId, environments));
+        this.PackageItems.ForEach(x =>
+        {
+          ListViewItem item = new ListViewItem { Text = x.Name };
+          item.SubItems.AddRange(new[] {
+            x.Size.ToString(),
+            x.Version,
+            !string.IsNullOrEmpty(x.SystemVersion) ? x.SystemVersion : x.SupportVersion,
+            x.Hash,
+            x.Digest
+          });
+          this.listViewPackage.Items.Add(item);
+        });
+      }
+      catch (PackageNotFoundException ex)
+      {
+        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      finally
+      {
+        this.UseWaitCursor = false;
+      }
+    }
 
-				this.listViewPackage.Items.Clear();
+    private List<Package> PackageSearch(Platform type, string name, string environments = "NP")
+    {
+      List<Package> items = new List<Package>();
 
-				if (!this.IsValid(this.packageId) && this.checkBoxForce.CheckState != CheckState.Checked)
-					throw new Exceptions.InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
+      if (type == Platform.PS4)
+      {
+        RestClient client = new RestClient($"https://ps4.octolus.net");
+        RestRequest request = new RestRequest($"https://ps4.octolus.net/dataApi?id={ name }&env={ environments }&method=patches", DataFormat.Json);
+        IRestResponse response = client.Get(request);
 
-				this.packageItems = await Task.Run(() => this.PackageSearch(this.packageId));
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+          PS4DatabasePatches patches = JsonConvert.DeserializeObject<PS4DatabasePatches>(response.Content);
+          items.Add(new Package
+          {
+            Name = "Latest Delta",
+            Hash = "Unknown",
+            Digest = patches.Tag.Package.Attributes.Digest,
+            Platform = Platform.PS4,
+            Url = new Uri(patches.Tag.Package.DeltaInfoSet.Attributes.Url),
+            Version = patches.Tag.Package.Attributes.Version,
+            SupportVersion = "",
+            SystemVersion = patches.Tag.Package.Attributes.SystemVersion,
+            Size = ByteSize.FromMegaBytes(0)
+          });
 
-				if (this.packageItems.Count <= 0)
-					throw new Exceptions.PackageNotFoundException($"Package not found: {this.textBoxPackageId.Text}");
+          this.ManifestPS4(new Uri(patches.Tag.Package.Attributes.ManifestUrl), ref items);
+        }
+      }
+      else if (type == Platform.PS3)
+      {
+        foreach (string url in this.Environments)
+        {
+          try
+          {
+            XmlTextReader reader = new XmlTextReader(url + name + "/" + name + "-ver.xml");
+            do
+            {
+              if (reader.NodeType == XmlNodeType.Element && reader.Name == "package")
+                items.Add(this.AttributeReaderPS3(ref reader));
+            } while (reader.Read());
+          }
+          catch (WebException ex)
+          {
+            HttpWebResponse response = (HttpWebResponse)ex.Response;
+            switch (response.StatusCode)
+            {
+              case HttpStatusCode.NotFound:
+              case HttpStatusCode.Forbidden:
+                break;
 
-				this.Text = $"{Application.ProductName} - {this.packageName}";
+              default:
+              {
+                MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                break;
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+        }
+      }
 
-				this.packageItems.ForEach(x =>
-				{
-					ListViewItem viewItem = new ListViewItem { Text = x.Name };
-					viewItem.SubItems.AddRange(new[] {
-						ByteSize.FromBytes(double.Parse(x.Size)).ToString(),
-						x.Version,
-						x.SupportVersion,
-						x.Hash
-					});
+      return items;
+    }
 
-					this.listViewPackage.Items.Add(viewItem);
-				});
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-			finally
-			{
-				this.UseWaitCursor = false;
-			}
-		}
+    private void ManifestPS4(Uri manifestUri, ref List<Package> items)
+    {
+      RestClient client = new RestClient(manifestUri.GetLeftPart(UriPartial.Authority));
+      RestRequest request = new RestRequest(manifestUri.PathAndQuery, DataFormat.Json);
+      IRestResponse response = client.Get(request);
+      if (response.StatusCode != HttpStatusCode.OK)
+        throw new ManifestNotFoundException("Manifest notfound");
 
-		private List<PackageData> PackageSearch(string packageId)
-		{
-			List<PackageData> package = new List<PackageData>();
+      PlayStationManifest manifest = JsonConvert.DeserializeObject<PlayStationManifest>(response.Content);
+      foreach(PlayStationManifest.PiecesObject item in manifest.Pieces)
+      {
+        items.Add(new Package {
+          Name = Path.GetFileName(item.Url),
+          Hash = item.Hash,
+          Platform = Platform.PS4,
+          Size = ByteSize.FromBytes(double.Parse(item.FileSize)),
+          Url = new Uri(item.Url),
+          Digest = manifest.PackageDigest,
+        });
+      }
+    }
 
-			foreach (string baseUrl in this.ServerList)
-			{
-				try
-				{
-					XmlTextReader reader = new XmlTextReader(baseUrl + packageId + "/" + packageId + "-ver.xml");
+    private Package AttributeReaderPS3(ref XmlTextReader reader)
+    {
+      Package package = new Package();
 
-					do
-					{
-						if (reader.NodeType == XmlNodeType.Element && reader.Name == "package")
-						{
-							package.Add(this.MetaDataReader(ref reader));
-						}
-						else if (reader.NodeType == XmlNodeType.Text)
-						{
-							this.packageName = reader.Value;
-						}
-					} while (reader.Read());
-				}
-				catch (WebException ex)
-				{
-					if (ex.Status == WebExceptionStatus.ProtocolError)
-					{
-						HttpWebResponse response = (HttpWebResponse)ex.Response;
+      for (int i = 0; i < reader.AttributeCount; i++)
+      {
+        reader.MoveToNextAttribute();
+        switch (reader.Name)
+        {
+          case "version":
+          {
+            package.Version = reader.Value;
+            break;
+          }
 
-						switch (response.StatusCode)
-						{
-							case HttpStatusCode.NotFound:
-							case HttpStatusCode.Forbidden:
-								break;
+          case "size":
+          {
+            package.Size = ByteSize.FromBytes(double.Parse(reader.Value.ToString()));
+            break;
+          }
 
-							default:
-								MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-								break;
-						}
-					}
+          case "sha1sum":
+          {
+            package.Hash = reader.Value;
+            break;
+          }
 
-					if (ex.Status == WebExceptionStatus.Timeout)
-					{
-						MessageBox.Show("Check your connection and try again", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+          case "ps3_system_ver":
+          {
+            package.SupportVersion = reader.Value;
+            break;
+          }
 
-						return null;
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
+          case "url":
+          {
+            package.Name = Path.GetFileName(reader.Value);
+            package.Url = new Uri(reader.Value);
+            break;
+          }
+        }
+      }
 
-			return package;
-		}
+      return package;
+    }
 
-		private PackageData MetaDataReader(ref XmlTextReader reader)
-		{
-			PackageData package = new PackageData();
+    private bool IsValid(Platform type, string name)
+    {
+      if (string.IsNullOrWhiteSpace(name)) return false;
 
-			for (int i = 0; i < reader.AttributeCount; i++)
-			{
+      if (type == Platform.PS3)
+      {
+        return System.Text.RegularExpressions.Regex.IsMatch(name, "^[A-Z0-9]");
+      }
+      else if (type == Platform.PS4)
+      {
+        RestClient client = new RestClient($"https://ps4.octolus.net");
+        RestRequest request = new RestRequest($"submit_api?id={ name }", DataFormat.Json);
+        IRestResponse<PS4DatabaseValid> response = client.Get<PS4DatabaseValid>(request);
+        return (response.StatusCode == HttpStatusCode.OK && response.Data.Success);
+      }
 
-				reader.MoveToNextAttribute();
+      return false;
+    }
 
-				switch (reader.Name)
-				{
-					case "version":
-						package.Version = reader.Value;
-						break;
+    private void ListViewPackages_ItemActivate(object sender, EventArgs e)
+    {
+      if (this.listViewPackage.SelectedIndices.Count == 0) return;
 
-					case "size":
-						package.Size = reader.Value;
-						break;
+      try
+      {
+        foreach (ListViewItem item in this.listViewPackage.SelectedItems)
+          Process.Start(this.PackageItems[item.Index].Url.ToString());
+      }
+      catch(Exception ex)
+      {
+        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
 
-					case "sha1sum":
-						package.Hash = reader.Value;
-						break;
+    private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      MessageBox.Show("PS4 database by @OctolusNET\n\rMade by Coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
 
-					case "ps3_system_ver":
-						package.SupportVersion = reader.Value;
-						break;
+    private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      Process.Start("https://www.github.com/coreizer/PackageStore");
+    }
 
-					case "url":
-						package.Name = Path.GetFileName(reader.Value);
-						package.Url = new Uri(reader.Value);
-						break;
-				}
-			}
+    private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      if (this.listViewPackage.SelectedIndices.Count == 0) return;
 
-			return package;
-		}
+      try
+      {
+        Clipboard.SetText(this.PackageItems[this.listViewPackage.SelectedItems[0].Index].Url.ToString());
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
 
-		private bool IsValid(string packageId)
-		{
-			if (packageId.Length == 9)
-				return System.Text.RegularExpressions.Regex.IsMatch(packageId, "^[A-Z0-9]");
-
-			return false;
-		}
-
-		private void ListViewPackages_ItemActivate(object sender, EventArgs e)
-		{
-			if (this.listViewPackage.SelectedIndices.Count == 0)
-				return;
-
-			FolderBrowserDialog FBD = new FolderBrowserDialog();
-
-			if (FBD.ShowDialog() == DialogResult.OK)
-			{
-				DownloadManager.Directory = FBD.SelectedPath;
-
-				foreach (ListViewItem item in this.listViewPackage.SelectedItems)
-					this.downloadManager.Add(new JobContainer(this.packageItems[item.Index]));
-
-				this.downloadManager.Start();
-				this.downloadManager.Form.Show();
-			}
-		}
-
-		private void DownloadManagerToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			this.downloadManager.Form.Show();
-		}
-
-		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			MessageBox.Show("Made by AlphaNyne", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
-
-		private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Process.Start("https://www.github.com/AlphaNyne/PackageStore");
-		}
-
-		private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (this.listViewPackage.SelectedIndices.Count == 0)
-				return;
-
-			try
-			{
-				Clipboard.SetText(this.packageItems[this.listViewPackage.SelectedItems[0].Index].Url.ToString());
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-		}
-	}
+    private void comboBoxPlatform_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      this.CurrentPlatform = EnumsNET.Enums.Parse<Platform>(this.comboBoxPlatform.SelectedItem.ToString());
+      this.comboBoxEnvironments.Visible = (this.CurrentPlatform == Platform.PS4);
+      this.comboBoxEnvironments.SelectedIndex = 0;
+    }
+  }
 }

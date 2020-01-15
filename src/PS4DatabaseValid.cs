@@ -15,20 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
-using System.Windows.Forms;
+using Newtonsoft.Json;
 
-using ByteSizeLib;
-
-namespace PackageStore.Snippet
+namespace PackageStore
 {
-	public struct PackageData
-	{
-		public string Name;
-		public string Version;
-		public string SupportVersion;
-		public string Size;
-		public string Hash;
-		public Uri Url;
-	}
+  public class PS4DatabaseValid
+  {
+    [JsonProperty("success")]
+    public bool Success {
+      get;
+      set;
+    }
+  }
 }

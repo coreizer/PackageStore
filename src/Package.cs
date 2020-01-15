@@ -16,15 +16,21 @@
  */
 
 using System;
+using ByteSizeLib;
 
-namespace PackageStore.Managed
+namespace PackageStore
 {
-	public sealed class JobAddEventArgs : EventArgs
-	{
-		public JobContainer Job {
-			get;
-		}
 
-		public JobAddEventArgs(JobContainer job) => this.Job = job;
-	}
+  public class Package
+  {
+    public string Name = "Unknown";
+    public string Version = "Unknown";
+    public string SystemVersion = "Unknown";
+    public string SupportVersion = "Unknown";
+    public ByteSize Size;
+    public string Digest = "Unknown";
+    public string Hash = "Unknown";
+    public Uri Url;
+    public Enums.Platform Platform;
+  }
 }

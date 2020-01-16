@@ -16,7 +16,7 @@
 
 ## Additional resources
 * [Environments](https://www.psdevwiki.com/ps3/Environments)
-* [PS4 Database] https://ps4database.io/
+* [PS4Database.io](https://ps4database.io)
 
 ## License
 

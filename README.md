@@ -1,9 +1,9 @@
 <h1 align="center">Package Store</h1>
 <p align="center">PS Store(CD only) package search tools</p>
 
-[![Build Status](https://travis-ci.org/AlphaNyne/PackageStore.svg?branch=master)](https://travis-ci.org/AlphaNyne/PackageStore)
-[![Coverage Status](https://coveralls.io/repos/github/AlphaNyne/PackageStore/badge.svg?branch=master)](https://coveralls.io/github/AlphaNyne/PackageStore?branch=master)
-[![AUR](https://img.shields.io/github/license/AlphaNyne/PackageStore.svg)](LICENSE)
+[![Build Status](https://travis-ci.org/coreizer/PackageStore.svg?branch=master)](https://travis-ci.org/coreizer/PackageStore)
+[![Coverage Status](https://coveralls.io/repos/github/coreizer/PackageStore/badge.svg?branch=master)](https://coveralls.io/github/coreizer/PackageStore?branch=master)
+[![AUR](https://img.shields.io/github/license/coreizer/PackageStore.svg)](LICENSE)
 
 <img src="./doc/PackageStore.png">
 

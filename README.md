@@ -14,6 +14,10 @@
 
 * **Coreizer**
 
+## Additional resources
+* [Environments](https://www.psdevwiki.com/ps3/Environments)
+* [PS4 Database] https://ps4database.io/
+
 ## License
 
 [Public License v3.0](LICENSE)

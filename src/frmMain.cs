@@ -22,6 +22,7 @@
 namespace PackageStore
 {
    using System;
+   using System.Linq;
    using System.Collections.Generic;
    using System.Diagnostics;
    using System.IO;
@@ -34,6 +35,7 @@ namespace PackageStore
    using System.Xml;
    using ByteSizeLib;
    using PackageStore.Exceptions;
+   using static System.Windows.Forms.ListView;
 
    public partial class frmMain : Form
    {
@@ -113,9 +115,11 @@ namespace PackageStore
             try {
                Trace.WriteLine(url + name + "/" + name + "-ver.xml", "URL");
                XmlTextReader reader = new XmlTextReader(url + name + "/" + name + "-ver.xml");
+
                do {
-                  if (reader.NodeType == XmlNodeType.Element && reader.Name == "package")
+                  if (reader.NodeType == XmlNodeType.Element && reader.Name == "package") {
                      items.Add(this.AttributeReaderPS3(ref reader));
+                  }
                } while (reader.Read());
             }
             catch (WebException ex) {
@@ -125,10 +129,9 @@ namespace PackageStore
                   case HttpStatusCode.Forbidden:
                      break;
 
-                  default: {
-                        MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                     }
+                  default:
+                     MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     break;
                }
             }
             catch (Exception ex) {
@@ -146,31 +149,27 @@ namespace PackageStore
          for (int i = 0; i < reader.AttributeCount; i++) {
             reader.MoveToNextAttribute();
             switch (reader.Name) {
-               case "version": {
-                     package.Version = reader.Value;
-                     break;
-                  }
+               case "version":
+                  package.Version = reader.Value;
+                  break;
 
-               case "size": {
-                     package.Size = ByteSize.FromBytes(double.Parse(reader.Value.ToString()));
-                     break;
-                  }
+               case "size":
+                  package.Size = ByteSize.FromBytes(double.Parse(reader.Value.ToString()));
+                  break;
 
-               case "sha1sum": {
-                     package.Hash = reader.Value;
-                     break;
-                  }
+               case "sha1sum":
+                  package.Hash = reader.Value;
+                  break;
 
-               case "ps3_system_ver": {
-                     package.SupportVersion = reader.Value;
-                     break;
-                  }
+               case "ps3_system_ver":
+                  package.SupportVersion = reader.Value;
+                  break;
 
-               case "url": {
-                     package.Name = Path.GetFileName(reader.Value);
-                     package.Url = new Uri(reader.Value);
-                     break;
-                  }
+               case "url":
+                  package.Name = Path.GetFileName(reader.Value);
+                  package.Url = new Uri(reader.Value);
+                  break;
+
             }
          }
 
@@ -214,10 +213,11 @@ namespace PackageStore
 
       private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
       {
-         if (this.listViewPackage.SelectedIndices.Count == 0) return;
-
          try {
-            Clipboard.SetText(this.PackageItems[this.listViewPackage.SelectedItems[0].Index].Url.ToString());
+            if (this.listViewPackage.SelectedIndices.Count >= 1) {
+               ListViewItem selectedItem = this.listViewPackage.SelectedItems[0];
+               Clipboard.SetText(this.PackageItems[selectedItem.Index].Url.ToString());
+            }
          }
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);

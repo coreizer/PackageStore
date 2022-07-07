@@ -25,14 +25,14 @@ namespace PackageStore
    using ByteSizeLib;
 
    public class Package
-  {
-    public string Name = "Unknown";
-    public string Version = "Unknown";
-    public string SystemVersion = "Unknown";
-    public string SupportVersion = "Unknown";
-    public ByteSize Size;
-    public string Digest = "Unknown";
-    public string Hash = "Unknown";
-    public Uri Url;
-  }
+   {
+      public string Name = "Unknown";
+      public string Version = "Unknown";
+      public string SystemVersion = "Unknown";
+      public string SupportVersion = "Unknown";
+      public ByteSize Size;
+      public string Digest = "Unknown";
+      public string Hash = "Unknown";
+      public Uri Url;
+   }
 }

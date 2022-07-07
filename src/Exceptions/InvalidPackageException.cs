@@ -19,18 +19,14 @@
 
 #endregion
 
-using System;
-
 namespace PackageStore.Exceptions
 {
-	public class InvalidPackageException : Exception
-	{
-		public InvalidPackageException(string message) : base(message)
-		{
-		}
+   using System;
 
-		public InvalidPackageException(string message, Exception innerException) : base(message, innerException)
-		{
-		}
-	}
+   public class InvalidPackageException : Exception
+   {
+      public InvalidPackageException(string message) : base(message) { }
+
+      public InvalidPackageException(string message, Exception innerException) : base(message, innerException) { }
+   }
 }

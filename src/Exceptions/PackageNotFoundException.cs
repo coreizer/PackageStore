@@ -19,7 +19,6 @@
 
 #endregion
 
-
 namespace PackageStore.Exceptions
 {
    using System;

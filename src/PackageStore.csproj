@@ -56,8 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\ManifestNotFoundException.cs" />
-    <Compile Include="PlayStationManifest.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
     <Compile Include="frmMain.cs">

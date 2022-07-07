@@ -22,7 +22,6 @@
 namespace PackageStore
 {
    using System;
-   using System.Linq;
    using System.Collections.Generic;
    using System.Diagnostics;
    using System.IO;
@@ -35,7 +34,6 @@ namespace PackageStore
    using System.Xml;
    using ByteSizeLib;
    using PackageStore.Exceptions;
-   using static System.Windows.Forms.ListView;
 
    public partial class frmMain : Form
    {

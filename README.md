@@ -7,16 +7,12 @@
 
 <img src="./doc/PackageStore.png">
 
-## Credit
-* OctolusNET - ps4 pkg database
-
 ## Author
 
 * **Coreizer**
 
 ## Additional resources
 * [Environments](https://www.psdevwiki.com/ps3/Environments)
-* [PS4Database.io](https://ps4database.io)
 
 ## License
 

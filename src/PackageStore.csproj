@@ -58,9 +58,6 @@
   <ItemGroup>
     <Compile Include="Exceptions\ManifestNotFoundException.cs" />
     <Compile Include="PlayStationManifest.cs" />
-    <Compile Include="PS4DatabasePatches.cs" />
-    <Compile Include="PS4DatabaseValid.cs" />
-    <Compile Include="Enums\Platform.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
     <Compile Include="frmMain.cs">
@@ -89,7 +86,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest" />
-    <None Include="PackageStore.licenseheader" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,9 +108,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="RestSharp">
-      <Version>106.10.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

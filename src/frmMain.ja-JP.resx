@@ -118,53 +118,44 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 34</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 6</value>
-  </data>
-  <data name="githubToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 34</value>
-  </data>
   <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 29</value>
+    <value>48, 20</value>
   </data>
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>ヘルプ</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1320, 37</value>
+    <value>1099, 24</value>
   </data>
   <data name="textBoxPackageId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>561, 54</value>
+    <value>101, 32</value>
   </data>
   <data name="textBoxPackageId.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 31</value>
+    <value>246, 23</value>
   </data>
   <data name="checkBoxForce.Location" type="System.Drawing.Point, System.Drawing">
-    <value>817, 56</value>
+    <value>355, 34</value>
   </data>
   <data name="checkBoxForce.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 29</value>
+    <value>52, 19</value>
   </data>
   <data name="checkBoxForce.Text" xml:space="preserve">
     <value>強制</value>
   </data>
   <data name="buttonSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1108, 47</value>
+    <value>932, 33</value>
   </data>
   <data name="buttonSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 44</value>
+    <value>154, 32</value>
   </data>
   <data name="buttonSearch.Text" xml:space="preserve">
     <value>検索</value>
   </data>
   <data name="labelPackageId.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 57</value>
+    <value>13, 36</value>
   </data>
   <data name="labelPackageId.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>80, 15</value>
   </data>
   <data name="labelPackageId.Text" xml:space="preserve">
     <value>パッケージ Id : </value>
@@ -192,56 +183,25 @@
     <value>ハッシュ</value>
   </data>
   <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 108</value>
+    <value>13, 75</value>
   </data>
   <data name="listViewPackage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1287, 813</value>
+    <value>1073, 408</value>
+  </data>
+  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 497</value>
+  </data>
+  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1099, 22</value>
   </data>
   <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1144, 25</value>
+    <value>984, 17</value>
   </data>
   <data name="toolStripStatusLabel2.Text" xml:space="preserve">
     <value>© Package Store 2017-2020</value>
   </data>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 937</value>
-  </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1320, 32</value>
-  </data>
-  <data name="comboBoxPlatform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>157, 54</value>
-  </data>
-  <data name="comboBoxPlatform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 33</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 57</value>
-  </data>
-  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 0, 5, 0</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 25</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>プラットフォーム : </value>
-  </data>
-  <data name="comboBoxEnvironments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 33</value>
-  </data>
-  <data name="comboBoxEnvironments.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1320, 969</value>
+    <value>1099, 519</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

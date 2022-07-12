@@ -121,7 +121,7 @@ namespace PackageStore
          // textBoxPackageId
          // 
          resources.ApplyResources(this.textBoxPackageId, "textBoxPackageId");
-         this.textBoxPackageId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+         this.textBoxPackageId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
          this.textBoxPackageId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
          this.textBoxPackageId.Name = "textBoxPackageId";
          // 

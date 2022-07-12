@@ -25,6 +25,7 @@ namespace PackageStore
    using System.Collections.Generic;
    using System.Diagnostics;
    using System.IO;
+   using System.Linq;
    using System.Net;
    using System.Net.Security;
    using System.Security.Cryptography.X509Certificates;
@@ -46,7 +47,9 @@ namespace PackageStore
       "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/"
     };
 
-      private List<Package> PackageItems = new List<Package>();
+      private List<Package> _items = new List<Package>();
+
+      private AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
 
       public new bool UseWaitCursor
       {
@@ -67,6 +70,7 @@ namespace PackageStore
       public frmMain()
       {
          this.InitializeComponent();
+         this.SetAutoCompleteSource();
          ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
       }
 
@@ -81,18 +85,24 @@ namespace PackageStore
                throw new InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
             }
 
-            this.PackageItems = await Task.Run(() => this.PackageSearch(this.textBoxPackageId.Text));
-            this.PackageItems.ForEach(x =>
+            await Task.Run(() =>
             {
-               ListViewItem package = new ListViewItem { Text = x.Name };
-               package.SubItems.Add(x.Size.ToString());
-               package.SubItems.Add(x.Version);
-               package.SubItems.Add(!string.IsNullOrEmpty(x.SystemVersion) ? x.SystemVersion : x.SupportVersion);
-               package.SubItems.Add(x.Hash);
-               package.SubItems.Add(x.Digest);
+               this._items = this.PackageSearch(this.textBoxPackageId.Text);
+               foreach (Package package in this._items) {
+                  ListViewItem newItem = new ListViewItem { Text = package.Name };
+                  newItem.SubItems.Add(package.Size.ToString());
+                  newItem.SubItems.Add(package.Version);
+                  newItem.SubItems.Add(!string.IsNullOrEmpty(package.SystemVersion) ? package.SystemVersion : package.SupportVersion);
+                  newItem.SubItems.Add(package.Hash);
+                  newItem.SubItems.Add(package.Digest);
 
-               this.listViewPackage.Items.Add(package);
+                  this.Invoke((Action)(() => this.listViewPackage.Items.Add(newItem)));
+               }
             });
+
+            if (this._items.Count >= 1) {
+               this.AddSuggestion(this.textBoxPackageId.Text);
+            }
          }
          catch (PackageNotFoundException ex) {
             MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -105,14 +115,15 @@ namespace PackageStore
          }
       }
 
-      private List<Package> PackageSearch(string name, string environments = "NP")
+      private List<Package> PackageSearch(string id, string environments = "NP")
       {
          List<Package> items = new List<Package>();
+         string titleId = id.Trim();
 
          foreach (string url in this.Environments) {
             try {
-               Trace.WriteLine(url + name + "/" + name + "-ver.xml", "URL");
-               XmlTextReader reader = new XmlTextReader(url + name + "/" + name + "-ver.xml");
+               Trace.WriteLine(url + titleId + "/" + titleId + "-ver.xml", "URL");
+               XmlTextReader reader = new XmlTextReader(url + titleId + "/" + titleId + "-ver.xml");
 
                do {
                   if (reader.NodeType == XmlNodeType.Element && reader.Name == "package") {
@@ -138,6 +149,21 @@ namespace PackageStore
          }
 
          return items;
+      }
+
+      private void AddSuggestion(string titleId)
+      {
+         try {
+            HashSet<string> suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray());
+            suggestions.Add(titleId);
+            Properties.Settings.Default.Suggestions.Clear();
+            Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
+         }
+         finally {
+            Properties.Settings.Default.Save();
+         }
+
+         this.SetAutoCompleteSource();
       }
 
       private Package AttributeReaderPS3(ref XmlTextReader reader)
@@ -191,7 +217,7 @@ namespace PackageStore
 
          try {
             foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
-               Process.Start(this.PackageItems[item.Index].Url.ToString());
+               Process.Start(this._items[item.Index].Url.ToString());
             }
          }
          catch (Exception ex) {
@@ -214,11 +240,47 @@ namespace PackageStore
          try {
             if (this.listViewPackage.SelectedIndices.Count >= 1) {
                ListViewItem selectedItem = this.listViewPackage.SelectedItems[0];
-               Clipboard.SetText(this.PackageItems[selectedItem.Index].Url.ToString());
+               Clipboard.SetText(this._items[selectedItem.Index].Url.ToString());
             }
          }
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void SetAutoCompleteSource(string addSuggestion = null)
+      {
+         try {
+            this._autoComplete.Clear();
+            this._autoComplete.AddRange(
+               Properties.Settings.Default.Suggestions.Cast<string>().ToArray()
+            );
+            this.textBoxPackageId.AutoCompleteCustomSource = this._autoComplete;
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+      {
+         try {
+            Properties.Settings.Default.Save();
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void resetSuggestionToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         try {
+            Properties.Settings.Default.Suggestions.Clear();
+            this.SetAutoCompleteSource();
+         }
+         finally {
+            Properties.Settings.Default.Save();
+            MessageBox.Show("Suggestions have been removed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
          }
       }
    }

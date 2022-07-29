@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PackageStore")]
-[assembly: AssemblyCopyright("© Coreizer 2017-2019")]
+[assembly: AssemblyCopyright("© Coreizer 2017-2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,19 +1,22 @@
-<h1 align="center">Package Store</h1>
-<p align="center">PS Store(CD only) package search tools</p>
+# Package Store
+PS Store(CD only) package search tools
 
-[![Build Status](https://travis-ci.org/coreizer/PackageStore.svg?branch=master)](https://travis-ci.org/coreizer/PackageStore)
-[![Coverage Status](https://coveralls.io/repos/github/coreizer/PackageStore/badge.svg?branch=master)](https://coveralls.io/github/coreizer/PackageStore?branch=master)
-[![AUR](https://img.shields.io/github/license/coreizer/PackageStore.svg)](LICENSE)
+## Featured
+ - PKG Search
+ - PKG Download
 
-<img src="./doc/PackageStore.png">
-
-## Author
-
-* **Coreizer**
+## Screenshot
+![ScreenShot](docs/PackageStore.png)
 
 ## Additional resources
-* [Environments](https://www.psdevwiki.com/ps3/Environments)
+ - [Environments](https://www.psdevwiki.com/ps3/Environments)
+
+## Stay In Touch
+- [Website (coreizer.dev)](https://www.coreizer.dev)
+- [Twitter](https://www.twitter.com/coreizer)
+
+## Author
+coreizer
 
 ## License
-
-[Public License v3.0](LICENSE)
+[GPL v3 licensed.](./LICENSE)

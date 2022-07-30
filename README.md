@@ -1,4 +1,6 @@
 # Package Store
+[![Build status](https://ci.appveyor.com/api/projects/status/5j92bdq3sv9hp7gm?svg=true)](https://ci.appveyor.com/project/coreizer/packagestore)
+
 PS Store(CD only) package search tools
 
 ## Featured

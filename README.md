@@ -21,4 +21,4 @@ PS Store(CD only) package search tools
 coreizer
 
 ## License
-[GPL v3 licensed.](./LICENSE)
+[GPL v3.0 licensed.](LICENSE)

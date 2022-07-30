@@ -1,4 +1,0 @@
-language: csharp
-solution: PackageStore.sln
-after_success:
-  - coveralls

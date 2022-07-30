@@ -1,2 +1,7 @@
+image: visual studio 2022
+before_build:
+ - ps: nuget restore
 build:
-  publish_nuget: true
+  verbosity: minimal
+configuration:
+  - Release

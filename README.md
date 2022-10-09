@@ -10,8 +10,8 @@ PS Store(CD only) package search tools
 ## Screenshot
 ![ScreenShot](docs/PackageStore.png)
 
-## Additional resources
- - [Environments](https://www.psdevwiki.com/ps3/Environments)
+## Additional resources and thanks
+ - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
 
 ## Stay In Touch
 - [Website (coreizer.dev)](https://www.coreizer.dev)

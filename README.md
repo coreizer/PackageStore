@@ -4,8 +4,9 @@
 PS Store(CD only) package search tools
 
 ## Featured
- - PKG Search
- - PKG Download
+ - Package Search
+ - Package Download (from browser)
+ - Search history
 
 ## Screenshot
 ![ScreenShot](docs/PackageStore.png)

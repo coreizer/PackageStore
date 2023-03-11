@@ -49,13 +49,11 @@ namespace PackageStore
 
       private List<Package> _items = new List<Package>();
 
-      private AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
+      private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
 
       public new bool UseWaitCursor
       {
-         get {
-            return base.UseWaitCursor;
-         }
+         get => base.UseWaitCursor;
 
          set {
             base.UseWaitCursor = value;
@@ -85,11 +83,10 @@ namespace PackageStore
                throw new InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
             }
 
-            await Task.Run(() =>
-            {
+            await Task.Run(() => {
                this._items = this.PackageSearch(this.textBoxPackageId.Text);
-               foreach (Package package in this._items) {
-                  ListViewItem newItem = new ListViewItem { Text = package.Name };
+               foreach (var package in this._items) {
+                  var newItem = new ListViewItem { Text = package.Name };
                   newItem.SubItems.Add(package.Size.ToString());
                   newItem.SubItems.Add(package.Version);
                   newItem.SubItems.Add(!string.IsNullOrEmpty(package.SystemVersion) ? package.SystemVersion : package.SupportVersion);
@@ -117,13 +114,13 @@ namespace PackageStore
 
       private List<Package> PackageSearch(string id, string environments = "NP")
       {
-         List<Package> items = new List<Package>();
-         string titleId = id.Trim();
+         var items = new List<Package>();
+         var titleId = id.Trim();
 
-         foreach (string url in this.Environments) {
+         foreach (var url in this.Environments) {
             try {
                Trace.WriteLine(url + titleId + "/" + titleId + "-ver.xml", "URL");
-               XmlTextReader reader = new XmlTextReader(url + titleId + "/" + titleId + "-ver.xml");
+               var reader = new XmlTextReader(url + titleId + "/" + titleId + "-ver.xml");
 
                do {
                   if (reader.NodeType == XmlNodeType.Element && reader.Name == "package") {
@@ -132,7 +129,7 @@ namespace PackageStore
                } while (reader.Read());
             }
             catch (WebException ex) {
-               HttpWebResponse response = (HttpWebResponse)ex.Response;
+               var response = (HttpWebResponse)ex.Response;
                switch (response.StatusCode) {
                   case HttpStatusCode.NotFound:
                   case HttpStatusCode.Forbidden:
@@ -154,8 +151,10 @@ namespace PackageStore
       private void AddSuggestion(string titleId)
       {
          try {
-            HashSet<string> suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray());
-            suggestions.Add(titleId);
+            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) {
+               titleId
+            };
+
             Properties.Settings.Default.Suggestions.Clear();
             Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
          }
@@ -168,9 +167,9 @@ namespace PackageStore
 
       private Package AttributeReaderPS3(ref XmlTextReader reader)
       {
-         Package package = new Package();
+         var package = new Package();
 
-         for (int i = 0; i < reader.AttributeCount; i++) {
+         for (var i = 0; i < reader.AttributeCount; i++) {
             reader.MoveToNextAttribute();
             switch (reader.Name) {
                case "version":
@@ -211,9 +210,7 @@ namespace PackageStore
 
       private void ListViewPackages_ItemActivate(object sender, EventArgs e)
       {
-         if (this.listViewPackage.SelectedIndices.Count == 0) {
-            return;
-         }
+         if (this.listViewPackage.SelectedIndices.Count == 0) return;
 
          try {
             foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
@@ -227,7 +224,7 @@ namespace PackageStore
 
       private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
       {
-         MessageBox.Show("Made by Coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+         MessageBox.Show("Made by coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
 
       private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
@@ -239,7 +236,7 @@ namespace PackageStore
       {
          try {
             if (this.listViewPackage.SelectedIndices.Count >= 1) {
-               ListViewItem selectedItem = this.listViewPackage.SelectedItems[0];
+               var selectedItem = this.listViewPackage.SelectedItems[0];
                Clipboard.SetText(this._items[selectedItem.Index].Url.ToString());
             }
          }

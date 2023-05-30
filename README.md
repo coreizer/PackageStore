@@ -23,4 +23,4 @@ PS Store(CD only) package search tools
 coreizer
 
 ## License
-[GPL v3.0 licensed.](LICENSE)
+The PackageStore is open-sourced software licensed under the [GPL v3.0 licensed.](LICENSE)

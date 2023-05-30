@@ -3,7 +3,7 @@
 
 PS Store(CD only) package search tools
 
-## Featured
+## 👀 Featured
  - Package Search
  - Package Download (from browser)
  - Search history
@@ -11,7 +11,7 @@ PS Store(CD only) package search tools
 ## Screenshot
 ![ScreenShot](docs/PackageStore.png)
 
-## Additional resources and thanks
+##🙏 Additional resources and thanks
  - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
  - [ByteSize - Utility](https://github.com/omar/ByteSize)
 
@@ -21,6 +21,9 @@ PS Store(CD only) package search tools
 
 ## Author
 coreizer
+
+## ⚠️ Caution/Disclaimer
+"Copyright Disclaimer Under Section 107 of the Copyright Act 1976, allowance is made for -fair use- for purposes such as criticism, comment, news reporting, teaching, scholarship, and research. Fair use is a use permitted by copyright statute that might oth erwise be infringing. Non-profit, educational or personal use tips the balance in favor of fair use."
 
 ## License
 The PackageStore is open-sourced software licensed under the [GPL v3.0 licensed.](LICENSE)

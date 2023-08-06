@@ -21,6 +21,7 @@
   <ol>
     <li><a href="#👀-featured">Featured</a></li>
     <li><a href="#🖼️-screenshot">Screenshot</a></li>
+    <li><a href="#🙏-additional-resources-and-thanks">Additional resources and thanks</a></li>
     <li><a href="#👷-author">Author</a></li>
     <li><a href="#🌏-stay-in-touch">Stay In Touch</a></li>
     <li><a href="#⚖️-license">License</a></li>

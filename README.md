@@ -1,26 +1,55 @@
-# Package Store
 [![Build status](https://ci.appveyor.com/api/projects/status/5j92bdq3sv9hp7gm?svg=true)](https://ci.appveyor.com/project/coreizer/packagestore)
 
-PS Store(CD only) package search tools
+<div align="center">
+  <a href="https://github.com/coreizer/ChatHub">
+    <img src="./docs/logo.png" width="128">
+  </a>
 
-## Featured
- - Package Search
- - Package Download (from browser)
- - Search history
+  <h3 align="center">PackageStore</h3>
 
-## Screenshot
+  <p>PS Store(CD only) package search tools</p>
+
+  <p align="center">
+    <a href="https://github.com/coreizer/PackageStore/issues">Report Bug</a>
+    ・
+    <a href="https://github.com/coreizer/PackageStore/issues">Request Feature</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#👀-featured">Featured</a></li>
+    <li><a href="#🖼️-screenshot">Screenshot</a></li>
+    <li><a href="#👷-author">Author</a></li>
+    <li><a href="#⚖️-license">License</a></li>
+  </ol>
+</details>
+
+## 👀 Featured
+
+- Package Search
+- Package Download (from browser)
+- Search history
+
+## 🖼️ Screenshot
+
 ![ScreenShot](docs/PackageStore.png)
 
-## Additional resources and thanks
- - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
- - [ByteSize - Utility](https://github.com/omar/ByteSize)
+## 🙏 Additional resources and thanks
+
+- [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
+- [ByteSize - Utility](https://github.com/omar/ByteSize)
 
 ## Stay In Touch
+
 - [Website (coreizer.dev)](https://www.coreizer.dev)
 - [Twitter](https://www.twitter.com/coreizer)
 
-## Author
-coreizer
+## 👷 Author
 
-## License
+- coreizer
+
+## ⚖️ License
+
 [GPL v3.0 licensed.](LICENSE)

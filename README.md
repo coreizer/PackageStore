@@ -22,6 +22,7 @@
     <li><a href="#👀-featured">Featured</a></li>
     <li><a href="#🖼️-screenshot">Screenshot</a></li>
     <li><a href="#👷-author">Author</a></li>
+    <li><a href="#🌏-stay-in-touch">Stay In Touch</a></li>
     <li><a href="#⚖️-license">License</a></li>
   </ol>
 </details>
@@ -41,7 +42,7 @@
 - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
 - [ByteSize - Utility](https://github.com/omar/ByteSize)
 
-## Stay In Touch
+## 🌏 Stay In Touch
 
 - [Website (coreizer.dev)](https://www.coreizer.dev)
 - [Twitter](https://www.twitter.com/coreizer)

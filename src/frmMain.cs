@@ -90,7 +90,7 @@ namespace PackageStore
                   var newItem = new ListViewItem { Text = package.Name };
                   newItem.SubItems.Add(package.Size.ToString());
                   newItem.SubItems.Add(package.Version);
-                  newItem.SubItems.Add(package.PS3SystemVer != Environment.DefaultString ? package.PS3SystemVer : package.PSPSystemVer); // PS3 or PSP*/
+                  newItem.SubItems.Add(package.PS3SystemVer != Environment.DefaultString ? package.PS3SystemVer : package.PSPSystemVer); /* PS3 or PSP */
                   newItem.SubItems.Add(package.Hash);
 
                   this.Invoke((Action)(() => this.listViewPackage.Items.Add(newItem)));

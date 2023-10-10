@@ -67,6 +67,9 @@
     <Compile Include="Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmMain.en.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.ja-JP.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

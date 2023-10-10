@@ -203,6 +203,9 @@
   <data name="columnHeader5.Text" xml:space="preserve">
     <value>ハッシュ</value>
   </data>
+  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+    <value>327</value>
+  </data>
   <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 75</value>
   </data>

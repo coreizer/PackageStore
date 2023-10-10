@@ -26,13 +26,12 @@ namespace PackageStore
 
    public class Package
    {
-      public string Name = "Unknown";
-      public string Version = "Unknown";
-      public string SystemVersion = "Unknown";
-      public string SupportVersion = "Unknown";
+      public string Name = Environment.DefaultString;
+      public string Version = Environment.DefaultString;
+      public string PS3SystemVer = Environment.DefaultString;
+      public string PSPSystemVer = Environment.DefaultString;
       public ByteSize Size;
-      public string Digest = "Unknown";
-      public string Hash = "Unknown";
+      public string Hash = Environment.DefaultString;
       public Uri Url;
    }
 }

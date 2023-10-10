@@ -44,7 +44,8 @@ namespace PackageStore
       "http://b0.ww.np.dl.playstation.net/tppkg/np/",
       "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
       "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
-      "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/"
+      "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/",
+      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
     };
 
       private List<Package> _items = new List<Package>();
@@ -89,9 +90,8 @@ namespace PackageStore
                   var newItem = new ListViewItem { Text = package.Name };
                   newItem.SubItems.Add(package.Size.ToString());
                   newItem.SubItems.Add(package.Version);
-                  newItem.SubItems.Add(!string.IsNullOrEmpty(package.SystemVersion) ? package.SystemVersion : package.SupportVersion);
+                  newItem.SubItems.Add(package.PS3SystemVer != Environment.DefaultString ? package.PS3SystemVer : package.PSPSystemVer); // PS3 or PSP*/
                   newItem.SubItems.Add(package.Hash);
-                  newItem.SubItems.Add(package.Digest);
 
                   this.Invoke((Action)(() => this.listViewPackage.Items.Add(newItem)));
                }
@@ -185,14 +185,17 @@ namespace PackageStore
                   break;
 
                case "ps3_system_ver":
-                  package.SupportVersion = reader.Value;
+                  package.PS3SystemVer = reader.Value;
+                  break;
+
+               case "psp_system_ver":
+                  package.PSPSystemVer = reader.Value;
                   break;
 
                case "url":
                   package.Name = Path.GetFileName(reader.Value);
                   package.Url = new Uri(reader.Value);
                   break;
-
             }
          }
 

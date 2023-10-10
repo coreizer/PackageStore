@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Environment.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
     <Compile Include="frmMain.cs">

@@ -54,4 +54,4 @@
 
 ## ⚖️ License
 
-[GPL v3.0 licensed.](LICENSE)
+This project is licensed under [GPL v3.0](https://opensource.org/license/lgpl-3-0/). See [License File](LICENSE) for details.

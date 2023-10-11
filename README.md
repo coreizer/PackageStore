@@ -43,6 +43,7 @@
 - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
 - [ByteSize - Utility](https://github.com/omar/ByteSize)
 - [redump.org](http://redump.org/)
+- [AngleSharp](https://github.com/AngleSharp/AngleSharp)
 
 ## 🌏 Stay In Touch
 

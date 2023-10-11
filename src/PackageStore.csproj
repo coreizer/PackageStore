@@ -58,6 +58,7 @@
     <Compile Include="Environment.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
+    <Compile Include="PackageExport.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -117,8 +118,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
+    <PackageReference Include="System.Text.Json">
+      <Version>7.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

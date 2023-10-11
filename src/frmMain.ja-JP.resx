@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="SaveAsJsonStripMenuItem.Text" xml:space="preserve">
+    <value>エクスポート JSON</value>
+  </data>
+  <data name="ファイルToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>ヘルプ</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 24</value>
-  </data>
   <data name="resetSuggestionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 22</value>
   </data>
@@ -147,6 +144,15 @@
   </data>
   <data name="githubToolStripMenuItem.Text" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 24</value>
   </data>
   <data name="textBoxPackageId.Location" type="System.Drawing.Point, System.Drawing">
     <value>101, 32</value>
@@ -206,17 +212,41 @@
   <data name="columnHeader5.Width" type="System.Int32, mscorlib">
     <value>154</value>
   </data>
+  <data name="OpenXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
+  <data name="OpenXMLToolStripMenuItem.Text" xml:space="preserve">
+    <value>XMLをブラウザで開く</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 6</value>
+  </data>
+  <data name="copyToURLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
+  <data name="copyToURLToolStripMenuItem.Text" xml:space="preserve">
+    <value>URLをコピー</value>
+  </data>
+  <data name="CopyToSizeToolStripMenuItem.Text" xml:space="preserve">
+    <value>サイズをコピー</value>
+  </data>
+  <data name="CopyToVersionToolStripMenuItem.Text" xml:space="preserve">
+    <value>バージョンをコピー</value>
+  </data>
+  <data name="CopyToSystemVersionToolStripMenuItem.Text" xml:space="preserve">
+    <value>システム/サポートバージョンをコピー</value>
+  </data>
+  <data name="CopyToHashToolStripMenuItem.Text" xml:space="preserve">
+    <value>ハッシュをコピー</value>
+  </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 142</value>
+  </data>
   <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 75</value>
   </data>
   <data name="listViewPackage.Size" type="System.Drawing.Size, System.Drawing">
     <value>854, 360</value>
-  </data>
-  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 449</value>
-  </data>
-  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 22</value>
   </data>
   <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 17</value>
@@ -225,10 +255,16 @@
     <value>Made by coreizer</value>
   </data>
   <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>735, 17</value>
+    <value>766, 17</value>
   </data>
   <data name="toolStripStatusLabel2.Text" xml:space="preserve">
     <value>© Package Store 2017-2023</value>
+  </data>
+  <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 449</value>
+  </data>
+  <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 22</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>880, 471</value>

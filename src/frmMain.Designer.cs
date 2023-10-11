@@ -51,6 +51,8 @@ namespace PackageStore
          this.components = new System.ComponentModel.Container();
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
          this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+         this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.SaveAsJsonStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.resetSuggestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +69,13 @@ namespace PackageStore
          this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+         this.OpenXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
          this.copyToURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.CopyToSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.CopyToVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.CopyToSystemVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.CopyToHashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
          this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
          this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -81,8 +89,22 @@ namespace PackageStore
          resources.ApplyResources(this.menuStrip1, "menuStrip1");
          this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ファイルToolStripMenuItem,
             this.helpToolStripMenuItem});
          this.menuStrip1.Name = "menuStrip1";
+         // 
+         // ファイルToolStripMenuItem
+         // 
+         resources.ApplyResources(this.ファイルToolStripMenuItem, "ファイルToolStripMenuItem");
+         this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SaveAsJsonStripMenuItem});
+         this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
+         // 
+         // SaveAsJsonStripMenuItem
+         // 
+         resources.ApplyResources(this.SaveAsJsonStripMenuItem, "SaveAsJsonStripMenuItem");
+         this.SaveAsJsonStripMenuItem.Name = "SaveAsJsonStripMenuItem";
+         this.SaveAsJsonStripMenuItem.Click += new System.EventHandler(this.SaveAsJSONStripMenuItem_Click);
          // 
          // helpToolStripMenuItem
          // 
@@ -185,14 +207,55 @@ namespace PackageStore
          resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
          this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyToURLToolStripMenuItem});
+            this.OpenXMLToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.copyToURLToolStripMenuItem,
+            this.CopyToSizeToolStripMenuItem,
+            this.CopyToVersionToolStripMenuItem,
+            this.CopyToSystemVersionToolStripMenuItem,
+            this.CopyToHashToolStripMenuItem});
          this.contextMenuStrip1.Name = "contextMenuStrip1";
+         // 
+         // OpenXMLToolStripMenuItem
+         // 
+         resources.ApplyResources(this.OpenXMLToolStripMenuItem, "OpenXMLToolStripMenuItem");
+         this.OpenXMLToolStripMenuItem.Name = "OpenXMLToolStripMenuItem";
+         this.OpenXMLToolStripMenuItem.Click += new System.EventHandler(this.OpenXMLToolStripMenuItem_Click);
+         // 
+         // toolStripSeparator2
+         // 
+         resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+         this.toolStripSeparator2.Name = "toolStripSeparator2";
          // 
          // copyToURLToolStripMenuItem
          // 
          resources.ApplyResources(this.copyToURLToolStripMenuItem, "copyToURLToolStripMenuItem");
          this.copyToURLToolStripMenuItem.Name = "copyToURLToolStripMenuItem";
          this.copyToURLToolStripMenuItem.Click += new System.EventHandler(this.CopyToURLToolStripMenuItem_Click);
+         // 
+         // CopyToSizeToolStripMenuItem
+         // 
+         resources.ApplyResources(this.CopyToSizeToolStripMenuItem, "CopyToSizeToolStripMenuItem");
+         this.CopyToSizeToolStripMenuItem.Name = "CopyToSizeToolStripMenuItem";
+         this.CopyToSizeToolStripMenuItem.Click += new System.EventHandler(this.CopyToSizeToolStripMenuItem_Click);
+         // 
+         // CopyToVersionToolStripMenuItem
+         // 
+         resources.ApplyResources(this.CopyToVersionToolStripMenuItem, "CopyToVersionToolStripMenuItem");
+         this.CopyToVersionToolStripMenuItem.Name = "CopyToVersionToolStripMenuItem";
+         this.CopyToVersionToolStripMenuItem.Click += new System.EventHandler(this.CopyToVersionToolStripMenuItem_Click);
+         // 
+         // CopyToSystemVersionToolStripMenuItem
+         // 
+         resources.ApplyResources(this.CopyToSystemVersionToolStripMenuItem, "CopyToSystemVersionToolStripMenuItem");
+         this.CopyToSystemVersionToolStripMenuItem.Name = "CopyToSystemVersionToolStripMenuItem";
+         this.CopyToSystemVersionToolStripMenuItem.Click += new System.EventHandler(this.CopyToSystemVersionToolStripMenuItem_Click);
+         // 
+         // CopyToHashToolStripMenuItem
+         // 
+         resources.ApplyResources(this.CopyToHashToolStripMenuItem, "CopyToHashToolStripMenuItem");
+         this.CopyToHashToolStripMenuItem.Name = "CopyToHashToolStripMenuItem";
+         this.CopyToHashToolStripMenuItem.Click += new System.EventHandler(this.CopyToHashToolStripMenuItem_Click);
          // 
          // statusStrip1
          // 
@@ -264,6 +327,14 @@ namespace PackageStore
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ListView listViewPackage;
       private System.Windows.Forms.ToolStripMenuItem resetSuggestionToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem SaveAsJsonStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem CopyToSizeToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem CopyToVersionToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem CopyToSystemVersionToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem CopyToHashToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem OpenXMLToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
    }
 }
 

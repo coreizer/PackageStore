@@ -27,8 +27,7 @@ namespace PackageStore
    using System.IO;
    using System.Linq;
    using System.Net;
-   using System.Net.Security;
-   using System.Security.Cryptography.X509Certificates;
+   using System.Text.Json;
    using System.Text.RegularExpressions;
    using System.Threading.Tasks;
    using System.Windows.Forms;
@@ -40,25 +39,23 @@ namespace PackageStore
    {
       // https://www.psdevwiki.com/ps3/Environments
       private readonly string[] Environments = {
-      "https://a0.ww.np.dl.playstation.net/tpl/np/",
-      "http://b0.ww.np.dl.playstation.net/tppkg/np/",
-      "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
-      "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
-      "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/",
-      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
-    };
+         "https://a0.ww.np.dl.playstation.net/tpl/np/",
+         "http://b0.ww.np.dl.playstation.net/tppkg/np/",
+         "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
+         "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
+         "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/",
+         "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
+      };
 
-      private List<Package> _items = new List<Package>();
+      private List<Package> _items;
 
       private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
 
       public new bool UseWaitCursor
       {
          get => base.UseWaitCursor;
-
          set {
             base.UseWaitCursor = value;
-
             this.buttonSearch.Enabled = !value;
             this.textBoxPackageId.Enabled = !value;
             this.checkBoxForce.Enabled = !value;
@@ -70,7 +67,14 @@ namespace PackageStore
       {
          this.InitializeComponent();
          this.SetAutoCompleteSource();
-         ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback((object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) => true);
+
+         // SSL: Certificate Revocation Allow
+         ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(
+            (object sender,
+            System.Security.Cryptography.X509Certificates.X509Certificate certificate,
+            System.Security.Cryptography.X509Certificates.X509Chain chain,
+            System.Net.Security.SslPolicyErrors sslPolicyErrors) => true
+         );
       }
 
       private async void ButtonSearch_Click(object sender, EventArgs e)
@@ -79,6 +83,7 @@ namespace PackageStore
             this.Text = Application.ProductName;
             this.UseWaitCursor = true;
             this.listViewPackage.Items.Clear();
+            this.textBoxPackageId.Text = this.textBoxPackageId.Text.Trim();
 
             if (!this.IsValid(this.textBoxPackageId.Text)) {
                throw new InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
@@ -119,12 +124,13 @@ namespace PackageStore
 
          foreach (var url in this.Environments) {
             try {
-               Trace.WriteLine(url + titleId + "/" + titleId + "-ver.xml", "URL");
-               var reader = new XmlTextReader(url + titleId + "/" + titleId + "-ver.xml");
+               var xmlUrl = url + titleId + "/" + titleId + "-ver.xml";
+               Trace.WriteLine(xmlUrl, "URL");
 
+               var reader = new XmlTextReader(xmlUrl);
                do {
                   if (reader.NodeType == XmlNodeType.Element && reader.Name == "package") {
-                     items.Add(this.AttributeReaderPS3(ref reader));
+                     items.Add(this.AttributeReaderPS3(xmlUrl, ref reader));
                   }
                } while (reader.Read());
             }
@@ -151,10 +157,7 @@ namespace PackageStore
       private void AddSuggestion(string titleId)
       {
          try {
-            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) {
-               titleId
-            };
-
+            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) { titleId };
             Properties.Settings.Default.Suggestions.Clear();
             Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
          }
@@ -165,9 +168,9 @@ namespace PackageStore
          this.SetAutoCompleteSource();
       }
 
-      private Package AttributeReaderPS3(ref XmlTextReader reader)
+      private Package AttributeReaderPS3(string xmlUrl, ref XmlTextReader reader)
       {
-         var package = new Package();
+         var package = new Package() { XmlUrl = xmlUrl };
 
          for (var i = 0; i < reader.AttributeCount; i++) {
             reader.MoveToNextAttribute();
@@ -202,14 +205,7 @@ namespace PackageStore
          return package;
       }
 
-      private bool IsValid(string name)
-      {
-         if (string.IsNullOrWhiteSpace(name)) {
-            throw new ArgumentNullException();
-         }
-
-         return Regex.IsMatch(name, "^[A-Z0-9]"); ;
-      }
+      private bool IsValid(string name) => string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException() : Regex.IsMatch(name, "^[A-Z0-9]");
 
       private void ListViewPackages_ItemActivate(object sender, EventArgs e)
       {
@@ -225,28 +221,20 @@ namespace PackageStore
          }
       }
 
-      private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-      {
-         MessageBox.Show("Made by coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      }
+      private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("Made by coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-      private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
-      {
-         Process.Start("https://www.github.com/coreizer/PackageStore");
-      }
+      private void GithubToolStripMenuItem_Click(object sender, EventArgs e) => Process.Start("https://www.github.com/coreizer/PackageStore");
 
-      private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e)
-      {
-         try {
-            if (this.listViewPackage.SelectedIndices.Count >= 1) {
-               var selectedItem = this.listViewPackage.SelectedItems[0];
-               Clipboard.SetText(this._items[selectedItem.Index].Url.ToString());
-            }
-         }
-         catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
-      }
+      private void CopyToURLToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("Url");
+
+      private void CopyToSizeToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("Size");
+
+      private void CopyToVersionToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("Version");
+
+      private void CopyToSystemVersionToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("SP_SYS");
+
+      private void CopyToHashToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("Hash");
+
 
       private void SetAutoCompleteSource(string addSuggestion = null)
       {
@@ -281,6 +269,55 @@ namespace PackageStore
          finally {
             Properties.Settings.Default.Save();
             MessageBox.Show("Suggestions have been removed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+         }
+      }
+
+      private void SaveAsJSONStripMenuItem_Click(object sender, EventArgs e)
+      {
+         try {
+            if (this._items != null && this._items.Count <= 0) throw new FileNotFoundException("Not found: Package List");
+
+            using (var SFD = new SaveFileDialog()) {
+               SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
+               SFD.Filter = "JSON File|*.json";
+               var result = SFD.ShowDialog();
+               if (result == DialogResult.OK) {
+                  var jsonString = JsonSerializer.Serialize(
+                     new PackageExport(this._items),
+                     new JsonSerializerOptions { WriteIndented = true }
+                  );
+                  File.WriteAllText(SFD.FileName, jsonString, System.Text.Encoding.UTF8);
+               }
+            }
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void ToClipboard(string propertyName)
+      {
+         try {
+            if (this.listViewPackage.SelectedIndices.Count >= 1) {
+               var selectedItem = this.listViewPackage.SelectedItems[0];
+               Clipboard.SetText(this._items[selectedItem.Index][propertyName]);
+            }
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void OpenXMLToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         try {
+            if (this.listViewPackage.SelectedIndices.Count >= 1) {
+               var selectedItem = this.listViewPackage.SelectedItems[0];
+               Process.Start(this._items[selectedItem.Index].XmlUrl);
+            }
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
          }
       }
    }

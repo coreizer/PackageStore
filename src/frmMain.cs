@@ -87,11 +87,11 @@ namespace PackageStore
 
             var packageId = this.textBoxPackageId.Text.Trim();
             if (this.checkBoxRedump.Checked) {
-               var redump = await this.GetInternalSerial(packageId);
-               if (redump != null) {
-                  var internalSerial = redump.Replace("-", "").Trim();
-                  MessageBox.Show($"Internal serial: Replace '{packageId}' to '{internalSerial}'", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                  packageId = internalSerial;
+               var serialId = await this.GetInternalSerial(packageId);
+               if (serialId != null) {
+                  serialId = serialId.Replace("-", "").Trim();
+                  MessageBox.Show($"Internal serial: Replace '{packageId}' to '{serialId}'", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  packageId = serialId;
                }
             }
 
@@ -132,9 +132,9 @@ namespace PackageStore
       private async Task<string> GetInternalSerial(string packageId)
       {
          try {
-            var titleId = Regex.Replace(packageId, @"[^0-9]", "");
+            var serialId = Regex.Replace(packageId, @"[^0-9]", "");
             var config = Configuration.Default.WithDefaultLoader();
-            var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{titleId}");
+            var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{serialId}");
             var tbody = document.QuerySelector("table.gamecomments tbody");
 
             if (tbody != null) {
@@ -157,14 +157,13 @@ namespace PackageStore
          return null;
       }
 
-      private List<Package> XMLParser(string id)
+      private List<Package> XMLParser(string packageId)
       {
          var items = new List<Package>();
-         var titleId = id.Trim();
 
          foreach (var url in this.Environments) {
             try {
-               var xmlUrl = url + titleId + "/" + titleId + "-ver.xml";
+               var xmlUrl = url + packageId + "/" + packageId + "-ver.xml";
                Trace.WriteLine(xmlUrl, "URL");
 
                var reader = new XmlTextReader(xmlUrl);
@@ -194,10 +193,10 @@ namespace PackageStore
          return items;
       }
 
-      private void AddSuggestion(string titleId)
+      private void AddSuggestion(string packageId)
       {
          try {
-            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) { titleId };
+            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) { packageId };
             Properties.Settings.Default.Suggestions.Clear();
             Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
          }

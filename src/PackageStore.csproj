@@ -58,14 +58,15 @@
     <Compile Include="Environment.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
-    <Compile Include="PackageExport.cs" />
+    <Compile Include="Models\Redump.cs" />
+    <Compile Include="Models\PackageExport.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Package.cs" />
+    <Compile Include="Models\Package.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.en.resx">
@@ -102,6 +103,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AngleSharp">
+      <Version>1.0.5</Version>
+    </PackageReference>
     <PackageReference Include="ByteSize">
       <Version>2.1.1</Version>
     </PackageReference>

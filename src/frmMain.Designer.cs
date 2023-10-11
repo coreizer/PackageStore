@@ -59,7 +59,6 @@ namespace PackageStore
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
          this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.textBoxPackageId = new System.Windows.Forms.TextBox();
-         this.checkBoxForce = new System.Windows.Forms.CheckBox();
          this.buttonSearch = new System.Windows.Forms.Button();
          this.labelPackageId = new System.Windows.Forms.Label();
          this.listViewPackage = new System.Windows.Forms.ListView();
@@ -79,6 +78,7 @@ namespace PackageStore
          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
          this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
          this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+         this.checkBoxRedump = new System.Windows.Forms.CheckBox();
          this.menuStrip1.SuspendLayout();
          this.contextMenuStrip1.SuspendLayout();
          this.statusStrip1.SuspendLayout();
@@ -145,12 +145,6 @@ namespace PackageStore
          this.textBoxPackageId.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
          this.textBoxPackageId.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
          this.textBoxPackageId.Name = "textBoxPackageId";
-         // 
-         // checkBoxForce
-         // 
-         resources.ApplyResources(this.checkBoxForce, "checkBoxForce");
-         this.checkBoxForce.Name = "checkBoxForce";
-         this.checkBoxForce.UseVisualStyleBackColor = true;
          // 
          // buttonSearch
          // 
@@ -278,14 +272,20 @@ namespace PackageStore
          this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
          this.toolStripStatusLabel2.Spring = true;
          // 
+         // checkBoxRedump
+         // 
+         resources.ApplyResources(this.checkBoxRedump, "checkBoxRedump");
+         this.checkBoxRedump.Name = "checkBoxRedump";
+         this.checkBoxRedump.UseVisualStyleBackColor = true;
+         // 
          // frmMain
          // 
          resources.ApplyResources(this, "$this");
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+         this.Controls.Add(this.checkBoxRedump);
          this.Controls.Add(this.statusStrip1);
          this.Controls.Add(this.labelPackageId);
          this.Controls.Add(this.buttonSearch);
-         this.Controls.Add(this.checkBoxForce);
          this.Controls.Add(this.textBoxPackageId);
          this.Controls.Add(this.menuStrip1);
          this.Controls.Add(this.listViewPackage);
@@ -311,7 +311,6 @@ namespace PackageStore
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
         private System.Windows.Forms.TextBox textBoxPackageId;
-        private System.Windows.Forms.CheckBox checkBoxForce;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.Label labelPackageId;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -335,6 +334,7 @@ namespace PackageStore
       private System.Windows.Forms.ToolStripMenuItem CopyToHashToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem OpenXMLToolStripMenuItem;
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+      private System.Windows.Forms.CheckBox checkBoxRedump;
    }
 }
 

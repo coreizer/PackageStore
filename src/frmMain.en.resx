@@ -142,6 +142,19 @@
   <data name="githubToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="columnHeader2.Width" type="System.Int32, mscorlib">
+    <value>114</value>
+  </data>
+  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+    <value>189</value>
+  </data>
+  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+    <value>228</value>
+  </data>
   <data name="OpenXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 22</value>
   </data>
@@ -183,6 +196,15 @@
   </data>
   <data name="toolStripStatusLabel2.Text" xml:space="preserve">
     <value>© Package Store 2017-2023</value>
+  </data>
+  <data name="checkBoxRedump.Location" type="System.Drawing.Point, System.Drawing">
+    <value>509, 31</value>
+  </data>
+  <data name="checkBoxRedump.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 24</value>
+  </data>
+  <data name="checkBoxRedump.Text" xml:space="preserve">
+    <value>from  supplement redump.org</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

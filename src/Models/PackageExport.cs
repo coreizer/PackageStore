@@ -19,7 +19,7 @@
 
 #endregion
 
-namespace PackageStore
+namespace PackageStore.Models
 {
    using System;
    using System.Collections.Generic;

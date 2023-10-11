@@ -32,8 +32,10 @@ namespace PackageStore
    using System.Threading.Tasks;
    using System.Windows.Forms;
    using System.Xml;
+   using AngleSharp;
    using ByteSizeLib;
    using PackageStore.Exceptions;
+   using PackageStore.Models;
 
    public partial class frmMain : Form
    {
@@ -58,7 +60,6 @@ namespace PackageStore
             base.UseWaitCursor = value;
             this.buttonSearch.Enabled = !value;
             this.textBoxPackageId.Enabled = !value;
-            this.checkBoxForce.Enabled = !value;
             this.listViewPackage.Enabled = !value;
          }
       }
@@ -80,30 +81,41 @@ namespace PackageStore
       private async void ButtonSearch_Click(object sender, EventArgs e)
       {
          try {
-            this.Text = Application.ProductName;
             this.UseWaitCursor = true;
+            this.Text = Application.ProductName;
             this.listViewPackage.Items.Clear();
-            this.textBoxPackageId.Text = this.textBoxPackageId.Text.Trim();
 
-            if (!this.IsValid(this.textBoxPackageId.Text)) {
-               throw new InvalidPackageException($"The package id '{this.textBoxPackageId.Text}' is Invalid");
+            var packageId = this.textBoxPackageId.Text.Trim();
+            if (this.checkBoxRedump.Checked) {
+               var redump = await this.GetInternalSerial(packageId);
+               if (redump != null) {
+                  var internalSerial = redump.Replace("-", "").Trim();
+                  MessageBox.Show($"Internal serial: Replace '{packageId}' to '{internalSerial}'", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  packageId = internalSerial;
+               }
+            }
+
+            this.textBoxPackageId.Text = packageId;
+
+            if (!this.IsValid(packageId)) {
+               throw new InvalidPackageException($"The package id '{packageId}' is Invalid");
             }
 
             await Task.Run(() => {
-               this._items = this.PackageSearch(this.textBoxPackageId.Text);
-               foreach (var package in this._items) {
-                  var newItem = new ListViewItem { Text = package.Name };
-                  newItem.SubItems.Add(package.Size.ToString());
-                  newItem.SubItems.Add(package.Version);
-                  newItem.SubItems.Add(package.PS3SystemVer != Environment.DefaultString ? package.PS3SystemVer : package.PSPSystemVer); /* PS3 or PSP */
-                  newItem.SubItems.Add(package.Hash);
+               this._items = this.XMLParser(packageId);
+               foreach (var pkg in this._items) {
+                  var newItem = new ListViewItem { Text = pkg.Name };
+                  newItem.SubItems.Add(pkg.Size.ToString());
+                  newItem.SubItems.Add(pkg.Version);
+                  newItem.SubItems.Add(pkg.PS3SystemVer != Environment.DefaultString ? pkg.PS3SystemVer : pkg.PSPSystemVer); /* PS3 or PSP */
+                  newItem.SubItems.Add(pkg.Hash);
 
                   this.Invoke((Action)(() => this.listViewPackage.Items.Add(newItem)));
                }
             });
 
-            if (this._items.Count >= 1) {
-               this.AddSuggestion(this.textBoxPackageId.Text);
+            if (this._items != null && this._items.Count >= 1) {
+               this.AddSuggestion(packageId);
             }
          }
          catch (PackageNotFoundException ex) {
@@ -117,7 +129,35 @@ namespace PackageStore
          }
       }
 
-      private List<Package> PackageSearch(string id, string environments = "NP")
+      private async Task<string> GetInternalSerial(string packageId)
+      {
+         try {
+            var titleId = Regex.Replace(packageId, @"[^0-9]", "");
+            var config = Configuration.Default.WithDefaultLoader();
+            var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{titleId}");
+            var tbody = document.QuerySelector("table.gamecomments tbody");
+
+            if (tbody != null) {
+               var internalSerial = "";
+               foreach (var child in tbody.ChildNodes) {
+                  if (child.TextContent.Contains("Internal Serial")) {
+                     internalSerial = child.TextContent.Split('\n').First();
+                     break;
+                  }
+               }
+
+               var texts = internalSerial.Split(':');
+               return texts.Last();
+            }
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+
+         return null;
+      }
+
+      private List<Package> XMLParser(string id)
       {
          var items = new List<Package>();
          var titleId = id.Trim();
@@ -160,6 +200,9 @@ namespace PackageStore
             var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) { titleId };
             Properties.Settings.Default.Suggestions.Clear();
             Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
+         }
+         catch(Exception ex) {
+            MessageBox.Show($"Suggestion Error: {ex.Message}", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
          }
          finally {
             Properties.Settings.Default.Save();
@@ -235,8 +278,7 @@ namespace PackageStore
 
       private void CopyToHashToolStripMenuItem_Click(object sender, EventArgs e) => this.ToClipboard("Hash");
 
-
-      private void SetAutoCompleteSource(string addSuggestion = null)
+      private void SetAutoCompleteSource()
       {
          try {
             this._autoComplete.Clear();

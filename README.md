@@ -42,6 +42,7 @@
 
 - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
 - [ByteSize - Utility](https://github.com/omar/ByteSize)
+- [redump.org](http://redump.org/)
 
 ## 🌏 Stay In Touch
 

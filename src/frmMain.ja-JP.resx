@@ -117,24 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ファイルToolStripMenuItem.Text" xml:space="preserve">
-    <value>ファイル</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>ヘルプ</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 24</value>
-  </data>
   <data name="SaveAsJsonStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 22</value>
   </data>
   <data name="SaveAsJsonStripMenuItem.Text" xml:space="preserve">
     <value>エクスポート JSON</value>
+  </data>
+  <data name="SaveFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 22</value>
+  </data>
+  <data name="SaveFolderToolStripMenuItem.Text" xml:space="preserve">
+    <value>保存フォルダー</value>
+  </data>
+  <data name="ファイルToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイル</value>
   </data>
   <data name="resetSuggestionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 22</value>
@@ -156,6 +153,15 @@
   </data>
   <data name="githubToolStripMenuItem.Text" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 24</value>
   </data>
   <data name="textBoxPackageId.Location" type="System.Drawing.Point, System.Drawing">
     <value>101, 32</value>
@@ -181,39 +187,39 @@
   <data name="labelPackageId.Text" xml:space="preserve">
     <value>パッケージ Id : </value>
   </data>
-  <data name="columnHeader1.Text" xml:space="preserve">
+  <data name="columnHeaderFileName.Text" xml:space="preserve">
     <value>ファイル名</value>
   </data>
-  <data name="columnHeader2.Text" xml:space="preserve">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="columnHeaderFileName.Width" type="System.Int32, mscorlib">
+    <value>185</value>
+  </data>
+  <data name="columnHeaderSize.Text" xml:space="preserve">
     <value>サイズ</value>
   </data>
-  <data name="columnHeader3.Text" xml:space="preserve">
+  <data name="columnHeaderSize.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="columnHeaderVersion.Text" xml:space="preserve">
     <value>バージョン</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="columnHeader3.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderVersion.Width" type="System.Int32, mscorlib">
     <value>137</value>
   </data>
-  <data name="columnHeader4.Text" xml:space="preserve">
+  <data name="columnHeaderSystem.Text" xml:space="preserve">
     <value>システム / サポート バージョン</value>
   </data>
-  <data name="columnHeader4.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderSystem.Width" type="System.Int32, mscorlib">
     <value>244</value>
   </data>
-  <data name="columnHeader5.Text" xml:space="preserve">
+  <data name="columnHeaderHash.Text" xml:space="preserve">
     <value>ハッシュ</value>
   </data>
-  <data name="columnHeader5.Width" type="System.Int32, mscorlib">
+  <data name="columnHeaderHash.Width" type="System.Int32, mscorlib">
     <value>154</value>
   </data>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 142</value>
-  </data>
-  <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 75</value>
-  </data>
-  <data name="listViewPackage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 360</value>
+  <data name="DownloadToolStripMenuItem.Text" xml:space="preserve">
+    <value>ダウンロード</value>
   </data>
   <data name="OpenXMLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 22</value>
@@ -242,23 +248,29 @@
   <data name="CopyToHashToolStripMenuItem.Text" xml:space="preserve">
     <value>ハッシュをコピー</value>
   </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 164</value>
+  </data>
+  <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 75</value>
+  </data>
+  <data name="listViewPackage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>854, 360</value>
+  </data>
+  <data name="toolStripStatusLabelSelected.Text" xml:space="preserve">
+    <value>Selected item(s): 0</value>
+  </data>
+  <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>761, 17</value>
+  </data>
+  <data name="toolStripStatusLabel2.Text" xml:space="preserve">
+    <value>© Package Store 2017-2023</value>
+  </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 449</value>
   </data>
   <data name="statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>880, 22</value>
-  </data>
-  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 17</value>
-  </data>
-  <data name="toolStripStatusLabel1.Text" xml:space="preserve">
-    <value>Made by coreizer</value>
-  </data>
-  <data name="toolStripStatusLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>766, 17</value>
-  </data>
-  <data name="toolStripStatusLabel2.Text" xml:space="preserve">
-    <value>© Package Store 2017-2023</value>
   </data>
   <data name="checkBoxRedump.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6450,5 +6462,8 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>...</value>
   </data>
 </root>

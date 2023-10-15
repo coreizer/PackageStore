@@ -137,6 +137,9 @@
   <data name="columnHeader1.Text" xml:space="preserve">
     <value>FileName</value>
   </data>
+  <data name="&gt;&gt;columnHeaderHash.Name" xml:space="preserve">
+    <value>columnHeaderHash</value>
+  </data>
   <data name="&gt;&gt;columnHeader2.Name" xml:space="preserve">
     <value>columnHeader2</value>
   </data>
@@ -151,6 +154,9 @@
   </data>
   <data name="&gt;&gt;CopyToHashToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="copyToURLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy to URL</value>
   </data>
   <data name="statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 487</value>
@@ -224,9 +230,6 @@
   <data name="&gt;&gt;checkBox1.Name" xml:space="preserve">
     <value>checkBox1</value>
   </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="&gt;&gt;columnHeader4.Name" xml:space="preserve">
     <value>columnHeader4</value>
   </data>
@@ -236,8 +239,8 @@
   <data name="&gt;&gt;CopyToSizeToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="resetSuggestionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="&gt;&gt;コピーToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="保存ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -251,11 +254,11 @@
   <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
     <value>columnHeader1</value>
   </data>
-  <data name="&gt;&gt;textBoxTitleId.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="labelPackageId.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 35</value>
+  </data>
+  <data name="toolStripStatusLabelSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 17</value>
   </data>
   <data name="&gt;&gt;toolStripStatusLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -309,8 +312,20 @@
   <data name="&gt;&gt;CopyToVersionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;columnHeaderSize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;labelPackageId.Name" xml:space="preserve">
     <value>labelPackageId</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderSystem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderHash.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="columnHeader4.Text" xml:space="preserve">
     <value>Support / System Version</value>
@@ -321,13 +336,13 @@
   <data name="&gt;&gt;SaveAsJsonStripMenuItem.Name" xml:space="preserve">
     <value>SaveAsJsonStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;システムサポートバージョンをコピーToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;SaveFolderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
-    <value>198</value>
+  <data name="&gt;&gt;DownloadToolStripMenuItem.Name" xml:space="preserve">
+    <value>DownloadToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;OpenRetailUpdateToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;DownloadToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="SaveAsJsonStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -408,8 +423,14 @@
   <data name="&gt;&gt;textBoxTitleId.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="DownloadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
+  </data>
   <data name="&gt;&gt;HashToolStripMenuItem.Name" xml:space="preserve">
     <value>HashToolStripMenuItem</value>
+  </data>
+  <data name="columnHeader6.Width" type="System.Int32, mscorlib">
+    <value>198</value>
   </data>
   <data name="checkBoxForce.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -426,17 +447,32 @@
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>7, 15</value>
   </data>
-  <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;columnHeaderSystem.Name" xml:space="preserve">
+    <value>columnHeaderSystem</value>
+  </data>
+  <data name="&gt;&gt;OpenRetailUpdateToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderVersion.Name" xml:space="preserve">
+    <value>columnHeaderVersion</value>
   </data>
   <data name="&gt;&gt;labelPackageId.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="listViewPackage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripStatusLabelSelected.Name" xml:space="preserve">
+    <value>toolStripStatusLabelSelected</value>
+  </data>
   <data name="&gt;&gt;openBrowserToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxRedump.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPackageId.Name" xml:space="preserve">
     <value>textBoxPackageId</value>
@@ -476,6 +512,9 @@
   </data>
   <data name="&gt;&gt;textBoxPackageId.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;コピーToolStripMenuItem.Name" xml:space="preserve">
+    <value>コピーToolStripMenuItem</value>
   </data>
   <data name="CopyToHashToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 22</value>
@@ -6670,8 +6709,8 @@
   <data name="labelPackageId.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;checkBoxForce.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="aaToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
   <data name="&gt;&gt;CopyToSizeToolStripMenuItem.Name" xml:space="preserve">
     <value>CopyToSizeToolStripMenuItem</value>
@@ -6682,8 +6721,8 @@
   <data name="statusStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 26</value>
@@ -6691,14 +6730,14 @@
   <data name="columnHeader2.Text" xml:space="preserve">
     <value>Size</value>
   </data>
-  <data name="openBrowserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+  <data name="&gt;&gt;columnHeaderFileName.Name" xml:space="preserve">
+    <value>columnHeaderFileName</value>
   </data>
-  <data name="listViewPackage.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <data name="&gt;&gt;checkBoxForce.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="&gt;&gt;copyToURLToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyToURLToolStripMenuItem</value>
+  <data name="&gt;&gt;aaToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -6736,6 +6775,9 @@
   <data name="&gt;&gt;githubToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="openBrowserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
   <data name="listViewPackage.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 65</value>
   </data>
@@ -6769,6 +6811,12 @@
   <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
+  <data name="resetSuggestionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reset suggestion</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
   <data name="&gt;&gt;toolStripStatusLabel1.Name" xml:space="preserve">
     <value>toolStripStatusLabel1</value>
   </data>
@@ -6778,14 +6826,17 @@
   <data name="checkBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>415, 35</value>
   </data>
+  <data name="&gt;&gt;aaToolStripMenuItem.Name" xml:space="preserve">
+    <value>aaToolStripMenuItem</value>
+  </data>
   <data name="checkBoxForce.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 19</value>
   </data>
   <data name="&gt;&gt;サイズをコピーToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="&gt;&gt;columnHeader2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPackageId.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -6802,6 +6853,9 @@
   <data name="textBoxPackageId.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 31</value>
   </data>
+  <data name="&gt;&gt;システムサポートバージョンをコピーToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="ハッシュをコピーToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 22</value>
   </data>
@@ -6817,23 +6871,29 @@
   <data name="&gt;&gt;保存ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
   <data name="CopyToSystemVersionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>230, 22</value>
   </data>
   <data name="statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 0, 16, 0</value>
   </data>
-  <data name="resetSuggestionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reset suggestion</value>
+  <data name="&gt;&gt;textBoxTitleId.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
-  <data name="copyToURLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy to URL</value>
+  <data name="SaveFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
   <data name="&gt;&gt;システムサポートバージョンをコピーToolStripMenuItem.Name" xml:space="preserve">
     <value>システムサポートバージョンをコピーToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;checkBoxRedump.Name" xml:space="preserve">
     <value>checkBoxRedump</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderVersion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;checkBoxRedump.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -6843,6 +6903,9 @@
   </data>
   <data name="columnHeader1.Width" type="System.Int32, mscorlib">
     <value>185</value>
+  </data>
+  <data name="&gt;&gt;ダウンロードToolStripMenuItem.Name" xml:space="preserve">
+    <value>ダウンロードToolStripMenuItem</value>
   </data>
   <data name="checkBoxForce.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -6865,11 +6928,17 @@
   <data name="&gt;&gt;エクスポートJSONToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;checkBoxRedump.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;copyToURLToolStripMenuItem.Name" xml:space="preserve">
+    <value>copyToURLToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderSize.Name" xml:space="preserve">
+    <value>columnHeaderSize</value>
   </data>
   <data name="&gt;&gt;サイズをコピーToolStripMenuItem.Name" xml:space="preserve">
     <value>サイズをコピーToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ExportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
@@ -6885,6 +6954,12 @@
   </data>
   <data name="&gt;&gt;toolStripStatusLabel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SaveFolderToolStripMenuItem.Name" xml:space="preserve">
+    <value>SaveFolderToolStripMenuItem</value>
+  </data>
+  <data name="resetSuggestionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
   <data name="&gt;&gt;checkBoxForce.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -6907,14 +6982,20 @@
   <data name="columnHeader4.Width" type="System.Int32, mscorlib">
     <value>261</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
+  <data name="&gt;&gt;ダウンロードToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="コピーToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
   </data>
   <data name="textBoxPackageId.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 23</value>
   </data>
   <data name="&gt;&gt;ExportJsonToolStripMenuItem.Name" xml:space="preserve">
     <value>ExportJsonToolStripMenuItem</value>
+  </data>
+  <data name="ダウンロードToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 22</value>
   </data>
   <data name="buttonSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 23</value>
@@ -6928,11 +7009,14 @@
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripStatusLabelSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;listViewPackage.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ja-JP</value>
+    <value>en</value>
   </metadata>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

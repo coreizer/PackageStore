@@ -31,8 +31,9 @@
 ## 👀 Featured
 
 - Package Search
-- Package Download (from browser)
+- Simple Download Manger
 - Search history
+- Compensation of package Id using redump's database
 
 ## 🖼️ Screenshot
 

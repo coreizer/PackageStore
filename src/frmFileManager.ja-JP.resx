@@ -117,12 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripStatusLabelDownload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 17</value>
+  <data name="columnHeaderFileName.Text" xml:space="preserve">
+    <value>ファイル名</value>
   </data>
-  <data name="toolStripStatusLabelDownload.Text" xml:space="preserve">
-    <value>Downloads: ...</value>
+  <data name="columnHeaderStatus.Text" xml:space="preserve">
+    <value>ステータス</value>
+  </data>
+  <data name="columnHeaderSize.Text" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="columnHeaderPercent.Text" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="columnHeaderEstimatedTime.Text" xml:space="preserve">
+    <value>ダウンロード予測</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="OpenFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 22</value>
+  </data>
+  <data name="OpenFileToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイルを開く</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 6</value>
+  </data>
+  <data name="DownloadCancelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 22</value>
+  </data>
+  <data name="DownloadCancelToolStripMenuItem.Text" xml:space="preserve">
+    <value>ダウンロードをキャンセル</value>
+  </data>
+  <data name="contextMenuStripFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 54</value>
+  </data>
+  <data name="toolStripStatusLabelDownloadQueue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 17</value>
+  </data>
+  <data name="toolStripStatusLabelDownloadQueue.Text" xml:space="preserve">
+    <value>ダウンロードキュー : 0</value>
+  </data>
+  <data name="SaveDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="SaveDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>保存ディレクトリ</value>
+  </data>
+  <data name="FilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="FilesToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイル</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

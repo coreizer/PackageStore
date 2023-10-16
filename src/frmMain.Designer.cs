@@ -51,9 +51,9 @@ namespace PackageStore
          this.components = new System.ComponentModel.Container();
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
          this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-         this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.FilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.SaveAsJsonStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.SaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.SaveDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.resetSuggestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +79,7 @@ namespace PackageStore
          this.CopyToHashToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
          this.toolStripStatusLabelSelected = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+         this.toolStripStatusLabelCopyright = new System.Windows.Forms.ToolStripStatusLabel();
          this.checkBoxRedump = new System.Windows.Forms.CheckBox();
          this.menuStrip1.SuspendLayout();
          this.contextMenuStrip1.SuspendLayout();
@@ -91,17 +91,17 @@ namespace PackageStore
          resources.ApplyResources(this.menuStrip1, "menuStrip1");
          this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ファイルToolStripMenuItem,
+            this.FilesToolStripMenuItem,
             this.helpToolStripMenuItem});
          this.menuStrip1.Name = "menuStrip1";
          // 
-         // ファイルToolStripMenuItem
+         // FilesToolStripMenuItem
          // 
-         resources.ApplyResources(this.ファイルToolStripMenuItem, "ファイルToolStripMenuItem");
-         this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+         resources.ApplyResources(this.FilesToolStripMenuItem, "FilesToolStripMenuItem");
+         this.FilesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SaveAsJsonStripMenuItem,
-            this.SaveFolderToolStripMenuItem});
-         this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
+            this.SaveDirectoryToolStripMenuItem});
+         this.FilesToolStripMenuItem.Name = "FilesToolStripMenuItem";
          // 
          // SaveAsJsonStripMenuItem
          // 
@@ -109,11 +109,11 @@ namespace PackageStore
          this.SaveAsJsonStripMenuItem.Name = "SaveAsJsonStripMenuItem";
          this.SaveAsJsonStripMenuItem.Click += new System.EventHandler(this.ExportJsonStripMenuItem_Click);
          // 
-         // SaveFolderToolStripMenuItem
+         // SaveDirectoryToolStripMenuItem
          // 
-         resources.ApplyResources(this.SaveFolderToolStripMenuItem, "SaveFolderToolStripMenuItem");
-         this.SaveFolderToolStripMenuItem.Name = "SaveFolderToolStripMenuItem";
-         this.SaveFolderToolStripMenuItem.Click += new System.EventHandler(this.SaveFolderToolStripMenuItem_Click);
+         resources.ApplyResources(this.SaveDirectoryToolStripMenuItem, "SaveDirectoryToolStripMenuItem");
+         this.SaveDirectoryToolStripMenuItem.Name = "SaveDirectoryToolStripMenuItem";
+         this.SaveDirectoryToolStripMenuItem.Click += new System.EventHandler(this.SaveDirectoryToolStripMenuItem_Click);
          // 
          // helpToolStripMenuItem
          // 
@@ -189,7 +189,7 @@ namespace PackageStore
          // 
          // columnHeaderFileName
          // 
-         this.columnHeaderFileName.Tag = "FileName";
+         this.columnHeaderFileName.Tag = "";
          resources.ApplyResources(this.columnHeaderFileName, "columnHeaderFileName");
          // 
          // columnHeaderSize
@@ -281,7 +281,7 @@ namespace PackageStore
          this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
          this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelSelected,
-            this.toolStripStatusLabel2});
+            this.toolStripStatusLabelCopyright});
          this.statusStrip1.Name = "statusStrip1";
          this.statusStrip1.SizingGrip = false;
          // 
@@ -291,11 +291,11 @@ namespace PackageStore
          this.toolStripStatusLabelSelected.ForeColor = System.Drawing.Color.Black;
          this.toolStripStatusLabelSelected.Name = "toolStripStatusLabelSelected";
          // 
-         // toolStripStatusLabel2
+         // toolStripStatusLabelCopyright
          // 
-         resources.ApplyResources(this.toolStripStatusLabel2, "toolStripStatusLabel2");
-         this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-         this.toolStripStatusLabel2.Spring = true;
+         resources.ApplyResources(this.toolStripStatusLabelCopyright, "toolStripStatusLabelCopyright");
+         this.toolStripStatusLabelCopyright.Name = "toolStripStatusLabelCopyright";
+         this.toolStripStatusLabelCopyright.Spring = true;
          // 
          // checkBoxRedump
          // 
@@ -349,10 +349,10 @@ namespace PackageStore
     private System.Windows.Forms.ToolStripMenuItem copyToURLToolStripMenuItem;
     private System.Windows.Forms.StatusStrip statusStrip1;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSelected;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCopyright;
         private System.Windows.Forms.ListView listViewPackage;
       private System.Windows.Forms.ToolStripMenuItem resetSuggestionToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem FilesToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem SaveAsJsonStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem CopyToSizeToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem CopyToVersionToolStripMenuItem;
@@ -362,7 +362,7 @@ namespace PackageStore
       private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
       private System.Windows.Forms.CheckBox checkBoxRedump;
       private System.Windows.Forms.ToolStripMenuItem DownloadToolStripMenuItem;
-      private System.Windows.Forms.ToolStripMenuItem SaveFolderToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem SaveDirectoryToolStripMenuItem;
    }
 }
 

@@ -23,6 +23,7 @@ namespace PackageStore
 {
    using System;
    using System.Collections.ObjectModel;
+   using System.Diagnostics;
    using System.IO;
    using System.Linq;
    using System.Net;
@@ -58,6 +59,11 @@ namespace PackageStore
       private class FileItem : ListViewItem
       {
          private readonly CancellationTokenSource _source = new CancellationTokenSource();
+
+         public string FileName
+         {
+            get => this.Package.Name;
+         }
 
          public string Path { get; set; }
 
@@ -162,10 +168,7 @@ namespace PackageStore
          pi.SetValue(this.listViewPackage, true, null);
       }
 
-      private void frmFileManager_Load(object sender, EventArgs e)
-      {
-         this.OnListAddItems();
-      }
+      private void frmFileManager_Load(object sender, EventArgs e) => this.OnListAddItems();
 
       private void frmFileManager_FormClosing(object sender, FormClosingEventArgs e)
       {
@@ -193,13 +196,13 @@ namespace PackageStore
 
       public void Add(Package package)
       {
-         var path = Path.Combine(this.Settings.DirectoryPath, package.Name);
-         if (File.Exists(path)) {
+         var filePath = Path.Combine(this.Settings.DirectoryPath, package.Name);
+         if (File.Exists(filePath)) {
             var hResult = MessageBox.Show($"'{package.Name}' already exists. Do you want to overwrite it?", Environment.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (hResult != DialogResult.Yes) return;
 
             try {
-               File.Delete(path);
+               File.Delete(filePath);
             }
             catch (Exception ex) {
                MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -208,11 +211,11 @@ namespace PackageStore
 
          var item = new FileItem(package) { Text = package.Name };
          item.SubItems.AddRange(new[] {
-               DownloadStatus.Waiting.ToString(), // 状態
-               package.Size.ToString(), // サイズ
-               "0%", // パーセント
-               "0秒" // 予定時間
-               }
+            DownloadStatus.Waiting.ToString(), // 状態
+            package.Size.ToString(), // サイズ
+            "0%", // パーセント
+            "0秒" // 予定時間
+           }
          );
 
          this._files.Add(item);
@@ -229,7 +232,7 @@ namespace PackageStore
          }
       }
 
-      private void CancelToolStripMenuItem_Click(object sender, EventArgs e)
+      private void DownloadCancelToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
@@ -298,6 +301,21 @@ namespace PackageStore
          }
       }
 
-      private void SaveFolderToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
+      private void SaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
+
+      private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         try {
+            if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+            var filePath = Path.Combine(
+               this.Settings.DirectoryPath,
+               ((FileItem)this.listViewPackage.SelectedItems[0].Tag).FileName
+            );
+            Process.Start("explorer.exe", $"/select, \"{ filePath }\"");
+         }
+         catch(Exception ex) {
+            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
    }
 }

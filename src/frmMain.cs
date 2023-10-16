@@ -383,6 +383,6 @@ namespace PackageStore
          }
       }
 
-      private void SaveFolderToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
+      private void SaveDirectoryToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
    }
 }

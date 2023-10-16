@@ -44,6 +44,8 @@
 - [ByteSize - Utility](https://github.com/omar/ByteSize)
 - [redump.org](http://redump.org/)
 - [AngleSharp](https://github.com/AngleSharp/AngleSharp)
+- [Enums.NET](https://github.com/TylerBrinkley/Enums.NET)
+- [Fody](https://github.com/Fody/Fody)
 
 ## 🌏 Stay In Touch
 

@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/5j92bdq3sv9hp7gm?svg=true)](https://ci.appveyor.com/project/coreizer/packagestore)
 
 <div align="center">
-  <a href="https://github.com/coreizer/ChatHub">
+  <a href="https://github.com/coreizer/PackageStore">
     <img src="./docs/logo.png" width="128">
   </a>
 

@@ -81,7 +81,7 @@ namespace PackageStore
             get => this._estimatedTime;
             set {
                if (this.ListView != null && this.Index != -1) {
-                  this.SubItems[4].Text = $"{value:m\\:ss}s";
+                  this.SubItems[4].Text = $"{value:m\\:ss}(s)";
                }
                this._estimatedTime = value;
             }
@@ -214,7 +214,7 @@ namespace PackageStore
             DownloadStatus.Waiting.ToString(), // 状態
             package.Size.ToString(), // サイズ
             "0%", // パーセント
-            "0秒" // 予定時間
+            "0:00(s)" // 予定時間
            }
          );
 

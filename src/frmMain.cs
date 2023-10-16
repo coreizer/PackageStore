@@ -356,7 +356,8 @@ namespace PackageStore
       private void AddToFileManager()
       {
          try {
-            if (this.listViewPackage.SelectedIndices.Count == 0) return;
+            if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
+            if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             if (string.IsNullOrEmpty(Utils.SelectDirectoryPath())) return;
 
             foreach (ListViewItem item in this.listViewPackage.SelectedItems) {

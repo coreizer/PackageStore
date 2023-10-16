@@ -60,9 +60,13 @@ namespace PackageStore
          this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.キャンセルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-         this.toolStripStatusLabelDownload = new System.Windows.Forms.ToolStripStatusLabel();
+         this.toolStripStatusLabelDownloadQueue = new System.Windows.Forms.ToolStripStatusLabel();
+         this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+         this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.SaveFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.contextMenuStripFile.SuspendLayout();
          this.statusStrip1.SuspendLayout();
+         this.menuStrip1.SuspendLayout();
          this.SuspendLayout();
          // 
          // listViewPackage
@@ -104,49 +108,74 @@ namespace PackageStore
          // 
          // contextMenuStripFile
          // 
-         resources.ApplyResources(this.contextMenuStripFile, "contextMenuStripFile");
          this.contextMenuStripFile.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.開くToolStripMenuItem,
             this.キャンセルToolStripMenuItem});
          this.contextMenuStripFile.Name = "contextMenuStripFile";
+         resources.ApplyResources(this.contextMenuStripFile, "contextMenuStripFile");
          // 
          // 開くToolStripMenuItem
          // 
-         resources.ApplyResources(this.開くToolStripMenuItem, "開くToolStripMenuItem");
          this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
+         resources.ApplyResources(this.開くToolStripMenuItem, "開くToolStripMenuItem");
          // 
          // キャンセルToolStripMenuItem
          // 
-         resources.ApplyResources(this.キャンセルToolStripMenuItem, "キャンセルToolStripMenuItem");
          this.キャンセルToolStripMenuItem.Name = "キャンセルToolStripMenuItem";
-         this.キャンセルToolStripMenuItem.Click += new System.EventHandler(this.キャンセルToolStripMenuItem_Click);
+         resources.ApplyResources(this.キャンセルToolStripMenuItem, "キャンセルToolStripMenuItem");
+         this.キャンセルToolStripMenuItem.Click += new System.EventHandler(this.CancelToolStripMenuItem_Click);
          // 
          // statusStrip1
          // 
-         resources.ApplyResources(this.statusStrip1, "statusStrip1");
          this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelDownload});
+            this.toolStripStatusLabelDownloadQueue});
+         resources.ApplyResources(this.statusStrip1, "statusStrip1");
          this.statusStrip1.Name = "statusStrip1";
          // 
-         // toolStripStatusLabelDownload
+         // toolStripStatusLabelDownloadQueue
          // 
-         resources.ApplyResources(this.toolStripStatusLabelDownload, "toolStripStatusLabelDownload");
-         this.toolStripStatusLabelDownload.ActiveLinkColor = System.Drawing.Color.Transparent;
-         this.toolStripStatusLabelDownload.ForeColor = System.Drawing.Color.Black;
-         this.toolStripStatusLabelDownload.Name = "toolStripStatusLabelDownload";
+         this.toolStripStatusLabelDownloadQueue.ActiveLinkColor = System.Drawing.Color.Transparent;
+         this.toolStripStatusLabelDownloadQueue.ForeColor = System.Drawing.Color.Black;
+         this.toolStripStatusLabelDownloadQueue.Name = "toolStripStatusLabelDownloadQueue";
+         resources.ApplyResources(this.toolStripStatusLabelDownloadQueue, "toolStripStatusLabelDownloadQueue");
+         // 
+         // menuStrip1
+         // 
+         this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ファイルToolStripMenuItem});
+         resources.ApplyResources(this.menuStrip1, "menuStrip1");
+         this.menuStrip1.Name = "menuStrip1";
+         // 
+         // ファイルToolStripMenuItem
+         // 
+         this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SaveFolderToolStripMenuItem});
+         this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
+         resources.ApplyResources(this.ファイルToolStripMenuItem, "ファイルToolStripMenuItem");
+         // 
+         // SaveFolderToolStripMenuItem
+         // 
+         this.SaveFolderToolStripMenuItem.Name = "SaveFolderToolStripMenuItem";
+         resources.ApplyResources(this.SaveFolderToolStripMenuItem, "SaveFolderToolStripMenuItem");
+         this.SaveFolderToolStripMenuItem.Click += new System.EventHandler(this.SaveFolderToolStripMenuItem_Click);
          // 
          // frmFileManager
          // 
          resources.ApplyResources(this, "$this");
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.Controls.Add(this.statusStrip1);
+         this.Controls.Add(this.menuStrip1);
          this.Controls.Add(this.listViewPackage);
+         this.MainMenuStrip = this.menuStrip1;
          this.MaximizeBox = false;
          this.Name = "frmFileManager";
          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFileManager_FormClosing);
+         this.Load += new System.EventHandler(this.frmFileManager_Load);
          this.contextMenuStripFile.ResumeLayout(false);
          this.statusStrip1.ResumeLayout(false);
          this.statusStrip1.PerformLayout();
+         this.menuStrip1.ResumeLayout(false);
+         this.menuStrip1.PerformLayout();
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -161,9 +190,12 @@ namespace PackageStore
       private System.Windows.Forms.ColumnHeader columnHeader4;
       private System.Windows.Forms.ColumnHeader columnHeader5;
       private System.Windows.Forms.StatusStrip statusStrip1;
-      private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelDownload;
+      private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelDownloadQueue;
       private System.Windows.Forms.ContextMenuStrip contextMenuStripFile;
       private System.Windows.Forms.ToolStripMenuItem キャンセルToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem;
+      private System.Windows.Forms.MenuStrip menuStrip1;
+      private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem SaveFolderToolStripMenuItem;
    }
 }

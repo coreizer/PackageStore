@@ -22,7 +22,7 @@
 namespace PackageStore
 {
    using System;
-   using System.Collections.Generic;
+   using System.Collections.ObjectModel;
    using System.IO;
    using System.Linq;
    using System.Net;
@@ -46,9 +46,14 @@ namespace PackageStore
          Failed = 4
       }
 
+      private Properties.Settings Settings
+      {
+         get => Properties.Settings.Default;
+      }
+
       internal static HttpClient _http = new HttpClient();
 
-      private readonly List<FileItem> _files = new List<FileItem>();
+      private readonly ObservableCollection<FileItem> _files = new ObservableCollection<FileItem>();
 
       private class FileItem : ListViewItem
       {
@@ -70,7 +75,7 @@ namespace PackageStore
             get => this._estimatedTime;
             set {
                if (this.ListView != null && this.Index != -1) {
-                  this.SubItems[4].Text = $"{(value == TimeSpan.Zero ? "0" : value.ToString("m\\:ss"))}秒";
+                  this.SubItems[4].Text = $"{value:m\\:ss}s";
                }
                this._estimatedTime = value;
             }
@@ -138,7 +143,7 @@ namespace PackageStore
          internal void Reset()
          {
             if (this.ListView != null && this.Index != -1) {
-               this.Percent = 0;
+               this.Percent = this.Percent > 1 ? this.Percent : 0;
                this.ElapsedTime = TimeSpan.Zero;
                this.EstimatedTime = TimeSpan.Zero;
             }
@@ -150,38 +155,48 @@ namespace PackageStore
       {
          this.InitializeComponent();
 
+         this._files.CollectionChanged += this.OnCollectionChanged;
          this.Text = $"{Environment.Name} - Downloader";
          this.DoubleBuffered = true;
          var pi = this.listViewPackage.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
          pi.SetValue(this.listViewPackage, true, null);
       }
 
-      private void SelectFolder()
+      private void frmFileManager_Load(object sender, EventArgs e)
       {
-         if (string.IsNullOrEmpty(Properties.Settings.Default.DirectoryPath)) {
-            using (var FBD = new FolderBrowserDialog()) {
-               if (FBD.ShowDialog() != DialogResult.OK) {
-                  this.Close();
-                  return;
+         this.OnListAddItems();
+      }
+
+      private void frmFileManager_FormClosing(object sender, FormClosingEventArgs e)
+      {
+         try {
+            foreach (var file in this._files) {
+               if (file.Status != DownloadStatus.Completed) {
+                  file.Cancel();
                }
-               Properties.Settings.Default.DirectoryPath = FBD.SelectedPath;
+            }
+         }
+         catch (Exception ex) {
+            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+         }
+      }
+
+      private void OnCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+      {
+         var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+         foreach (FileItem item in e.NewItems) {
+            if (item.Status == DownloadStatus.Waiting) {
+               Task.Factory.StartNew(() => this.FileDownload(item), item.CancellationToken, TaskCreationOptions.None, taskScheduler);
             }
          }
       }
 
-      public void AddRange(IList<Package> packages)
-      {
-         this.SelectFolder();
-         foreach (var package in packages)
-            this.Add(package);
-      }
-
       public void Add(Package package)
       {
-         var path = Path.Combine(Properties.Settings.Default.DirectoryPath, package.Name);
+         var path = Path.Combine(this.Settings.DirectoryPath, package.Name);
          if (File.Exists(path)) {
-            var result = MessageBox.Show($"'{package.Name}' already exists. Do you want to overwrite it?", Environment.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result != DialogResult.Yes) return;
+            var hResult = MessageBox.Show($"'{package.Name}' already exists. Do you want to overwrite it?", Environment.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (hResult != DialogResult.Yes) return;
 
             try {
                File.Delete(path);
@@ -193,17 +208,28 @@ namespace PackageStore
 
          var item = new FileItem(package) { Text = package.Name };
          item.SubItems.AddRange(new[] {
-            DownloadStatus.Waiting.ToString(), // 状態
-            package.Size.ToString(), // サイズ
-            "0%", // パーセント
-            "0秒" // 予定時間
-         });
-         this.listViewPackage.Items.Add(item);
+               DownloadStatus.Waiting.ToString(), // 状態
+               package.Size.ToString(), // サイズ
+               "0%", // パーセント
+               "0秒" // 予定時間
+               }
+         );
+
          this._files.Add(item);
-         this.DownloadState();
+         this.OnListAddItems();
+         this.UpdateQueue();
       }
 
-      private void キャンセルToolStripMenuItem_Click(object sender, EventArgs e)
+      private void OnListAddItems()
+      {
+         foreach (ListViewItem item in this._files) {
+            if (!this.listViewPackage.Items.Contains(item)) {
+               this.listViewPackage.Items.Add(item);
+            }
+         }
+      }
+
+      private void CancelToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
@@ -212,12 +238,6 @@ namespace PackageStore
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
          }
-      }
-
-      public void Start()
-      {
-         var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
-         this._files.FindAll(x => x.Status == DownloadStatus.Waiting).ForEach(file => Task.Factory.StartNew(() => this.FileDownload(file), file.CancellationToken, TaskCreationOptions.None, taskScheduler));
       }
 
       private async Task FileDownload(FileItem file)
@@ -264,32 +284,20 @@ namespace PackageStore
          }
          finally {
             file.Reset();
-            this.DownloadState();
+            this.UpdateQueue();
          }
       }
 
-      private void frmFileManager_FormClosing(object sender, FormClosingEventArgs e)
+      private void UpdateQueue()
       {
          try {
-            foreach (var file in this._files) {
-               if (file.Status != DownloadStatus.Completed) {
-                  file.Cancel();
-               }
-            }
+            this.toolStripStatusLabelDownloadQueue.Text = $"Download Queue(s) : {this._files.Count(x => (DownloadStatus.Waiting | DownloadStatus.Downloading).HasAllFlags(x.Status))}";
          }
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
          }
       }
 
-      private void DownloadState()
-      {
-         try {
-            this.toolStripStatusLabelDownload.Text = $"Downloading: {this._files.Count(x => (DownloadStatus.Waiting | DownloadStatus.Downloading).HasAllFlags(x.Status))}";
-         }
-         catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
-      }
+      private void SaveFolderToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
    }
 }

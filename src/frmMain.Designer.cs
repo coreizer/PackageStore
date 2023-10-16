@@ -107,7 +107,7 @@ namespace PackageStore
          // 
          resources.ApplyResources(this.SaveAsJsonStripMenuItem, "SaveAsJsonStripMenuItem");
          this.SaveAsJsonStripMenuItem.Name = "SaveAsJsonStripMenuItem";
-         this.SaveAsJsonStripMenuItem.Click += new System.EventHandler(this.SaveAsJSONStripMenuItem_Click);
+         this.SaveAsJsonStripMenuItem.Click += new System.EventHandler(this.ExportJsonStripMenuItem_Click);
          // 
          // SaveFolderToolStripMenuItem
          // 

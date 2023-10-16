@@ -49,9 +49,14 @@ namespace PackageStore
          "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
       };
 
+      private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
+
       private List<Package> _items = new List<Package>();
 
-      private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
+      private Properties.Settings Settings
+      {
+         get => Properties.Settings.Default;
+      }
 
       public new bool UseWaitCursor
       {
@@ -68,12 +73,11 @@ namespace PackageStore
       public frmFileManager FileManager
       {
          get {
-            if (this._fileManager == null || this._fileManager.IsDisposed) this._fileManager = new frmFileManager();
+            if (this._fileManager == null || this._fileManager.IsDisposed)
+               this._fileManager = new frmFileManager();
             return this._fileManager;
          }
-         set {
-            this._fileManager = value;
-         }
+         set => this._fileManager = value;
       }
 
       public frmMain()
@@ -88,13 +92,13 @@ namespace PackageStore
       private void frmMain_Load(object sender, EventArgs e)
       {
          this.Text = Environment.Name;
-         this.textBoxPackageId.Text = Properties.Settings.Default.LastPackageId;
+         this.textBoxPackageId.Text = this.Settings.LastPackageId;
       }
 
       private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
       {
          try {
-            Properties.Settings.Default.Save();
+            this.Settings.Save();
          }
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -162,7 +166,7 @@ namespace PackageStore
             var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{id}");
             var tbody = document.QuerySelector("table.gamecomments tbody");
 
-            // Whether the tag exists in the redirected result
+            // 結果にtbodyが素材する場合のみ継続する
             if (tbody != null) {
                var internalSerial = "";
                foreach (var child in tbody.ChildNodes) {
@@ -220,9 +224,8 @@ namespace PackageStore
       private void AddSuggestion(string packageId)
       {
          try {
-            var suggestions = new HashSet<string>(Properties.Settings.Default.Suggestions.Cast<string>().ToArray()) { packageId };
-            Properties.Settings.Default.Suggestions.Clear();
-            Properties.Settings.Default.Suggestions.AddRange(suggestions.ToArray());
+            this.Settings.Suggestions.Clear();
+            this.Settings.Suggestions.AddRange(new HashSet<string>(this.Settings.Suggestions.Cast<string>()) { packageId }.ToArray());
             Properties.Settings.Default.LastPackageId = packageId;
          }
          catch (Exception ex) {
@@ -269,21 +272,7 @@ namespace PackageStore
 
       private bool IsValid(string name) => string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException() : Regex.IsMatch(name, "^[A-Z0-9]");
 
-      private void ListViewPackages_ItemActivate(object sender, EventArgs e)
-      {
-         if (this.listViewPackage.SelectedIndices.Count == 0) return;
-
-         try {
-            this.FileManager.Show();
-            foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
-               this.FileManager.Add(this._items[item.Index]);
-            }
-            this.FileManager.Start();
-         }
-         catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
-      }
+      private void ListViewPackages_ItemActivate(object sender, EventArgs e) => this.AddToFileManager();
 
       private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("Made by coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -305,9 +294,7 @@ namespace PackageStore
       {
          try {
             this._autoComplete.Clear();
-            this._autoComplete.AddRange(
-               Properties.Settings.Default.Suggestions.Cast<string>().ToArray()
-            );
+            this._autoComplete.AddRange(this.Settings.Suggestions.Cast<string>().ToArray());
             this.textBoxPackageId.AutoCompleteCustomSource = this._autoComplete;
          }
          catch (Exception ex) {
@@ -318,7 +305,7 @@ namespace PackageStore
       private void resetSuggestionToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            Properties.Settings.Default.Suggestions.Clear();
+            this.Settings.Suggestions.Clear();
             this.SetAutoCompleteSource();
          }
          finally {
@@ -327,7 +314,7 @@ namespace PackageStore
          }
       }
 
-      private void SaveAsJSONStripMenuItem_Click(object sender, EventArgs e)
+      private void ExportJsonStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
@@ -361,17 +348,22 @@ namespace PackageStore
          }
       }
 
-      private void listViewPackage_SelectedIndexChanged(object sender, EventArgs e)
-      {
+      private void listViewPackage_SelectedIndexChanged(object sender, EventArgs e) =>
          this.toolStripStatusLabelSelected.Text = $"Selected item(s): {this.listViewPackage.SelectedItems.Count}";
-      }
 
-      private void DownloadToolStripMenuItem_Click(object sender, EventArgs e)
+      private void DownloadToolStripMenuItem_Click(object sender, EventArgs e) => this.AddToFileManager();
+
+      private void AddToFileManager()
       {
          try {
+            if (this.listViewPackage.SelectedIndices.Count == 0) return;
+            if (string.IsNullOrEmpty(Utils.SelectDirectoryPath())) return;
+
+            foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
+               this.FileManager.Add((Package)item.Tag);
+            }
             this.FileManager.Show();
-            this.FileManager.AddRange(this.listViewPackage.SelectedItems.Cast<ListViewItem>().Select(x => (Package)x.Tag).ToArray());
-            this.FileManager.Start();
+            this.FileManager.Activate();
          }
          catch (Exception ex) {
             MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -391,19 +383,6 @@ namespace PackageStore
          }
       }
 
-      private void SaveFolderToolStripMenuItem_Click(object sender, EventArgs e)
-      {
-         try {
-            using (var FBD = new FolderBrowserDialog()) {
-               if (FBD.ShowDialog() != DialogResult.OK) {
-                  Properties.Settings.Default.DirectoryPath = FBD.SelectedPath;
-                  Properties.Settings.Default.Save();
-               }
-            }
-         }
-         catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
-         }
-      }
+      private void SaveFolderToolStripMenuItem_Click(object sender, EventArgs e) => Utils.SelectDirectoryPath(true);
    }
 }

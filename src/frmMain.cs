@@ -27,6 +27,7 @@ namespace PackageStore
    using System.IO;
    using System.Linq;
    using System.Net;
+   using System.Net.Http;
    using System.Text.Json;
    using System.Text.RegularExpressions;
    using System.Threading.Tasks;
@@ -49,9 +50,9 @@ namespace PackageStore
          "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
       };
 
+      private readonly HttpClient _http;
       private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
-
-      private List<Package> _items = new List<Package>();
+      private readonly List<Package> _items = new List<Package>();
 
       private Properties.Settings Settings
       {
@@ -86,7 +87,10 @@ namespace PackageStore
          this.SetAutoCompleteSource();
 
          // Signore SSL errors
-         ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+         var handler = new HttpClientHandler();
+         handler.ServerCertificateCustomValidationCallback += (s, a, b, e) => true;
+
+         _http = new HttpClient(handler);
       }
 
       private void frmMain_Load(object sender, EventArgs e)
@@ -127,10 +131,10 @@ namespace PackageStore
 
             this.textBoxPackageId.Text = packageId;
 
-            await Task.Run(() => {
-               this.XMLParser(ref this._items, packageId);
+            await Task.Run(async () => {
+               await this.XMLParser(this._items, packageId);
                foreach (var pkg in this._items) {
-                  this.Invoke((Action)(() => {
+                  this.Invoke(() => {
                      var addItem = new ListViewItem { Text = pkg.Name, Tag = pkg };
                      addItem.SubItems.AddRange(new[] {
                         pkg.Size.ToString(),
@@ -139,7 +143,7 @@ namespace PackageStore
                         pkg.Hash
                      });
                      this.listViewPackage.Items.Add(addItem);
-                  }));
+                  });
                }
             });
 
@@ -183,14 +187,19 @@ namespace PackageStore
          return null;
       }
 
-      private void XMLParser(ref List<Package> items, string packageId)
+      private async Task XMLParser(List<Package> items, string packageId)
       {
          foreach (var url in this.Environments) {
             try {
                var xmlUrl = url + packageId + "/" + packageId + "-ver.xml";
                Trace.WriteLine(xmlUrl, "URL");
 
-               var reader = new XmlTextReader(xmlUrl);
+               //var a = new XmlReaderSettings();
+               //a.Async = true;
+
+               var a = await _http.GetStreamAsync(xmlUrl);
+
+               var reader = XmlReader.Create(a);
                do {
                   if (reader.NodeType != XmlNodeType.Element) continue;
 
@@ -204,9 +213,8 @@ namespace PackageStore
                   }
                } while (reader.Read());
             }
-            catch (WebException ex) {
-               var response = (HttpWebResponse)ex.Response;
-               switch (response.StatusCode) {
+            catch (HttpRequestException ex) {
+               switch (ex.StatusCode) {
                   case HttpStatusCode.NotFound:
                   case HttpStatusCode.Forbidden:
                      break;
@@ -237,7 +245,7 @@ namespace PackageStore
          }
       }
 
-      private Package AttributeReaderPS3(string xmlUrl, ref XmlTextReader reader)
+      private Package AttributeReaderPS3(string xmlUrl, ref XmlReader reader)
       {
          if (string.IsNullOrEmpty(xmlUrl)) throw new ArgumentNullException(nameof(xmlUrl));
          if (reader == null) throw new ArgumentNullException(nameof(reader));

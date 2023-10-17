@@ -32,10 +32,9 @@ namespace PackageStore
             return Properties.Settings.Default.DirectoryPath;
 
          try {
-            using (var FBD = new FolderBrowserDialog()) {
-               if (FBD.ShowDialog() != DialogResult.OK) return null;
-               Properties.Settings.Default.DirectoryPath = FBD.SelectedPath;
-            }
+            using var FBD = new FolderBrowserDialog();
+            if (FBD.ShowDialog() != DialogResult.OK) return null;
+            Properties.Settings.Default.DirectoryPath = FBD.SelectedPath;
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(new TaskDialogPage {

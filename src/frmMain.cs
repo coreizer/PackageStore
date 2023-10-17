@@ -51,10 +51,10 @@ namespace PackageStore
       };
 
       private readonly HttpClient _http;
-      private readonly AutoCompleteStringCollection _autoComplete = new AutoCompleteStringCollection();
-      private readonly List<Package> _items = new List<Package>();
+      private readonly AutoCompleteStringCollection _autoComplete = new();
+      private readonly List<Package> _items = new();
 
-      private Properties.Settings Settings
+      private static Properties.Settings Settings
       {
          get => Properties.Settings.Default;
       }
@@ -96,13 +96,13 @@ namespace PackageStore
       private void frmMain_Load(object sender, EventArgs e)
       {
          this.Text = Environment.Name;
-         this.textBoxPackageId.Text = this.Settings.LastPackageId;
+         this.textBoxPackageId.Text = Settings.LastPackageId;
       }
 
       private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
       {
          try {
-            this.Settings.Save();
+            Settings.Save();
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(this, new TaskDialogPage() {
@@ -203,7 +203,7 @@ namespace PackageStore
             var tbody = document.QuerySelector("table.gamecomments tbody");
 
             // 結果にtbodyが素材する場合のみ継続する
-            if (!(tbody is null)) {
+            if (tbody is not null) {
                var internalSerial = "";
                foreach (var child in tbody.ChildNodes) {
                   if (child.TextContent.Contains("Internal Serial")) {
@@ -288,8 +288,8 @@ namespace PackageStore
       private void AddSuggestion(string packageId)
       {
          try {
-            this.Settings.Suggestions.Clear();
-            this.Settings.Suggestions.AddRange(new HashSet<string>(this.Settings.Suggestions.Cast<string>()) { packageId }.ToArray());
+            Settings.Suggestions.Clear();
+            Settings.Suggestions.AddRange(new HashSet<string>(Settings.Suggestions.Cast<string>()) { packageId }.ToArray());
             Properties.Settings.Default.LastPackageId = packageId;
          }
          catch (Exception ex) {
@@ -398,7 +398,7 @@ namespace PackageStore
       {
          try {
             this._autoComplete.Clear();
-            this._autoComplete.AddRange(this.Settings.Suggestions.Cast<string>().ToArray());
+            this._autoComplete.AddRange(Settings.Suggestions.Cast<string>().ToArray());
             this.textBoxPackageId.AutoCompleteCustomSource = this._autoComplete;
          }
          catch (Exception ex) {
@@ -417,7 +417,7 @@ namespace PackageStore
       private void resetSuggestionToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            this.Settings.Suggestions.Clear();
+            Settings.Suggestions.Clear();
             this.SetAutoCompleteSource();
          }
          finally {
@@ -439,17 +439,16 @@ namespace PackageStore
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
 
-            using (var SFD = new SaveFileDialog()) {
-               SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
-               SFD.Filter = "JSON File|*.json";
-               var result = SFD.ShowDialog();
-               if (result != DialogResult.OK) return;
-               var jsonString = JsonSerializer.Serialize(
-                  new PackageExport(this._items),
-                  new JsonSerializerOptions { WriteIndented = true }
-               );
-               File.WriteAllText(SFD.FileName, jsonString, System.Text.Encoding.UTF8);
-            }
+            using var SFD = new SaveFileDialog();
+            SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
+            SFD.Filter = "JSON File|*.json";
+            var result = SFD.ShowDialog();
+            if (result != DialogResult.OK) return;
+            var jsonString = JsonSerializer.Serialize(
+               new PackageExport(this._items),
+               new JsonSerializerOptions { WriteIndented = true }
+            );
+            File.WriteAllText(SFD.FileName, jsonString, System.Text.Encoding.UTF8);
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(this, new TaskDialogPage() {

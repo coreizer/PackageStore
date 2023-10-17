@@ -15,6 +15,16 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Version>2.1.0</Version>
+    <Copyright>coreizer</Copyright>
+    <PackageProjectUrl>https://github.com/coreizer/PackageStore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/coreizer/PackageStore</RepositoryUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AngleSharp">

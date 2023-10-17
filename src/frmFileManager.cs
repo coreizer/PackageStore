@@ -109,17 +109,17 @@ namespace PackageStore
 
                   switch (value) {
                      case DownloadStatus.Canceled:
-                        this.SubItems[1].ForeColor = System.Drawing.SystemColors.WindowFrame;
+                        this.SubItems[1].ForeColor = SystemColors.WindowFrame;
                         break;
                      case DownloadStatus.Waiting:
                      case DownloadStatus.Downloading:
-                        this.SubItems[1].ForeColor = System.Drawing.Color.Black;
+                        this.SubItems[1].ForeColor = Color.Black;
                         break;
                      case DownloadStatus.Completed:
-                        this.SubItems[1].ForeColor = System.Drawing.Color.Green;
+                        this.SubItems[1].ForeColor = Color.Green;
                         break;
                      case DownloadStatus.Failed:
-                        this.SubItems[1].ForeColor = System.Drawing.Color.Red;
+                        this.SubItems[1].ForeColor = Color.Red;
                         break;
                   }
                }
@@ -281,32 +281,31 @@ namespace PackageStore
          file.Status = DownloadStatus.Waiting;
 
          try {
-            using (var request = new HttpRequestMessage(HttpMethod.Get, file.Package.Url))
-            using (var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead)) {
-               if (response.StatusCode == HttpStatusCode.OK) {
-                  using (var fileStream = File.Create(Path.Combine(Properties.Settings.Default.DirectoryPath, file.Package.Name))) {
-                     var writer = new BinaryWriter(fileStream);
-                     var contentLength = response.Content.Headers.ContentLength;
-                     var buffer = new byte[1024 * 1024];
-                     double totalRead = 0;
+            using var request = new HttpRequestMessage(HttpMethod.Get, file.Package.Url);
+            using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
+            if (response.StatusCode == HttpStatusCode.OK) {
+               using (var fileStream = File.Create(Path.Combine(Properties.Settings.Default.DirectoryPath, file.Package.Name))) {
+                  var writer = new BinaryWriter(fileStream);
+                  var contentLength = response.Content.Headers.ContentLength;
+                  var buffer = new byte[1024 * 1024];
+                  double totalRead = 0;
 
-                     using (var readStream = await response.Content.ReadAsStreamAsync()) {
-                        file.Status = DownloadStatus.Downloading;
+                  using (var readStream = await response.Content.ReadAsStreamAsync()) {
+                     file.Status = DownloadStatus.Downloading;
 
-                        do {
-                           file.CancellationToken.ThrowIfCancellationRequested();
-                           if (await readStream.ReadAsync(buffer, 0, buffer.Length) is var read && read == 0) break;
-                           totalRead += read;
-                           writer.Write(buffer, 0, read);
+                     do {
+                        file.CancellationToken.ThrowIfCancellationRequested();
+                        if (await readStream.ReadAsync(buffer, 0, buffer.Length) is var read && read == 0) break;
+                        totalRead += read;
+                        writer.Write(buffer, 0, read);
 
-                           file.Percent = (int)(totalRead * 100 / contentLength);
-                           file.ElapsedTime = DateTime.Now - file.StartTime;
-                           file.EstimatedTime = TimeSpan.FromSeconds((((double)contentLength - totalRead) / (totalRead / file.ElapsedTime.TotalSeconds)));
-                        }
-                        while (true);
+                        file.Percent = (int)(totalRead * 100 / contentLength);
+                        file.ElapsedTime = DateTime.Now - file.StartTime;
+                        file.EstimatedTime = TimeSpan.FromSeconds((((double)contentLength - totalRead) / (totalRead / file.ElapsedTime.TotalSeconds)));
                      }
-                     file.Status = DownloadStatus.Completed;
+                     while (true);
                   }
+                  file.Status = DownloadStatus.Completed;
                }
             }
          }

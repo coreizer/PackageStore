@@ -33,8 +33,9 @@ namespace PackageStore
       private static void Main()
       {
          Application.EnableVisualStyles();
-         Application.SetCompatibleTextRenderingDefault(false);
+         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
+         // Segoe UI, 9pt
          // ネットワークが利用可能どうかを確認します
          if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
             throw new System.Net.NetworkInformation.NetworkInformationException();

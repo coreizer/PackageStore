@@ -167,7 +167,7 @@ namespace PackageStore
             var tbody = document.QuerySelector("table.gamecomments tbody");
 
             // 結果にtbodyが素材する場合のみ継続する
-            if (tbody != null) {
+            if (!(tbody is null)) {
                var internalSerial = "";
                foreach (var child in tbody.ChildNodes) {
                   if (child.TextContent.Contains("Internal Serial")) {
@@ -374,7 +374,7 @@ namespace PackageStore
       private void listViewPackage_KeyDown(object sender, KeyEventArgs e)
       {
          try {
-            // select all items, Ctrl + A.
+            // Ctrl + A を検知して、全てのアイテムを選択状態にする
             if (e.KeyCode == Keys.A && e.Control) {
                foreach (ListViewItem item in this.listViewPackage.Items) item.Selected = true;
             }

@@ -311,9 +311,9 @@ namespace PackageStore
                this.Settings.DirectoryPath,
                ((FileItem)this.listViewPackage.SelectedItems[0].Tag).FileName
             );
-            Process.Start("explorer.exe", $"/select, \"{ filePath }\"");
+            Process.Start("explorer.exe", $"/select, \"{filePath}\"");
          }
-         catch(Exception ex) {
+         catch (Exception ex) {
             MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
          }
       }

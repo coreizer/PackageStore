@@ -65,7 +65,6 @@
     <Compile Include="Environment.cs" />
     <Compile Include="Exceptions\InvalidPackageException.cs" />
     <Compile Include="Exceptions\PackageNotFoundException.cs" />
-    <Compile Include="Models\Redump.cs" />
     <Compile Include="Models\PackageExport.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

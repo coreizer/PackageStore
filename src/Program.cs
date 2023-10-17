@@ -24,18 +24,18 @@ namespace PackageStore
    using System;
    using System.Windows.Forms;
 
-   static class Program
+   internal static class Program
    {
       /// <summary>
       /// アプリケーションのメイン エントリ ポイントです。
       /// </summary>
       [STAThread]
-      static void Main()
+      private static void Main()
       {
          Application.EnableVisualStyles();
          Application.SetCompatibleTextRenderingDefault(false);
 
-         // ネットワークが利用可能どうかを確認します。
+         // ネットワークが利用可能どうかを確認します
          if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
             throw new System.Net.NetworkInformation.NetworkInformationException();
          }

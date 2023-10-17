@@ -38,7 +38,15 @@ namespace PackageStore
             }
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(new TaskDialogPage {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          finally {
             Properties.Settings.Default.Save();

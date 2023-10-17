@@ -105,7 +105,15 @@ namespace PackageStore
             this.Settings.Save();
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -124,7 +132,15 @@ namespace PackageStore
                var serialId = await this.ProbeForRedump(packageId);
                if (serialId != null) {
                   serialId = serialId.Replace("-", "").Trim();
-                  MessageBox.Show($"Internal serial: Replace '{packageId}' to '{serialId}'", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                  TaskDialog.ShowDialog(this, new TaskDialogPage() {
+                     Icon = TaskDialogIcon.Information,
+                     Text = $"Internal serial: Replace '{packageId}' to '{serialId}'",
+                     Caption = Environment.Name,
+                     Heading = "redump.org",
+                     Buttons = {
+                        TaskDialogButton.OK
+                     }
+                  });
                   packageId = serialId;
                }
             }
@@ -151,10 +167,26 @@ namespace PackageStore
             this.AddSuggestion(packageId);
          }
          catch (PackageNotFoundException ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Warning,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Package Not Found",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          finally {
             this.UseWaitCursor = false;
@@ -182,7 +214,15 @@ namespace PackageStore
             }
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          return null;
       }
@@ -219,12 +259,28 @@ namespace PackageStore
                   case HttpStatusCode.Forbidden:
                      break;
                   default:
-                     MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     TaskDialog.ShowDialog(this, new TaskDialogPage() {
+                        Icon = TaskDialogIcon.Error,
+                        Text = ex.Message,
+                        Caption = Environment.Name,
+                        Heading = "Error",
+                        Buttons = {
+                           TaskDialogButton.OK
+                        }
+                     });
                      break;
                }
             }
             catch (Exception ex) {
-               MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+               TaskDialog.ShowDialog(this, new TaskDialogPage() {
+                  Icon = TaskDialogIcon.Error,
+                  Text = ex.Message,
+                  Caption = Environment.Name,
+                  Heading = "Error",
+                  Buttons = {
+                     TaskDialogButton.OK
+                  }
+               });
             }
          }
       }
@@ -237,7 +293,15 @@ namespace PackageStore
             Properties.Settings.Default.LastPackageId = packageId;
          }
          catch (Exception ex) {
-            MessageBox.Show($"Suggestion Error: {ex.Message}", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = $"Suggestion Error: {ex.Message}",
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          finally {
             Properties.Settings.Default.Save();
@@ -282,19 +346,51 @@ namespace PackageStore
 
       private void ListViewPackages_ItemActivate(object sender, EventArgs e) => this.AddToFileManager();
 
-      private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => MessageBox.Show("Made by coreizer", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => TaskDialog.ShowDialog(this, new TaskDialogPage() {
+         Icon = TaskDialogIcon.Information,
+         Text = "Made by coreizer.",
+         Caption = Environment.Name,
+         Heading = "About",
+         Buttons = {
+            TaskDialogButton.OK
+         }
+      });
 
-      private void GithubToolStripMenuItem_Click(object sender, EventArgs e) => Process.Start("https://www.github.com/coreizer/PackageStore");
+      private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         try {
+            Process.Start("https://github.com/coreizer/PackageStore");
+         }
+         catch (Exception ex) {
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
+         }
+      }
 
       private void CopyToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
+            if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             Clipboard.SetText(((Package)this.listViewPackage.SelectedItems[0].Tag)[(string)(sender as ToolStripMenuItem).Tag]);
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -306,7 +402,15 @@ namespace PackageStore
             this.textBoxPackageId.AutoCompleteCustomSource = this._autoComplete;
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -318,14 +422,22 @@ namespace PackageStore
          }
          finally {
             Properties.Settings.Default.Save();
-            MessageBox.Show("Suggestions have been removed.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Information,
+               Text = "has been removed from the suggestions list",
+               Caption = Environment.Name,
+               Heading = "Suggestions",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
       private void ExportJsonStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
+            if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
 
             using (var SFD = new SaveFileDialog()) {
                SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
@@ -340,19 +452,35 @@ namespace PackageStore
             }
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
       private void OpenXMLToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
+            if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             Process.Start(((Package)this.listViewPackage.SelectedItems[0].Tag).XmlUrl);
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -364,7 +492,7 @@ namespace PackageStore
       private void AddToFileManager()
       {
          try {
-            if (this._items.Count <= 0) throw new InvalidOperationException("Error: Package List Empty");
+            if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             if (string.IsNullOrEmpty(Utils.SelectDirectoryPath())) return;
 
@@ -375,7 +503,15 @@ namespace PackageStore
             this.FileManager.Activate();
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -388,7 +524,15 @@ namespace PackageStore
             }
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 

@@ -180,7 +180,15 @@ namespace PackageStore
             }
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -198,14 +206,30 @@ namespace PackageStore
       {
          var filePath = Path.Combine(this.Settings.DirectoryPath, package.Name);
          if (File.Exists(filePath)) {
-            var hResult = MessageBox.Show($"'{package.Name}' already exists. Do you want to overwrite it?", Environment.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (hResult != DialogResult.Yes) return;
+            var result = TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Heading = package.Name,
+               Text = $"This file already exists. Do you want to overwrite?",
+               Buttons = {
+                  TaskDialogButton.Yes,
+                  TaskDialogButton.No,
+               },
+               Icon = TaskDialogIcon.Warning,
+            });
+            if (result != TaskDialogButton.Yes) return;
 
             try {
                File.Delete(filePath);
             }
             catch (Exception ex) {
-               MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+               TaskDialog.ShowDialog(this, new TaskDialogPage() {
+                  Icon = TaskDialogIcon.Error,
+                  Text = ex.Message,
+                  Caption = Environment.Name,
+                  Heading = "Error",
+                  Buttons = {
+                     TaskDialogButton.OK
+                  }
+               });
             }
          }
 
@@ -239,7 +263,15 @@ namespace PackageStore
             ((FileItem)this.listViewPackage.SelectedItems[0].Tag).Cancel();
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -283,7 +315,15 @@ namespace PackageStore
          }
          catch (Exception ex) {
             file.Status = DownloadStatus.Failed;
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
          finally {
             file.Reset();
@@ -297,7 +337,15 @@ namespace PackageStore
             this.toolStripStatusLabelDownloadQueue.Text = $"Download Queue(s) : {this._files.Count(x => (DownloadStatus.Waiting | DownloadStatus.Downloading).HasAllFlags(x.Status))}";
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
 
@@ -314,7 +362,15 @@ namespace PackageStore
             Process.Start("explorer.exe", $"/select, \"{filePath}\"");
          }
          catch (Exception ex) {
-            MessageBox.Show(ex.Message, Environment.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TaskDialog.ShowDialog(this, new TaskDialogPage() {
+               Icon = TaskDialogIcon.Error,
+               Text = ex.Message,
+               Caption = Environment.Name,
+               Heading = "Error",
+               Buttons = {
+                  TaskDialogButton.OK
+               }
+            });
          }
       }
    }

@@ -233,13 +233,7 @@ namespace PackageStore
             try {
                var xmlUrl = url + packageId + "/" + packageId + "-ver.xml";
                Trace.WriteLine(xmlUrl, "URL");
-
-               //var a = new XmlReaderSettings();
-               //a.Async = true;
-
-               var a = await _http.GetStreamAsync(xmlUrl);
-
-               var reader = XmlReader.Create(a);
+               var reader = XmlReader.Create(await _http.GetStreamAsync(xmlUrl));
                do {
                   if (reader.NodeType != XmlNodeType.Element) continue;
 

@@ -28,8 +28,7 @@ namespace PackageStore
    {
       public static string SelectDirectoryPath(bool isForce = false)
       {
-         if (!isForce && !string.IsNullOrEmpty(Properties.Settings.Default.DirectoryPath))
-            return Properties.Settings.Default.DirectoryPath;
+         if (!isForce && Directory.Exists(Properties.Settings.Default.DirectoryPath)) return Properties.Settings.Default.DirectoryPath;
 
          try {
             using var FBD = new FolderBrowserDialog();

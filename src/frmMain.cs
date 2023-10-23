@@ -202,7 +202,7 @@ namespace PackageStore
             var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{id}");
             var tbody = document.QuerySelector("table.gamecomments tbody");
 
-            // 結果にtbodyが素材する場合のみ継続する
+            // 結果にtbodyが存在する場合のみ継続する
             if (tbody is not null) {
                var internalSerial = "";
                foreach (var child in tbody.ChildNodes) {

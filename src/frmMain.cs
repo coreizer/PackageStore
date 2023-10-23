@@ -86,10 +86,11 @@ namespace PackageStore
          this.InitializeComponent();
          this.SetAutoCompleteSource();
 
-         // Signore SSL errors
+         // Signore SSL errors.
          var handler = new HttpClientHandler();
          handler.ServerCertificateCustomValidationCallback += (s, a, b, e) => true;
 
+         // Creating instance of HttpClient.
          _http = new HttpClient(handler);
       }
 

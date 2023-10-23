@@ -341,15 +341,11 @@ namespace PackageStore
 
       private void ListViewPackages_ItemActivate(object sender, EventArgs e) => this.AddToFileManager();
 
-      private void AboutToolStripMenuItem_Click(object sender, EventArgs e) => TaskDialog.ShowDialog(this, new TaskDialogPage() {
-         Icon = TaskDialogIcon.Information,
-         Text = "Made by coreizer.",
-         Caption = Environment.Name,
-         Heading = "About",
-         Buttons = {
-            TaskDialogButton.OK
-         }
-      });
+      private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+      {
+         using var frm = new frmAbout();
+         frm.ShowDialog();
+      }
 
       private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
       {

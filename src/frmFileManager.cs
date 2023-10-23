@@ -162,7 +162,7 @@ namespace PackageStore
          this.InitializeComponent();
 
          this._files.CollectionChanged += this.OnCollectionChanged;
-         this.Text = $"{Environment.Name} - Downloader";
+         this.Text = $"{Environment.Name} - Downloader(ALPHA)";
          this.DoubleBuffered = true;
          var pi = this.listViewPackage.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
          pi.SetValue(this.listViewPackage, true, null);

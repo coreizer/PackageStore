@@ -35,8 +35,7 @@ namespace PackageStore
          Application.EnableVisualStyles();
          Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
-         // Segoe UI, 9pt
-         // ネットワークが利用可能どうかを確認します
+         // ネットワークが利用可能どうかを確認します。
          if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
             throw new System.Net.NetworkInformation.NetworkInformationException();
          }

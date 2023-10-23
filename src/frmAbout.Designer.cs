@@ -103,11 +103,14 @@ namespace PackageStore
          this.Controls.Add(labelVersion);
          this.Controls.Add(labelName);
          this.Controls.Add(pictureBoxBrand);
+         this.DoubleBuffered = true;
          this.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+         this.FormBorderStyle = FormBorderStyle.FixedSingle;
          this.Icon = (Icon)resources.GetObject("$this.Icon");
          this.MaximizeBox = false;
          this.MinimizeBox = false;
          this.Name = "frmAbout";
+         this.SizeGripStyle = SizeGripStyle.Hide;
          this.StartPosition = FormStartPosition.CenterParent;
          this.Text = "About";
          ((System.ComponentModel.ISupportInitialize)pictureBoxBrand).EndInit();

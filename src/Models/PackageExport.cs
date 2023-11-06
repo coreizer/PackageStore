@@ -25,7 +25,7 @@ namespace PackageStore.Models
    using System.Collections.Generic;
    using System.Text.Json.Serialization;
 
-   public class PackageExport
+   public record PackageExport
    {
       [JsonPropertyName("created_at")]
       public DateTimeOffset CreatedAt { get; }

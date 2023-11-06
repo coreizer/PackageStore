@@ -194,6 +194,8 @@ namespace PackageStore
 
       private void OnCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
       {
+         if (e.NewItems is null) return;
+
          var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
          foreach (FileItem item in e.NewItems) {
             if (item.Status == DownloadStatus.Waiting) {

@@ -25,7 +25,7 @@ namespace PackageStore.Models
    using System.Text.Json.Serialization;
    using ByteSizeLib;
 
-   public class Package
+   public record Package
    {
       [JsonPropertyName("name")]
       public string Name { get; set; } = PackageStore.Environment.DefaultString;
@@ -49,7 +49,7 @@ namespace PackageStore.Models
       public Uri Url { get; set; }
 
       [JsonPropertyName("xml")]
-      public string XmlUrl { get; set; } = PackageStore.Environment.DefaultString;
+      public  string XmlUrl { get; set; } = PackageStore.Environment.DefaultString;
 
       public string this[string propertyName]
       {

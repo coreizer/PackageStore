@@ -55,14 +55,14 @@ namespace PackageStore
          this.SaveAsJsonStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.SaveDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.resetSuggestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.ResetSuggestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
          this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.textBoxPackageId = new System.Windows.Forms.TextBox();
          this.buttonSearch = new System.Windows.Forms.Button();
          this.labelPackageId = new System.Windows.Forms.Label();
-         this.listViewPackage = new System.Windows.Forms.ListView();
+         this.ListViewPackage = new System.Windows.Forms.ListView();
          this.columnHeaderFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.columnHeaderSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
          this.columnHeaderVersion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -119,7 +119,7 @@ namespace PackageStore
          // 
          resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
          this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetSuggestionToolStripMenuItem,
+            this.ResetSuggestionToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.toolStripSeparator1,
             this.githubToolStripMenuItem});
@@ -127,9 +127,9 @@ namespace PackageStore
          // 
          // resetSuggestionToolStripMenuItem
          // 
-         resources.ApplyResources(this.resetSuggestionToolStripMenuItem, "resetSuggestionToolStripMenuItem");
-         this.resetSuggestionToolStripMenuItem.Name = "resetSuggestionToolStripMenuItem";
-         this.resetSuggestionToolStripMenuItem.Click += new System.EventHandler(this.resetSuggestionToolStripMenuItem_Click);
+         resources.ApplyResources(this.ResetSuggestionToolStripMenuItem, "resetSuggestionToolStripMenuItem");
+         this.ResetSuggestionToolStripMenuItem.Name = "resetSuggestionToolStripMenuItem";
+         this.ResetSuggestionToolStripMenuItem.Click += new System.EventHandler(this.ResetSuggestionToolStripMenuItem_Click);
          // 
          // aboutToolStripMenuItem
          // 
@@ -169,23 +169,23 @@ namespace PackageStore
          // 
          // listViewPackage
          // 
-         resources.ApplyResources(this.listViewPackage, "listViewPackage");
-         this.listViewPackage.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+         resources.ApplyResources(this.ListViewPackage, "listViewPackage");
+         this.ListViewPackage.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderFileName,
             this.columnHeaderSize,
             this.columnHeaderVersion,
             this.columnHeaderSystem,
             this.columnHeaderHash});
-         this.listViewPackage.ContextMenuStrip = this.contextMenuStrip1;
-         this.listViewPackage.FullRowSelect = true;
-         this.listViewPackage.GridLines = true;
-         this.listViewPackage.HideSelection = false;
-         this.listViewPackage.Name = "listViewPackage";
-         this.listViewPackage.UseCompatibleStateImageBehavior = false;
-         this.listViewPackage.View = System.Windows.Forms.View.Details;
-         this.listViewPackage.ItemActivate += new System.EventHandler(this.ListViewPackages_ItemActivate);
-         this.listViewPackage.SelectedIndexChanged += new System.EventHandler(this.listViewPackage_SelectedIndexChanged);
-         this.listViewPackage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listViewPackage_KeyDown);
+         this.ListViewPackage.ContextMenuStrip = this.contextMenuStrip1;
+         this.ListViewPackage.FullRowSelect = true;
+         this.ListViewPackage.GridLines = true;
+         this.ListViewPackage.HideSelection = false;
+         this.ListViewPackage.Name = "listViewPackage";
+         this.ListViewPackage.UseCompatibleStateImageBehavior = false;
+         this.ListViewPackage.View = System.Windows.Forms.View.Details;
+         this.ListViewPackage.ItemActivate += new System.EventHandler(this.ListViewPackages_ItemActivate);
+         this.ListViewPackage.SelectedIndexChanged += new System.EventHandler(this.ListViewPackage_SelectedIndexChanged);
+         this.ListViewPackage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ListViewPackage_KeyDown);
          // 
          // columnHeaderFileName
          // 
@@ -313,7 +313,7 @@ namespace PackageStore
          this.Controls.Add(this.buttonSearch);
          this.Controls.Add(this.textBoxPackageId);
          this.Controls.Add(this.menuStrip1);
-         this.Controls.Add(this.listViewPackage);
+         this.Controls.Add(this.ListViewPackage);
          this.MainMenuStrip = this.menuStrip1;
          this.MaximizeBox = false;
          this.Name = "frmMain";
@@ -350,8 +350,8 @@ namespace PackageStore
     private System.Windows.Forms.StatusStrip statusStrip1;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSelected;
     private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelCopyright;
-        private System.Windows.Forms.ListView listViewPackage;
-      private System.Windows.Forms.ToolStripMenuItem resetSuggestionToolStripMenuItem;
+        private System.Windows.Forms.ListView ListViewPackage;
+      private System.Windows.Forms.ToolStripMenuItem ResetSuggestionToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem FilesToolStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem SaveAsJsonStripMenuItem;
       private System.Windows.Forms.ToolStripMenuItem CopyToSizeToolStripMenuItem;

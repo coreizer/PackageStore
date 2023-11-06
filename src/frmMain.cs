@@ -66,7 +66,7 @@ namespace PackageStore
             base.UseWaitCursor = value;
             this.buttonSearch.Enabled = !value;
             this.textBoxPackageId.Enabled = !value;
-            this.listViewPackage.Enabled = !value;
+            this.ListViewPackage.Enabled = !value;
          }
       }
 
@@ -123,7 +123,7 @@ namespace PackageStore
          try {
             this.UseWaitCursor = true;
             this.Text = Environment.Name;
-            this.listViewPackage.Items.Clear();
+            this.ListViewPackage.Items.Clear();
             this._items.Clear();
 
             var packageId = this.textBoxPackageId.Text.Trim();
@@ -159,7 +159,7 @@ namespace PackageStore
                         pkg.PS3SystemVer != Environment.DefaultString ? pkg.PS3SystemVer : pkg.PSPSystemVer, /* PS3 or PSP */
                         pkg.Hash
                      });
-                     this.listViewPackage.Items.Add(addItem);
+                     this.ListViewPackage.Items.Add(addItem);
                   });
                }
             });
@@ -306,9 +306,8 @@ namespace PackageStore
 
       private Package AttributeReaderPS3(string xmlUrl, ref XmlReader reader)
       {
-         if (string.IsNullOrEmpty(xmlUrl)) throw new ArgumentNullException(nameof(xmlUrl));
-         if (reader == null) throw new ArgumentNullException(nameof(reader));
-
+         ArgumentNullException.ThrowIfNull(xmlUrl);
+         ArgumentNullException.ThrowIfNull(reader);
          var package = new Package() { XmlUrl = xmlUrl };
          for (var i = 0; i < reader.AttributeCount; i++) {
             reader.MoveToNextAttribute();
@@ -337,7 +336,7 @@ namespace PackageStore
          return package;
       }
 
-      private bool IsValid(string name) => string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException() : Regex.IsMatch(name, "^[A-Z0-9]");
+      private bool IsValid(string name) => string.IsNullOrWhiteSpace(name) ? throw new ArgumentNullException(nameof(name)) : Regex.IsMatch(name, "^[A-Z0-9]");
 
       private void ListViewPackages_ItemActivate(object sender, EventArgs e) => this.AddToFileManager();
 
@@ -369,8 +368,8 @@ namespace PackageStore
       {
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-            if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
-            Clipboard.SetText(((Package)this.listViewPackage.SelectedItems[0].Tag)[(string)(sender as ToolStripMenuItem).Tag]);
+            if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+            Clipboard.SetText(((Package)this.ListViewPackage.SelectedItems[0].Tag)[(string)(sender as ToolStripMenuItem).Tag]);
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(this, new TaskDialogPage() {
@@ -405,7 +404,7 @@ namespace PackageStore
          }
       }
 
-      private void resetSuggestionToolStripMenuItem_Click(object sender, EventArgs e)
+      private void ResetSuggestionToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
             Settings.Suggestions.Clear();
@@ -429,7 +428,6 @@ namespace PackageStore
       {
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-
             using var SFD = new SaveFileDialog();
             SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
             SFD.Filter = "JSON File|*.json";
@@ -458,8 +456,8 @@ namespace PackageStore
       {
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-            if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
-            Process.Start(((Package)this.listViewPackage.SelectedItems[0].Tag).XmlUrl);
+            if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+            Process.Start(((Package)this.ListViewPackage.SelectedItems[0].Tag).XmlUrl);
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(this, new TaskDialogPage() {
@@ -474,8 +472,8 @@ namespace PackageStore
          }
       }
 
-      private void listViewPackage_SelectedIndexChanged(object sender, EventArgs e) =>
-         this.toolStripStatusLabelSelected.Text = $"Selected item(s): {this.listViewPackage.SelectedItems.Count}";
+      private void ListViewPackage_SelectedIndexChanged(object sender, EventArgs e) =>
+         this.toolStripStatusLabelSelected.Text = $"Selected item(s): {this.ListViewPackage.SelectedItems.Count}";
 
       private void DownloadToolStripMenuItem_Click(object sender, EventArgs e) => this.AddToFileManager();
 
@@ -483,10 +481,9 @@ namespace PackageStore
       {
          try {
             if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-            if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+            if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             if (string.IsNullOrEmpty(Utils.SelectDirectoryPath())) return;
-
-            foreach (ListViewItem item in this.listViewPackage.SelectedItems) {
+            foreach (ListViewItem item in this.ListViewPackage.SelectedItems) {
                this.FileManager.Add((Package)item.Tag);
             }
             this.FileManager.Show();
@@ -505,12 +502,12 @@ namespace PackageStore
          }
       }
 
-      private void listViewPackage_KeyDown(object sender, KeyEventArgs e)
+      private void ListViewPackage_KeyDown(object sender, KeyEventArgs e)
       {
          try {
             // Ctrl + A を検知して、全てのアイテムを選択状態にする
             if (e.KeyCode == Keys.A && e.Control) {
-               foreach (ListViewItem item in this.listViewPackage.Items) item.Selected = true;
+               foreach (ListViewItem item in this.ListViewPackage.Items) item.Selected = true;
             }
          }
          catch (Exception ex) {

@@ -34,6 +34,7 @@
 - Simple Download Manger
 - Search history
 - Compensation of package Id using redump's database
+- Multilingual: English, Japanese (Form only)
 
 ## 🖼️ Screenshot
 

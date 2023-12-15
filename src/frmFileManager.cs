@@ -206,7 +206,7 @@ namespace PackageStore
 
       public void Add(Package package)
       {
-         var filePath = Path.Combine(this.Settings.DirectoryPath, package.Name);
+         var filePath = Path.Combine(this.Settings.SaveFolderPath, package.Name);
          if (File.Exists(filePath)) {
             var result = TaskDialog.ShowDialog(this, new TaskDialogPage() {
                Heading = package.Name,
@@ -286,7 +286,7 @@ namespace PackageStore
             using var request = new HttpRequestMessage(HttpMethod.Get, file.Package.Url);
             using var response = await _http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             if (response.StatusCode == HttpStatusCode.OK) {
-               using (var fileStream = File.Create(Path.Combine(Properties.Settings.Default.DirectoryPath, file.Package.Name))) {
+               using (var fileStream = File.Create(Path.Combine(Properties.Settings.Default.SaveFolderPath, file.Package.Name))) {
                   var writer = new BinaryWriter(fileStream);
                   var contentLength = response.Content.Headers.ContentLength;
                   var buffer = new byte[1024 * 1024];
@@ -357,7 +357,7 @@ namespace PackageStore
          try {
             if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
             var filePath = Path.Combine(
-               this.Settings.DirectoryPath,
+               this.Settings.SaveFolderPath,
                ((FileItem)this.listViewPackage.SelectedItems[0].Tag).FileName
             );
             Process.Start("explorer.exe", $"/select, \"{filePath}\"");

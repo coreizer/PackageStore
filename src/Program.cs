@@ -23,6 +23,7 @@ namespace PackageStore
 {
    using System;
    using System.Windows.Forms;
+   using System.Net.NetworkInformation;
 
    internal static class Program
    {
@@ -36,8 +37,8 @@ namespace PackageStore
          Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
          // ネットワークが利用可能どうかを確認します。
-         if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) {
-            throw new System.Net.NetworkInformation.NetworkInformationException();
+         if (!NetworkInterface.GetIsNetworkAvailable()) {
+            throw new NetworkInformationException();
          }
 
          Application.Run(new frmMain());

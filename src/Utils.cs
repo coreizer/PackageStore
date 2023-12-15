@@ -28,12 +28,13 @@ namespace PackageStore
    {
       public static string SelectDirectoryPath(bool isForce = false)
       {
-         if (!isForce && Directory.Exists(Properties.Settings.Default.DirectoryPath)) return Properties.Settings.Default.DirectoryPath;
+         if (!isForce && Directory.Exists(Properties.Settings.Default.SaveFolderPath))
+            return Properties.Settings.Default.SaveFolderPath;
 
          try {
             using var FBD = new FolderBrowserDialog();
             if (FBD.ShowDialog() != DialogResult.OK) return null;
-            Properties.Settings.Default.DirectoryPath = FBD.SelectedPath;
+            Properties.Settings.Default.SaveFolderPath = FBD.SelectedPath;
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(new TaskDialogPage {
@@ -49,7 +50,7 @@ namespace PackageStore
          finally {
             Properties.Settings.Default.Save();
          }
-         return Properties.Settings.Default.DirectoryPath;
+         return Properties.Settings.Default.SaveFolderPath;
       }
    }
 }

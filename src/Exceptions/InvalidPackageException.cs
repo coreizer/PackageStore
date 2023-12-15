@@ -31,7 +31,7 @@ namespace PackageStore.Exceptions
 
       public InvalidPackageException(string message, Exception innerException) : base(message, innerException) { }
 
-      public static void ThrowIfNull([NotNull] object? argument, [CallerArgumentExpression("argument")] string? paramName = null)
+      public static void ThrowIfNull([NotNull] object? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
       {
          if (argument is null) {
             Throw(paramName);

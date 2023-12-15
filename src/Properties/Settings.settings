@@ -9,7 +9,7 @@
     <Setting Name="LastPackageId" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DirectoryPath" Type="System.String" Scope="User">
+    <Setting Name="SaveFolderPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

@@ -349,7 +349,10 @@ namespace PackageStore
       private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
-            Process.Start("https://github.com/coreizer/PackageStore");
+            Process.Start(new ProcessStartInfo {
+               FileName = "https://github.com/coreizer/PackageStore",
+               UseShellExecute = true,
+            });
          }
          catch (Exception ex) {
             TaskDialog.ShowDialog(this, new TaskDialogPage() {

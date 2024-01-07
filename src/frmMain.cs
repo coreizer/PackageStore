@@ -346,7 +346,7 @@ namespace PackageStore
          frm.ShowDialog();
       }
 
-      private void GithubToolStripMenuItem_Click(object sender, EventArgs e)
+      private void GitHubToolStripMenuItem_Click(object sender, EventArgs e)
       {
          try {
             Process.Start("https://github.com/coreizer/PackageStore");

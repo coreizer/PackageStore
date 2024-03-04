@@ -19,29 +19,26 @@
 
 #endregion
 
+using System.Net.NetworkInformation;
+
 namespace PackageStore
 {
-   using System;
-   using System.Windows.Forms;
-   using System.Net.NetworkInformation;
+  internal static class Program
+  {
+    /// <summary>
+    /// アプリケーションのメイン エントリ ポイントです。
+    /// </summary>
+    [STAThread]
+    private static void Main() {
+      Application.EnableVisualStyles();
+      Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
 
-   internal static class Program
-   {
-      /// <summary>
-      /// アプリケーションのメイン エントリ ポイントです。
-      /// </summary>
-      [STAThread]
-      private static void Main()
-      {
-         Application.EnableVisualStyles();
-         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
-
-         // ネットワークが利用可能どうかを確認します。
-         if (!NetworkInterface.GetIsNetworkAvailable()) {
-            throw new NetworkInformationException();
-         }
-
-         Application.Run(new frmMain());
+      // ネットワークが利用可能どうかを確認します。
+      if (!NetworkInterface.GetIsNetworkAvailable()) {
+        throw new NetworkInformationException();
       }
-   }
+
+      Application.Run(new frmMain());
+    }
+  }
 }

@@ -27,8 +27,8 @@ using System.Runtime.InteropServices;
 // これらの属性値を変更してください。
 [assembly: AssemblyTitle("PackageStore")]
 [assembly: AssemblyDescription("Playstation 3 and PSP package file search tools")]
-[assembly: AssemblyConfiguration("aaaaaa")]
-[assembly: AssemblyCompany("aaaaa")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("coreizer")]
 [assembly: AssemblyProduct("PackageStore")]
 [assembly: AssemblyCopyright("© coreizer 2023")]
 [assembly: AssemblyTrademark("")]

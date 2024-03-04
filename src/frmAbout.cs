@@ -21,14 +21,11 @@
 
 namespace PackageStore
 {
-   using System.Windows.Forms;
-
-   public partial class frmAbout : Form
-   {
-      public frmAbout()
-      {
-         this.InitializeComponent();
-         this.labelVersion.Text = $"Version: {Application.ProductVersion}";
-      }
-   }
+  public partial class frmAbout : Form
+  {
+    public frmAbout() {
+      this.InitializeComponent();
+      this.labelVersion.Text = $"Version: {Application.ProductVersion}";
+    }
+  }
 }

@@ -19,46 +19,44 @@
 
 #endregion
 
+using System.Text.Json.Serialization;
+using ByteSizeLib;
+
 namespace PackageStore.Models
 {
-   using System;
-   using System.Text.Json.Serialization;
-   using ByteSizeLib;
+  public record Package
+  {
+    [JsonPropertyName("name")]
+    public string Name { get; set; } = PackageStore.Environment.DefaultString;
 
-   public record Package
-   {
-      [JsonPropertyName("name")]
-      public string Name { get; set; } = PackageStore.Environment.DefaultString;
+    [JsonPropertyName("version")]
+    public string Version { get; set; } = PackageStore.Environment.DefaultString;
 
-      [JsonPropertyName("version")]
-      public string Version { get; set; } = PackageStore.Environment.DefaultString;
+    [JsonPropertyName("ps3_system_ver")]
+    public string PS3SystemVer { get; set; } = PackageStore.Environment.DefaultString;
 
-      [JsonPropertyName("ps3_system_ver")]
-      public string PS3SystemVer { get; set; } = PackageStore.Environment.DefaultString;
+    [JsonPropertyName("psp_system_ver")]
+    public string PSPSystemVer { get; set; } = PackageStore.Environment.DefaultString;
 
-      [JsonPropertyName("psp_system_ver")]
-      public string PSPSystemVer { get; set; } = PackageStore.Environment.DefaultString;
+    [JsonPropertyName("formated_size")]
+    public ByteSize Size { get; set; }
 
-      [JsonPropertyName("formated_size")]
-      public ByteSize Size { get; set; }
+    [JsonPropertyName("hash")]
+    public string Hash { get; set; } = PackageStore.Environment.DefaultString;
 
-      [JsonPropertyName("hash")]
-      public string Hash { get; set; } = PackageStore.Environment.DefaultString;
+    [JsonPropertyName("url")]
+    public Uri Url { get; set; }
 
-      [JsonPropertyName("url")]
-      public Uri Url { get; set; }
+    [JsonPropertyName("xml")]
+    public string XmlUrl { get; set; } = PackageStore.Environment.DefaultString;
 
-      [JsonPropertyName("xml")]
-      public  string XmlUrl { get; set; } = PackageStore.Environment.DefaultString;
-
-      public string this[string propertyName]
-      {
-         get {
-            if (propertyName == "SP_SYS") {
-               return this.PS3SystemVer != PackageStore.Environment.DefaultString ? this.PS3SystemVer : this.PSPSystemVer;
-            }
-            return typeof(Package).GetProperty(propertyName).GetValue(this).ToString(); // NOTE: Because is 'ByteSizeLib ' cannot be cast, use ToString()
-         }
+    public string this[string propertyName] {
+      get {
+        if (propertyName == "SP_SYS") {
+          return this.PS3SystemVer != PackageStore.Environment.DefaultString ? this.PS3SystemVer : this.PSPSystemVer;
+        }
+        return typeof(Package).GetProperty(propertyName).GetValue(this).ToString(); // NOTE: Because is 'ByteSizeLib ' cannot be cast, use ToString()
       }
-   }
+    }
+  }
 }

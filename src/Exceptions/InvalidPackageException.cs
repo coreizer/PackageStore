@@ -19,27 +19,25 @@
 
 #endregion
 
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+
 namespace PackageStore.Exceptions
 {
-   using System;
-   using System.Diagnostics.CodeAnalysis;
-   using System.Runtime.CompilerServices;
+  public class InvalidPackageException : Exception
+  {
+    public InvalidPackageException(string message) : base(message) { }
 
-   public class InvalidPackageException : Exception
-   {
-      public InvalidPackageException(string message) : base(message) { }
+    public InvalidPackageException(string message, Exception innerException) : base(message, innerException) { }
 
-      public InvalidPackageException(string message, Exception innerException) : base(message, innerException) { }
-
-      public static void ThrowIfNull([NotNull] object? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
-      {
-         if (argument is null) {
-            Throw(paramName);
-         }
+    public static void ThrowIfNull([NotNull] object argument, [CallerArgumentExpression(nameof(argument))] string paramName = null) {
+      if (argument is null) {
+        Throw(paramName);
       }
+    }
 
-      [DoesNotReturn]
-      internal static void Throw(string? paramName) =>
-         throw new ArgumentNullException(paramName);
-   }
+    [DoesNotReturn]
+    internal static void Throw(string paramName) =>
+       throw new ArgumentNullException(paramName);
+  }
 }

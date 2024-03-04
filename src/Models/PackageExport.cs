@@ -19,24 +19,21 @@
 
 #endregion
 
+using System.Text.Json.Serialization;
+
 namespace PackageStore.Models
 {
-   using System;
-   using System.Collections.Generic;
-   using System.Text.Json.Serialization;
+  public record PackageExport
+  {
+    [JsonPropertyName("created_at")]
+    public DateTimeOffset CreatedAt { get; }
 
-   public record PackageExport
-   {
-      [JsonPropertyName("created_at")]
-      public DateTimeOffset CreatedAt { get; }
+    [JsonPropertyName("packages")]
+    public IList<Package> Packages { get; set; }
 
-      [JsonPropertyName("packages")]
-      public IList<Package> Packages { get; set; }
-
-      public PackageExport(IList<Package> packages)
-      {
-         this.Packages = packages;
-         this.CreatedAt = DateTimeOffset.Now;
-      }
-   }
+    public PackageExport(IList<Package> packages) {
+      this.Packages = packages;
+      this.CreatedAt = DateTimeOffset.Now;
+    }
+  }
 }

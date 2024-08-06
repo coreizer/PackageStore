@@ -21,10 +21,8 @@
 
 using System.Text.Json.Serialization;
 
-namespace PackageStore.Models
-{
-  public record PackageExport
-  {
+namespace PackageStore.Models {
+  public record PackageExport {
     [JsonPropertyName("created_at")]
     public DateTimeOffset CreatedAt { get; }
 

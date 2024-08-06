@@ -19,10 +19,8 @@
 
 #endregion
 
-namespace PackageStore
-{
-  public static class Environment
-  {
+namespace PackageStore {
+  public static class Environment {
     public const string DefaultString = "Unknown";
     public const string Name = "Package Store";
   }

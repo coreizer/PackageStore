@@ -21,10 +21,8 @@
 
 using System.Net.NetworkInformation;
 
-namespace PackageStore
-{
-  internal static class Program
-  {
+namespace PackageStore {
+  internal static class Program {
     /// <summary>
     /// アプリケーションのメイン エントリ ポイントです。
     /// </summary>

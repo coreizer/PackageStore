@@ -19,10 +19,8 @@
 
 #endregion
 
-namespace PackageStore.Properties
-{
-  internal sealed partial class Settings
-  {
+namespace PackageStore.Properties {
+  internal sealed partial class Settings {
 
     public Settings() {
     }

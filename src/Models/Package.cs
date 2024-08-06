@@ -19,13 +19,11 @@
 
 #endregion
 
-using System.Text.Json.Serialization;
 using ByteSizeLib;
+using System.Text.Json.Serialization;
 
-namespace PackageStore.Models
-{
-  public record Package
-  {
+namespace PackageStore.Models {
+  public record Package {
     [JsonPropertyName("name")]
     public string Name { get; set; } = PackageStore.Environment.DefaultString;
 

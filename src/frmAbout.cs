@@ -19,10 +19,8 @@
 
 #endregion
 
-namespace PackageStore
-{
-  public partial class frmAbout : Form
-  {
+namespace PackageStore {
+  public partial class frmAbout : Form {
     public frmAbout() {
       this.InitializeComponent();
       this.labelVersion.Text = $"Version: {Application.ProductVersion}";

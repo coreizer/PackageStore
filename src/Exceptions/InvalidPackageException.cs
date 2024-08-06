@@ -22,10 +22,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace PackageStore.Exceptions
-{
-  public class InvalidPackageException : Exception
-  {
+namespace PackageStore.Exceptions {
+  public class InvalidPackageException : Exception {
     public InvalidPackageException(string message) : base(message) { }
 
     public InvalidPackageException(string message, Exception innerException) : base(message, innerException) { }

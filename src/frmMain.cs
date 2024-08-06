@@ -19,29 +19,27 @@
 
 #endregion
 
+using AngleSharp;
+using ByteSizeLib;
+using PackageStore.Exceptions;
+using PackageStore.Models;
 using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml;
-using AngleSharp;
-using ByteSizeLib;
-using PackageStore.Exceptions;
-using PackageStore.Models;
 
-namespace PackageStore
-{
-  public partial class frmMain : Form
-  {
+namespace PackageStore {
+  public partial class frmMain : Form {
     // https://www.psdevwiki.com/ps3/Environments
     private readonly string[] Environments = {
-         "https://a0.ww.np.dl.playstation.net/tpl/np/",
-         "http://b0.ww.np.dl.playstation.net/tppkg/np/",
-         "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
-         "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
-         "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/",
-         "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
-      };
+      "https://a0.ww.np.dl.playstation.net/tpl/np/",
+      "http://b0.ww.np.dl.playstation.net/tppkg/np/",
+      "https://a0.ww.sp-int.dl.playstation.net/tpl/sp-int/",
+      "http://b0.ww.sp-int.dl.playstation.net/tppkg/sp-int/",
+      "https://a0.ww.prod-qa.dl.playstation.net/tpl/prod-qa/",
+      "http://b0.ww.prod-qa.dl.playstation.net/tppkg/prod-qa/"
+    };
 
     private readonly HttpClient _http;
     private readonly AutoCompleteStringCollection _autoComplete = new();
@@ -64,8 +62,9 @@ namespace PackageStore
     private frmFileManager _fileManager;
     public frmFileManager FileManager {
       get {
-        if (this._fileManager == null || this._fileManager.IsDisposed)
+        if (this._fileManager == null || this._fileManager.IsDisposed) {
           this._fileManager = new frmFileManager();
+        }
         return this._fileManager;
       }
       set => this._fileManager = value;
@@ -98,9 +97,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -123,9 +120,7 @@ namespace PackageStore
               Text = $"Internal serial: Replace '{packageId}' to '{serialId}'",
               Caption = Environment.Name,
               Heading = "redump.org",
-              Buttons = {
-                        TaskDialogButton.OK
-                     }
+              Buttons = { TaskDialogButton.OK }
             });
             packageId = serialId;
           }
@@ -139,11 +134,11 @@ namespace PackageStore
             this.Invoke(() => {
               var addItem = new ListViewItem { Text = pkg.Name, Tag = pkg };
               addItem.SubItems.AddRange(new[] {
-                        pkg.Size.ToString(),
-                        pkg.Version,
-                        pkg.PS3SystemVer != Environment.DefaultString ? pkg.PS3SystemVer : pkg.PSPSystemVer, /* PS3 or PSP */
-                        pkg.Hash
-                     });
+                pkg.Size.ToString(),
+                pkg.Version,
+                pkg.PS3SystemVer != Environment.DefaultString ? pkg.PS3SystemVer : pkg.PSPSystemVer, /* PS3 or PSP */
+                pkg.Hash
+             });
               this.ListViewPackage.Items.Add(addItem);
             });
           }
@@ -158,9 +153,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Package Not Found",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
       catch (Exception ex) {
@@ -169,9 +162,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
       finally {
@@ -204,9 +195,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
       return null;
@@ -242,9 +231,7 @@ namespace PackageStore
                 Text = ex.Message,
                 Caption = Environment.Name,
                 Heading = "Error",
-                Buttons = {
-                           TaskDialogButton.OK
-                        }
+                Buttons = { TaskDialogButton.OK }
               });
               break;
           }
@@ -255,9 +242,7 @@ namespace PackageStore
             Text = ex.Message,
             Caption = Environment.Name,
             Heading = "Error",
-            Buttons = {
-                     TaskDialogButton.OK
-                  }
+            Buttons = { TaskDialogButton.OK }
           });
         }
       }
@@ -275,9 +260,7 @@ namespace PackageStore
           Text = $"Suggestion Error: {ex.Message}",
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
       finally {
@@ -339,9 +322,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -358,9 +339,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -377,9 +356,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -396,9 +373,7 @@ namespace PackageStore
           Text = "has been removed from the suggestions list",
           Caption = Environment.Name,
           Heading = "Suggestions",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -423,9 +398,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -442,9 +415,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -471,9 +442,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -491,9 +460,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }

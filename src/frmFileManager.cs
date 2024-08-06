@@ -19,20 +19,17 @@
 
 #endregion
 
+using EnumsNET;
+using PackageStore.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
 using System.Reflection;
-using EnumsNET;
-using PackageStore.Models;
 
-namespace PackageStore
-{
-  public partial class frmFileManager : Form
-  {
+namespace PackageStore {
+  public partial class frmFileManager : Form {
     [Flags]
-    public enum DownloadStatus
-    {
+    public enum DownloadStatus {
       Waiting = 0,
       Downloading = 1,
       Completed = 2,
@@ -48,8 +45,7 @@ namespace PackageStore
 
     private readonly ObservableCollection<FileItem> _files = new();
 
-    private class FileItem : ListViewItem
-    {
+    private class FileItem : ListViewItem {
       private readonly CancellationTokenSource _source = new();
 
       public string FileName {
@@ -167,9 +163,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -191,10 +185,7 @@ namespace PackageStore
         var result = TaskDialog.ShowDialog(this, new TaskDialogPage() {
           Heading = package.Name,
           Text = $"File already exists. Do you want to overwrite it?",
-          Buttons = {
-                  TaskDialogButton.Yes,
-                  TaskDialogButton.No,
-               },
+          Buttons = { TaskDialogButton.Yes, TaskDialogButton.No, },
           Icon = TaskDialogIcon.Warning,
         });
         if (result != TaskDialogButton.Yes) return;
@@ -208,9 +199,7 @@ namespace PackageStore
             Text = ex.Message,
             Caption = Environment.Name,
             Heading = "Error",
-            Buttons = {
-                     TaskDialogButton.OK
-                  }
+            Buttons = { TaskDialogButton.OK }
           });
         }
       }
@@ -248,9 +237,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -297,9 +284,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
       finally {
@@ -318,9 +303,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }
@@ -342,9 +325,7 @@ namespace PackageStore
           Text = ex.Message,
           Caption = Environment.Name,
           Heading = "Error",
-          Buttons = {
-                  TaskDialogButton.OK
-               }
+          Buttons = { TaskDialogButton.OK }
         });
       }
     }

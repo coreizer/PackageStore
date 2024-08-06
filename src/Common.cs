@@ -19,10 +19,8 @@
 
 #endregion
 
-namespace PackageStore
-{
-  internal class Common
-  {
+namespace PackageStore {
+  internal class Common {
     public static string SelectDirectoryPath(bool isForce = false) {
       if (!isForce && Directory.Exists(Properties.Settings.Default.SaveFolderPath))
         return Properties.Settings.Default.SaveFolderPath;

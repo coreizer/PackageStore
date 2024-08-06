@@ -54,7 +54,7 @@ namespace PackageStore {
 
       public string Path { get; set; }
 
-      public CancellationToken Token => (CancellationToken)(this._source?.Token);
+      public CancellationToken Token => this._source?.Token ?? CancellationToken.None;
 
       public DateTime StartTime { get; set; }
 
@@ -169,7 +169,8 @@ namespace PackageStore {
     }
 
     private void OnCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
-      if (e.NewItems is null) return;
+      if (e.NewItems is null)
+        return;
 
       var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
       foreach (FileItem item in e.NewItems) {
@@ -188,7 +189,8 @@ namespace PackageStore {
           Buttons = { TaskDialogButton.Yes, TaskDialogButton.No, },
           Icon = TaskDialogIcon.Warning,
         });
-        if (result != TaskDialogButton.Yes) return;
+        if (result != TaskDialogButton.Yes)
+          return;
 
         try {
           File.Delete(filePath);
@@ -206,7 +208,7 @@ namespace PackageStore {
 
       var item = new FileItem(package) { Text = package.Name };
       item.SubItems.AddRange(new[] {
-            DownloadStatus.Waiting.ToString(), // 状態
+    DownloadStatus.Waiting.ToString(), // 状態
             package.Size.ToString(), // サイズ
             "0%", // パーセント
             "0:00(s)" // 予定時間
@@ -228,7 +230,8 @@ namespace PackageStore {
 
     private void DownloadCancelToolStripMenuItem_Click(object sender, EventArgs e) {
       try {
-        if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+        if (this.listViewPackage.SelectedIndices.Count < 1)
+          throw new InvalidOperationException("Please select at least one package");
         ((FileItem)this.listViewPackage.SelectedItems[0].Tag).Cancel();
       }
       catch (Exception ex) {
@@ -261,7 +264,8 @@ namespace PackageStore {
 
             do {
               file.Token.ThrowIfCancellationRequested();
-              if (await readStream.ReadAsync(buffer, 0, buffer.Length) is var read && read == 0) break;
+              if (await readStream.ReadAsync(buffer, 0, buffer.Length) is var read && read == 0)
+                break;
               totalRead += read;
               writer.Write(buffer, 0, read);
 
@@ -312,10 +316,11 @@ namespace PackageStore {
 
     private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e) {
       try {
-        if (this.listViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+        if (this.listViewPackage.SelectedIndices.Count < 1)
+          throw new InvalidOperationException("Please select at least one package");
         var filePath = Path.Combine(
-           this.Settings.SaveFolderPath,
-           ((FileItem)this.listViewPackage.SelectedItems[0].Tag).FileName
+         this.Settings.SaveFolderPath,
+         ((FileItem)this.listViewPackage.SelectedItems[0].Tag).FileName
         );
         Process.Start("explorer.exe", $"/select, \"{filePath}\"");
       }

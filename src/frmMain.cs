@@ -110,7 +110,8 @@ namespace PackageStore {
         this._items.Clear();
 
         var packageId = this.textBoxPackageId.Text.Trim();
-        if (!this.IsValid(packageId)) throw new InvalidPackageException($"The package id '{packageId}' is Invalid");
+        if (!this.IsValid(packageId))
+          throw new InvalidPackageException($"The package id '{packageId}' is Invalid");
         if (this.checkBoxRedump.Checked) {
           var serialId = await this.ProbeForRedump(packageId);
           if (serialId != null) {
@@ -144,7 +145,8 @@ namespace PackageStore {
           }
         });
 
-        if (this._items.Count <= 0) throw new PackageNotFoundException($"Nothing found for '{packageId}'\n\rplease try use the redump.org.");
+        if (this._items.Count <= 0)
+          throw new PackageNotFoundException($"Nothing found for '{packageId}'\n\rplease try use the redump.org.");
         this.AddSuggestion(packageId);
       }
       catch (PackageNotFoundException ex) {
@@ -173,7 +175,8 @@ namespace PackageStore {
     private async Task<string> ProbeForRedump(string packageId) {
       try {
         var id = Regex.Replace(packageId, @"[^0-9]", "");
-        if (string.IsNullOrEmpty(id)) throw new InvalidOperationException($"Error: Invalid Id from redump.");
+        if (string.IsNullOrEmpty(id))
+          throw new InvalidOperationException($"Error: Invalid Id from redump.");
         var config = Configuration.Default.WithDefaultLoader();
         var document = await BrowsingContext.New(config).OpenAsync($"http://redump.org/discs/quicksearch/{id}");
         var tbody = document.QuerySelector("table.gamecomments tbody");
@@ -208,7 +211,8 @@ namespace PackageStore {
           Trace.WriteLine(xmlUrl, "URL");
           var reader = XmlReader.Create(await this._http.GetStreamAsync(xmlUrl));
           do {
-            if (reader.NodeType != XmlNodeType.Element) continue;
+            if (reader.NodeType != XmlNodeType.Element)
+              continue;
 
             switch (reader.Name) {
               case "package":
@@ -329,8 +333,10 @@ namespace PackageStore {
 
     private void CopyToClipboardToolStripMenuItem_Click(object sender, EventArgs e) {
       try {
-        if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-        if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+        if (this._items.Count <= 0)
+          throw new InvalidOperationException("Package List is Empty");
+        if (this.ListViewPackage.SelectedIndices.Count < 1)
+          throw new InvalidOperationException("Please select at least one package");
         Clipboard.SetText(((Package)this.ListViewPackage.SelectedItems[0].Tag)[(string)((ToolStripMenuItem)sender).Tag]);
       }
       catch (Exception ex) {
@@ -380,12 +386,14 @@ namespace PackageStore {
 
     private void ExportJsonStripMenuItem_Click(object sender, EventArgs e) {
       try {
-        if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
+        if (this._items.Count <= 0)
+          throw new InvalidOperationException("Package List is Empty");
         using var SFD = new SaveFileDialog();
         SFD.FileName = $"Export-{this.textBoxPackageId.Text}-{DateTime.Now:yyyyMMddHHmmss}";
         SFD.Filter = "JSON File|*.json";
         var result = SFD.ShowDialog();
-        if (result != DialogResult.OK) return;
+        if (result != DialogResult.OK)
+          return;
         var jsonString = JsonSerializer.Serialize(
            new PackageExport(this._items),
            new JsonSerializerOptions { WriteIndented = true }
@@ -405,8 +413,10 @@ namespace PackageStore {
 
     private void OpenXMLToolStripMenuItem_Click(object sender, EventArgs e) {
       try {
-        if (this._items.Count <= 0) throw new InvalidOperationException("Package List is Empty");
-        if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
+        if (this._items.Count <= 0)
+          throw new InvalidOperationException("Package List is Empty");
+        if (this.ListViewPackage.SelectedIndices.Count < 1)
+          throw new InvalidOperationException("Please select at least one package");
         Process.Start(((Package)this.ListViewPackage.SelectedItems[0].Tag).XmlUrl);
       }
       catch (Exception ex) {
@@ -425,11 +435,14 @@ namespace PackageStore {
 
     private void DownloadToolStripMenuItem_Click(object sender, EventArgs e) => this.AddToFileManager();
 
-    private void AddToFileManager() {
+    private async void AddToFileManager() {
       try {
-        if (this._items.Count <= 0) throw new InvalidOperationException("The package list is empty");
-        if (this.ListViewPackage.SelectedIndices.Count < 1) throw new InvalidOperationException("Please select at least one package");
-        if (string.IsNullOrEmpty(Common.SelectDirectoryPath())) return;
+        if (this._items.Count <= 0)
+          throw new InvalidOperationException("The package list is empty");
+        if (this.ListViewPackage.SelectedIndices.Count < 1)
+          throw new InvalidOperationException("Please select at least one package");
+        if (string.IsNullOrEmpty(Common.SelectDirectoryPath()))
+          return;
         foreach (ListViewItem item in this.ListViewPackage.SelectedItems) {
           this.FileManager.Add((Package)item.Tag);
         }
@@ -451,7 +464,8 @@ namespace PackageStore {
       try {
         // Ctrl + A を検知して、全てのアイテムを選択状態にする
         if (e.KeyCode == Keys.A && e.Control) {
-          foreach (ListViewItem item in this.ListViewPackage.Items) item.Selected = true;
+          foreach (ListViewItem item in this.ListViewPackage.Items)
+            item.Selected = true;
         }
       }
       catch (Exception ex) {

@@ -1,4 +1,4 @@
-﻿#region License Information (GPL v3)
+#region License Information (GPL v3)
 
 /**
  * Copyright (C) 2017-2023 coreizer
@@ -19,15 +19,19 @@
 
 #endregion
 
+using System.Runtime.Versioning;
+
 namespace PackageStore {
   internal class Common {
+    [SupportedOSPlatform("windows6.1")]
     public static string SelectDirectoryPath(bool isForce = false) {
       if (!isForce && Directory.Exists(Properties.Settings.Default.SaveFolderPath))
         return Properties.Settings.Default.SaveFolderPath;
 
       try {
         using var FBD = new FolderBrowserDialog();
-        if (FBD.ShowDialog() != DialogResult.OK) return null;
+        if (FBD.ShowDialog() != DialogResult.OK)
+          return null;
         Properties.Settings.Default.SaveFolderPath = FBD.SelectedPath;
       }
       catch (Exception ex) {
@@ -37,8 +41,8 @@ namespace PackageStore {
           Caption = Environment.Name,
           Heading = "Error",
           Buttons = {
-                  TaskDialogButton.OK
-               }
+            TaskDialogButton.OK
+            }
         });
       }
       finally {

@@ -53,7 +53,7 @@ namespace PackageStore.Models {
         if (propertyName == "SP_SYS") {
           return this.PS3SystemVer != PackageStore.Environment.DefaultString ? this.PS3SystemVer : this.PSPSystemVer;
         }
-        return typeof(Package).GetProperty(propertyName).GetValue(this).ToString(); // NOTE: Because is 'ByteSizeLib ' cannot be cast, use ToString()
+        return typeof(Package).GetProperty(propertyName)?.GetValue(this)?.ToString(); // NOTE: Because is 'ByteSizeLib ' cannot be cast, use ToString()
       }
     }
   }

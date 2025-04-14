@@ -52,7 +52,7 @@
 ## 🌏 Stay In Touch
 
 - [Website (coreizer.dev)](https://www.coreizer.dev)
-- [Twitter](https://www.twitter.com/coreizer)
+- [X](https://www.x.com/coreizer)
 
 ## 👷 Author
 

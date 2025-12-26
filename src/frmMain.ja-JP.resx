@@ -118,8 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ExportToJsonStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="FilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="FilesToolStripMenuItem.Text" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>ヘルプ</value>
   </data>
   <data name="ExportToJsonStripMenuItem.Text" xml:space="preserve">
     <value>Json 出力</value>
@@ -129,12 +138,6 @@
   </data>
   <data name="SaveDirectoryToolStripMenuItem.Text" xml:space="preserve">
     <value>保存ディレクトリ</value>
-  </data>
-  <data name="FilesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
-  </data>
-  <data name="FilesToolStripMenuItem.Text" xml:space="preserve">
-    <value>ファイル</value>
   </data>
   <data name="ResetSuggestionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 22</value>
@@ -150,12 +153,6 @@
   </data>
   <data name="githubToolStripMenuItem.Text" xml:space="preserve">
     <value>GitHub</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>ヘルプ</value>
   </data>
   <data name="buttonSearch.Text" xml:space="preserve">
     <value>検索</value>
@@ -174,6 +171,9 @@
   </data>
   <data name="columnHeaderHash.Text" xml:space="preserve">
     <value>ハッシュ</value>
+  </data>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 164</value>
   </data>
   <data name="DownloadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>188, 22</value>
@@ -219,9 +219,6 @@
   </data>
   <data name="CopyToHashToolStripMenuItem.Text" xml:space="preserve">
     <value>ハッシュをコピー</value>
-  </data>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 164</value>
   </data>
   <data name="toolStripStatusLabelSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 17</value>

@@ -87,63 +87,63 @@ namespace PackageStore
       // 
       // menuStrip1
       // 
-      resources.ApplyResources(this.menuStrip1, "menuStrip1");
       this.menuStrip1.ImageScalingSize = new Size(24, 24);
       this.menuStrip1.Items.AddRange(new ToolStripItem[] { this.FilesToolStripMenuItem, this.helpToolStripMenuItem });
+      resources.ApplyResources(this.menuStrip1, "menuStrip1");
       this.menuStrip1.Name = "menuStrip1";
       // 
       // FilesToolStripMenuItem
       // 
-      resources.ApplyResources(this.FilesToolStripMenuItem, "FilesToolStripMenuItem");
       this.FilesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.ExportToJsonStripMenuItem, this.SaveDirectoryToolStripMenuItem });
       this.FilesToolStripMenuItem.Name = "FilesToolStripMenuItem";
+      resources.ApplyResources(this.FilesToolStripMenuItem, "FilesToolStripMenuItem");
       // 
       // ExportToJsonStripMenuItem
       // 
-      resources.ApplyResources(this.ExportToJsonStripMenuItem, "ExportToJsonStripMenuItem");
       this.ExportToJsonStripMenuItem.Name = "ExportToJsonStripMenuItem";
+      resources.ApplyResources(this.ExportToJsonStripMenuItem, "ExportToJsonStripMenuItem");
       this.ExportToJsonStripMenuItem.Click += this.ExportToJsonStripMenuItem_Click;
       // 
       // SaveDirectoryToolStripMenuItem
       // 
-      resources.ApplyResources(this.SaveDirectoryToolStripMenuItem, "SaveDirectoryToolStripMenuItem");
       this.SaveDirectoryToolStripMenuItem.Name = "SaveDirectoryToolStripMenuItem";
+      resources.ApplyResources(this.SaveDirectoryToolStripMenuItem, "SaveDirectoryToolStripMenuItem");
       this.SaveDirectoryToolStripMenuItem.Click += this.SaveDirectoryToolStripMenuItem_Click;
       // 
       // helpToolStripMenuItem
       // 
-      resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
       this.helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { this.ResetSuggestionToolStripMenuItem, this.aboutToolStripMenuItem, this.toolStripSeparator1, this.githubToolStripMenuItem });
       this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+      resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
       // 
       // ResetSuggestionToolStripMenuItem
       // 
-      resources.ApplyResources(this.ResetSuggestionToolStripMenuItem, "ResetSuggestionToolStripMenuItem");
       this.ResetSuggestionToolStripMenuItem.Name = "ResetSuggestionToolStripMenuItem";
+      resources.ApplyResources(this.ResetSuggestionToolStripMenuItem, "ResetSuggestionToolStripMenuItem");
       this.ResetSuggestionToolStripMenuItem.Click += this.ResetSuggestionToolStripMenuItem_Click;
       // 
       // aboutToolStripMenuItem
       // 
-      resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
       this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
       this.aboutToolStripMenuItem.Click += this.AboutToolStripMenuItem_Click;
       // 
       // toolStripSeparator1
       // 
-      resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
       this.toolStripSeparator1.Name = "toolStripSeparator1";
+      resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
       // 
       // githubToolStripMenuItem
       // 
-      resources.ApplyResources(this.githubToolStripMenuItem, "githubToolStripMenuItem");
       this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
+      resources.ApplyResources(this.githubToolStripMenuItem, "githubToolStripMenuItem");
       this.githubToolStripMenuItem.Click += this.GitHubToolStripMenuItem_Click;
       // 
       // textBoxPackageId
       // 
-      resources.ApplyResources(this.textBoxPackageId, "textBoxPackageId");
       this.textBoxPackageId.AutoCompleteMode = AutoCompleteMode.Suggest;
       this.textBoxPackageId.AutoCompleteSource = AutoCompleteSource.CustomSource;
+      resources.ApplyResources(this.textBoxPackageId, "textBoxPackageId");
       this.textBoxPackageId.Name = "textBoxPackageId";
       // 
       // buttonSearch
@@ -195,81 +195,81 @@ namespace PackageStore
       // 
       // contextMenuStrip1
       // 
-      resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
       this.contextMenuStrip1.ImageScalingSize = new Size(24, 24);
       this.contextMenuStrip1.Items.AddRange(new ToolStripItem[] { this.DownloadToolStripMenuItem, this.OpenXMLToolStripMenuItem, this.toolStripSeparator2, this.copyToURLToolStripMenuItem, this.CopyToSizeToolStripMenuItem, this.CopyToVersionToolStripMenuItem, this.CopyToSystemVersionToolStripMenuItem, this.CopyToHashToolStripMenuItem });
       this.contextMenuStrip1.Name = "contextMenuStrip1";
+      resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
       // 
       // DownloadToolStripMenuItem
       // 
-      resources.ApplyResources(this.DownloadToolStripMenuItem, "DownloadToolStripMenuItem");
       this.DownloadToolStripMenuItem.Name = "DownloadToolStripMenuItem";
+      resources.ApplyResources(this.DownloadToolStripMenuItem, "DownloadToolStripMenuItem");
       this.DownloadToolStripMenuItem.Click += this.DownloadToolStripMenuItem_Click;
       // 
       // OpenXMLToolStripMenuItem
       // 
-      resources.ApplyResources(this.OpenXMLToolStripMenuItem, "OpenXMLToolStripMenuItem");
       this.OpenXMLToolStripMenuItem.Name = "OpenXMLToolStripMenuItem";
+      resources.ApplyResources(this.OpenXMLToolStripMenuItem, "OpenXMLToolStripMenuItem");
       this.OpenXMLToolStripMenuItem.Click += this.OpenXMLToolStripMenuItem_Click;
       // 
       // toolStripSeparator2
       // 
-      resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
       this.toolStripSeparator2.Name = "toolStripSeparator2";
+      resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
       // 
       // copyToURLToolStripMenuItem
       // 
-      resources.ApplyResources(this.copyToURLToolStripMenuItem, "copyToURLToolStripMenuItem");
       this.copyToURLToolStripMenuItem.Name = "copyToURLToolStripMenuItem";
+      resources.ApplyResources(this.copyToURLToolStripMenuItem, "copyToURLToolStripMenuItem");
       this.copyToURLToolStripMenuItem.Tag = "Url";
       this.copyToURLToolStripMenuItem.Click += this.CopyToClipboardToolStripMenuItem_Click;
       // 
       // CopyToSizeToolStripMenuItem
       // 
-      resources.ApplyResources(this.CopyToSizeToolStripMenuItem, "CopyToSizeToolStripMenuItem");
       this.CopyToSizeToolStripMenuItem.Name = "CopyToSizeToolStripMenuItem";
+      resources.ApplyResources(this.CopyToSizeToolStripMenuItem, "CopyToSizeToolStripMenuItem");
       this.CopyToSizeToolStripMenuItem.Tag = "Size";
       this.CopyToSizeToolStripMenuItem.Click += this.CopyToClipboardToolStripMenuItem_Click;
       // 
       // CopyToVersionToolStripMenuItem
       // 
-      resources.ApplyResources(this.CopyToVersionToolStripMenuItem, "CopyToVersionToolStripMenuItem");
       this.CopyToVersionToolStripMenuItem.Name = "CopyToVersionToolStripMenuItem";
+      resources.ApplyResources(this.CopyToVersionToolStripMenuItem, "CopyToVersionToolStripMenuItem");
       this.CopyToVersionToolStripMenuItem.Tag = "Version";
       this.CopyToVersionToolStripMenuItem.Click += this.CopyToClipboardToolStripMenuItem_Click;
       // 
       // CopyToSystemVersionToolStripMenuItem
       // 
-      resources.ApplyResources(this.CopyToSystemVersionToolStripMenuItem, "CopyToSystemVersionToolStripMenuItem");
       this.CopyToSystemVersionToolStripMenuItem.Name = "CopyToSystemVersionToolStripMenuItem";
+      resources.ApplyResources(this.CopyToSystemVersionToolStripMenuItem, "CopyToSystemVersionToolStripMenuItem");
       this.CopyToSystemVersionToolStripMenuItem.Tag = "SP_SYS";
       this.CopyToSystemVersionToolStripMenuItem.Click += this.CopyToClipboardToolStripMenuItem_Click;
       // 
       // CopyToHashToolStripMenuItem
       // 
-      resources.ApplyResources(this.CopyToHashToolStripMenuItem, "CopyToHashToolStripMenuItem");
       this.CopyToHashToolStripMenuItem.Name = "CopyToHashToolStripMenuItem";
+      resources.ApplyResources(this.CopyToHashToolStripMenuItem, "CopyToHashToolStripMenuItem");
       this.CopyToHashToolStripMenuItem.Tag = "Hash";
       this.CopyToHashToolStripMenuItem.Click += this.CopyToClipboardToolStripMenuItem_Click;
       // 
       // statusStrip1
       // 
-      resources.ApplyResources(this.statusStrip1, "statusStrip1");
       this.statusStrip1.ImageScalingSize = new Size(24, 24);
       this.statusStrip1.Items.AddRange(new ToolStripItem[] { this.toolStripStatusLabelSelected, this.toolStripStatusLabelCopyright });
+      resources.ApplyResources(this.statusStrip1, "statusStrip1");
       this.statusStrip1.Name = "statusStrip1";
       this.statusStrip1.SizingGrip = false;
       // 
       // toolStripStatusLabelSelected
       // 
-      resources.ApplyResources(this.toolStripStatusLabelSelected, "toolStripStatusLabelSelected");
       this.toolStripStatusLabelSelected.ForeColor = Color.Black;
       this.toolStripStatusLabelSelected.Name = "toolStripStatusLabelSelected";
+      resources.ApplyResources(this.toolStripStatusLabelSelected, "toolStripStatusLabelSelected");
       // 
       // toolStripStatusLabelCopyright
       // 
-      resources.ApplyResources(this.toolStripStatusLabelCopyright, "toolStripStatusLabelCopyright");
       this.toolStripStatusLabelCopyright.Name = "toolStripStatusLabelCopyright";
+      resources.ApplyResources(this.toolStripStatusLabelCopyright, "toolStripStatusLabelCopyright");
       this.toolStripStatusLabelCopyright.Spring = true;
       // 
       // checkBoxRedump

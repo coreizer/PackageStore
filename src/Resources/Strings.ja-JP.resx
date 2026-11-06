@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuFile" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="MenuExportJson" xml:space="preserve">
+    <value>JSON 出力</value>
+  </data>
+  <data name="MenuSaveDirectory" xml:space="preserve">
+    <value>保存ディレクトリ</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="MenuResetSuggestion" xml:space="preserve">
+    <value>サジェストをリセット</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="MenuGithub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="PackageId" xml:space="preserve">
+    <value>パッケージ ID :</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="UseRedump" xml:space="preserve">
+    <value>Redump.orgのデータベースを使用する</value>
+  </data>
+  <data name="ColFileName" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="ColSize" xml:space="preserve">
+    <value>サイズ</value>
+  </data>
+  <data name="ColVersion" xml:space="preserve">
+    <value>バージョン</value>
+  </data>
+  <data name="ColSystem" xml:space="preserve">
+    <value>システム / サポートバージョン</value>
+  </data>
+  <data name="ColHash" xml:space="preserve">
+    <value>ハッシュ</value>
+  </data>
+  <data name="ColStatus" xml:space="preserve">
+    <value>ステータス</value>
+  </data>
+  <data name="ColPercent" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="ColEstimatedTime" xml:space="preserve">
+    <value>ダウンロード予測</value>
+  </data>
+  <data name="CtxDownload" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="CtxOpenXml" xml:space="preserve">
+    <value>ブラウザでXMLを開く</value>
+  </data>
+  <data name="CtxCopyUrl" xml:space="preserve">
+    <value>URLをコピー</value>
+  </data>
+  <data name="CtxCopySize" xml:space="preserve">
+    <value>サイズをコピー</value>
+  </data>
+  <data name="CtxCopyVersion" xml:space="preserve">
+    <value>バージョンをコピー</value>
+  </data>
+  <data name="CtxCopySystemVersion" xml:space="preserve">
+    <value>サポートバージョンをコピー</value>
+  </data>
+  <data name="CtxCopyHash" xml:space="preserve">
+    <value>ハッシュをコピー</value>
+  </data>
+  <data name="CtxOpenFile" xml:space="preserve">
+    <value>ファイルを開く</value>
+  </data>
+  <data name="CtxDownloadCancel" xml:space="preserve">
+    <value>ダウンロードをキャンセル</value>
+  </data>
+  <data name="SelectedItems" xml:space="preserve">
+    <value>選択されたファイル数 : {0}</value>
+  </data>
+  <data name="DownloadQueue" xml:space="preserve">
+    <value>ダウンロードキュー : {0}</value>
+  </data>
+  <data name="DownloaderTitle" xml:space="preserve">
+    <value>{0} - ダウンローダー</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>バージョン情報</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>バージョン: {0}</value>
+  </data>
+  <data name="NavMenu" xml:space="preserve">
+    <value>メニュー</value>
+  </data>
+  <data name="NavDownloads" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="NoDownloads" xml:space="preserve">
+    <value>ダウンロードはありません</value>
+  </data>
+  <data name="ClearFinished" xml:space="preserve">
+    <value>完了を消去</value>
+  </data>
+  <data name="SaveFolder" xml:space="preserve">
+    <value>保存先: {0}</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>未設定</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>ダウンロード中</value>
+  </data>
+  <data name="NavSettings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SaveFolderSection" xml:space="preserve">
+    <value>保存先フォルダー</value>
+  </data>
+  <data name="SaveFolderHint" xml:space="preserve">
+    <value>ダウンロードしたパッケージはこのフォルダーに保存されます。初期値はユーザーの「ダウンロード」フォルダーです。</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>参照...</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>フォルダーを開く</value>
+  </data>
+  <data name="SuggestionsSection" xml:space="preserve">
+    <value>検索履歴</value>
+  </data>
+  <data name="SuggestionsHint" xml:space="preserve">
+    <value>検索したパッケージ ID は検索ボックスでサジェストされます。</value>
+  </data>
+  <data name="SuggestionsCount" xml:space="preserve">
+    <value>{0} 件</value>
+  </data>
+  <data name="SettingsFileSection" xml:space="preserve">
+    <value>設定ファイル</value>
+  </data>
+  <data name="SettingsFileHint" xml:space="preserve">
+    <value>ユーザー設定はこのファイルに保存されます。</value>
+  </data>
+  <data name="ResetSettings" xml:space="preserve">
+    <value>設定を初期化</value>
+  </data>
+  <data name="ResetSettingsHint" xml:space="preserve">
+    <value>保存先フォルダーと検索履歴を含むすべての設定を初期値に戻します。</value>
+  </data>
+  <data name="ResetSettingsConfirm" xml:space="preserve">
+    <value>すべての設定を初期値に戻しますか？この操作は元に戻せません。</value>
+  </data>
+  <data name="ResetSettingsDone" xml:space="preserve">
+    <value>設定を初期化しました。</value>
+  </data>
+  <data name="OpenSettingsFile" xml:space="preserve">
+    <value>設定ファイルの場所を開く</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>初期化</value>
+  </data>
+</root>

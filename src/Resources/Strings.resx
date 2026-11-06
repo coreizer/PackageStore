@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MenuFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="MenuExportJson" xml:space="preserve">
+    <value>Export to Json</value>
+  </data>
+  <data name="MenuSaveDirectory" xml:space="preserve">
+    <value>Save Directory</value>
+  </data>
+  <data name="MenuHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MenuResetSuggestion" xml:space="preserve">
+    <value>Reset suggestion</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuGithub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
+  <data name="PackageId" xml:space="preserve">
+    <value>Package Id :</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="UseRedump" xml:space="preserve">
+    <value>Use a Redump.org database</value>
+  </data>
+  <data name="ColFileName" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="ColSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="ColVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ColSystem" xml:space="preserve">
+    <value>System / Support Version</value>
+  </data>
+  <data name="ColHash" xml:space="preserve">
+    <value>Hash</value>
+  </data>
+  <data name="ColStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ColPercent" xml:space="preserve">
+    <value>Percent</value>
+  </data>
+  <data name="ColEstimatedTime" xml:space="preserve">
+    <value>Estimated Time</value>
+  </data>
+  <data name="CtxDownload" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="CtxOpenXml" xml:space="preserve">
+    <value>Open XML from Web Browser</value>
+  </data>
+  <data name="CtxCopyUrl" xml:space="preserve">
+    <value>Copy to URL</value>
+  </data>
+  <data name="CtxCopySize" xml:space="preserve">
+    <value>Copy to Size</value>
+  </data>
+  <data name="CtxCopyVersion" xml:space="preserve">
+    <value>Copy to Version</value>
+  </data>
+  <data name="CtxCopySystemVersion" xml:space="preserve">
+    <value>Copy to System Version</value>
+  </data>
+  <data name="CtxCopyHash" xml:space="preserve">
+    <value>Copy to Hash</value>
+  </data>
+  <data name="CtxOpenFile" xml:space="preserve">
+    <value>Open File</value>
+  </data>
+  <data name="CtxDownloadCancel" xml:space="preserve">
+    <value>Download Cancel</value>
+  </data>
+  <data name="SelectedItems" xml:space="preserve">
+    <value>Selected item(s): {0}</value>
+  </data>
+  <data name="DownloadQueue" xml:space="preserve">
+    <value>Download Queue(s) : {0}</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>© Package Store 2017-2026</value>
+  </data>
+  <data name="DownloaderTitle" xml:space="preserve">
+    <value>{0} - Downloader</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MadeBy" xml:space="preserve">
+    <value>Made by coreizer</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>Version: {0}</value>
+  </data>
+  <data name="NavMenu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="NavDownloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="NoDownloads" xml:space="preserve">
+    <value>No downloads yet</value>
+  </data>
+  <data name="ClearFinished" xml:space="preserve">
+    <value>Clear finished</value>
+  </data>
+  <data name="SaveFolder" xml:space="preserve">
+    <value>Save folder: {0}</value>
+  </data>
+  <data name="NotSet" xml:space="preserve">
+    <value>not set</value>
+  </data>
+  <data name="Downloading" xml:space="preserve">
+    <value>downloading</value>
+  </data>
+  <data name="NavSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SaveFolderSection" xml:space="preserve">
+    <value>Save folder</value>
+  </data>
+  <data name="SaveFolderHint" xml:space="preserve">
+    <value>Downloaded packages are saved to this folder. By default this is your Downloads folder.</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="OpenFolder" xml:space="preserve">
+    <value>Open folder</value>
+  </data>
+  <data name="SuggestionsSection" xml:space="preserve">
+    <value>Search history</value>
+  </data>
+  <data name="SuggestionsHint" xml:space="preserve">
+    <value>Package IDs you have searched are suggested in the search box.</value>
+  </data>
+  <data name="SuggestionsCount" xml:space="preserve">
+    <value>{0} item(s)</value>
+  </data>
+  <data name="SettingsFileSection" xml:space="preserve">
+    <value>Settings file</value>
+  </data>
+  <data name="SettingsFileHint" xml:space="preserve">
+    <value>User settings are stored in this file.</value>
+  </data>
+  <data name="ResetSettings" xml:space="preserve">
+    <value>Reset settings</value>
+  </data>
+  <data name="ResetSettingsHint" xml:space="preserve">
+    <value>Restores all settings (save folder and search history) to their defaults.</value>
+  </data>
+  <data name="ResetSettingsConfirm" xml:space="preserve">
+    <value>Reset all settings to their defaults? This cannot be undone.</value>
+  </data>
+  <data name="ResetSettingsDone" xml:space="preserve">
+    <value>Settings have been reset to their defaults.</value>
+  </data>
+  <data name="OpenSettingsFile" xml:space="preserve">
+    <value>Open settings file location</value>
+  </data>
+  <data name="ResetSection" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+</root>

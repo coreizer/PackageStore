@@ -1,0 +1,86 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PackageStore.ViewModels"
+             xmlns:m="using:PackageStore.Models"
+             xmlns:loc="using:PackageStore.Localization"
+             x:Class="PackageStore.Views.SearchPage"
+             x:DataType="vm:SearchViewModel">
+  <DockPanel>
+    <!-- ステータスバー -->
+    <Border DockPanel.Dock="Bottom" Classes="statusbar">
+      <Grid ColumnDefinitions="Auto,*">
+        <TextBlock Text="{Binding SelectedText}" />
+        <TextBlock Grid.Column="1" Text="{Binding CopyrightText}" HorizontalAlignment="Right" />
+      </Grid>
+    </Border>
+
+    <!-- 検索バー -->
+    <Border DockPanel.Dock="Top" Classes="toolbar">
+      <StackPanel Spacing="8">
+        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+          <TextBlock Text="{loc:Loc PackageId}" VerticalAlignment="Center" Margin="0,0,10,0" />
+          <AutoCompleteBox x:Name="PackageIdBox"
+                           Grid.Column="1"
+                           Text="{Binding PackageId, Mode=TwoWay}"
+                           ItemsSource="{Binding Suggestions}"
+                           FilterMode="StartsWith"
+                           MinimumPrefixLength="1"
+                           PlaceholderText="e.g. BLUS30443"
+                           IsEnabled="{Binding !IsBusy}"
+                           KeyDown="OnPackageIdKeyDown" />
+          <Button Grid.Column="2"
+                  Content="{loc:Loc Search}"
+                  Command="{Binding SearchCommand}"
+                  Classes="accent"
+                  MinWidth="100"
+                  Margin="10,0,0,0" />
+          <Button Grid.Column="3"
+                  Command="{Binding ExportToJsonCommand}"
+                  ToolTip.Tip="{loc:Loc MenuExportJson}"
+                  Margin="8,0,0,0"
+                  VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+              <PathIcon Data="{StaticResource IconExport}" Width="14" Height="14" />
+              <TextBlock Text="{loc:Loc MenuExportJson}" />
+            </StackPanel>
+          </Button>
+        </Grid>
+        <CheckBox Content="{loc:Loc UseRedump}" IsChecked="{Binding UseRedump}" IsEnabled="{Binding !IsBusy}" />
+      </StackPanel>
+    </Border>
+
+    <!-- パッケージ一覧 -->
+    <DataGrid x:Name="PackageGrid"
+              Margin="12"
+              ItemsSource="{Binding Packages}"
+              SelectionMode="Extended"
+              IsReadOnly="True"
+              CanUserReorderColumns="True"
+              CanUserResizeColumns="True"
+              CanUserSortColumns="True"
+              GridLinesVisibility="Horizontal"
+              IsEnabled="{Binding !IsBusy}"
+              SelectionChanged="OnSelectionChanged"
+              DoubleTapped="OnDoubleTapped">
+      <DataGrid.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="{loc:Loc CtxDownload}" Command="{Binding DownloadCommand}" />
+          <MenuItem Header="{loc:Loc CtxOpenXml}" Command="{Binding OpenXmlCommand}" />
+          <Separator />
+          <MenuItem Header="{loc:Loc CtxCopyUrl}" Command="{Binding CopyCommand}" CommandParameter="Url" />
+          <MenuItem Header="{loc:Loc CtxCopySize}" Command="{Binding CopyCommand}" CommandParameter="Size" />
+          <MenuItem Header="{loc:Loc CtxCopyVersion}" Command="{Binding CopyCommand}" CommandParameter="Version" />
+          <MenuItem Header="{loc:Loc CtxCopySystemVersion}" Command="{Binding CopyCommand}" CommandParameter="SystemVersion" />
+          <MenuItem Header="{loc:Loc CtxCopyHash}" Command="{Binding CopyCommand}" CommandParameter="Hash" />
+        </ContextMenu>
+      </DataGrid.ContextMenu>
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="{loc:Loc ColFileName}" Binding="{Binding Name}" x:DataType="m:PackageModel" Width="2*" />
+        <DataGridTextColumn Header="{loc:Loc ColSize}" Binding="{Binding SizeText}" x:DataType="m:PackageModel" Width="110" />
+        <DataGridTextColumn Header="{loc:Loc ColVersion}" Binding="{Binding Version}" x:DataType="m:PackageModel" Width="90" />
+        <DataGridTextColumn Header="{loc:Loc ColSystem}" Binding="{Binding SystemVersion}" x:DataType="m:PackageModel" Width="180" />
+        <DataGridTextColumn Header="{loc:Loc ColHash}" Binding="{Binding Hash}" x:DataType="m:PackageModel" Width="3*" FontFamily="Cascadia Mono, Consolas, Menlo, monospace" />
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

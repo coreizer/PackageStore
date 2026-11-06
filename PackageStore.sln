@@ -1,14 +1,14 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+# Visual Studio Version 18
+VisualStudioVersion = 18.11.12328.437 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackageStore", "src\PackageStore.csproj", "{18FD5873-C197-47E9-A5C0-2CD80056FAF6}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{305AF322-4598-4588-B669-573E363A8329}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageStore.Avalonia", "src\PackageStore.Avalonia.csproj", "{3CBB580F-183C-E92C-1106-159607B6DDF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,10 +16,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{18FD5873-C197-47E9-A5C0-2CD80056FAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18FD5873-C197-47E9-A5C0-2CD80056FAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18FD5873-C197-47E9-A5C0-2CD80056FAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18FD5873-C197-47E9-A5C0-2CD80056FAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CBB580F-183C-E92C-1106-159607B6DDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CBB580F-183C-E92C-1106-159607B6DDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CBB580F-183C-E92C-1106-159607B6DDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CBB580F-183C-E92C-1106-159607B6DDF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,102 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PackageStore.ViewModels"
+        xmlns:v="using:PackageStore.Views"
+        xmlns:loc="using:PackageStore.Localization"
+        x:Class="PackageStore.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="{Binding Search.Title}"
+        Icon="/Assets/app.png"
+        Width="1180" Height="640"
+        MinWidth="900" MinHeight="480"
+        WindowStartupLocation="CenterScreen">
+  <Grid RowDefinitions="Auto,*">
+
+    <!-- ===== アプリ全体の進捗バー (ウィンドウ上端、常に 3px を確保してレイアウトを揺らさない) ===== -->
+    <Panel Grid.Row="0" Height="3">
+      <ProgressBar Classes="global"
+                   IsVisible="{Binding IsProgressVisible}"
+                   IsIndeterminate="{Binding IsProgressIndeterminate}"
+                   Value="{Binding ProgressValue}" />
+    </Panel>
+
+    <Grid Grid.Row="1" ColumnDefinitions="240,*">
+
+      <!-- ===== 左サイドバー: ナビゲーション ===== -->
+      <Border Grid.Column="0" Classes="sidebar">
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+          <!-- ブランド -->
+          <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10" Margin="16,16,16,18">
+            <Image Source="/Assets/app.png" Width="28" Height="28" />
+            <TextBlock Text="Package Store" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
+          </StackPanel>
+
+          <!-- ページ -->
+          <StackPanel Grid.Row="1">
+            <Button Classes="nav" Classes.selected="{Binding IsSearchPage}"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static vm:AppPage.Search}"
+                    HorizontalContentAlignment="Stretch">
+              <Grid ColumnDefinitions="Auto,*">
+                <PathIcon Data="{StaticResource IconSearch}" />
+                <TextBlock Grid.Column="1" Text="{loc:Loc Search}" VerticalAlignment="Center" />
+              </Grid>
+            </Button>
+            <Button Classes="nav" Classes.selected="{Binding IsDownloadsPage}"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static vm:AppPage.Downloads}"
+                    HorizontalContentAlignment="Stretch">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <PathIcon Data="{StaticResource IconDownload}" />
+                <TextBlock Grid.Column="1" Text="{loc:Loc NavDownloads}" VerticalAlignment="Center" />
+                <Border Grid.Column="2" Classes="badge" IsVisible="{Binding Downloads.ActiveCount}">
+                  <TextBlock Text="{Binding Downloads.ActiveCount}" />
+                </Border>
+              </Grid>
+            </Button>
+          </StackPanel>
+
+          <!-- 下部: 設定 + リンク -->
+          <StackPanel Grid.Row="3" Margin="0,0,0,10">
+            <Button Classes="nav" Classes.selected="{Binding IsSettingsPage}"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="{x:Static vm:AppPage.Settings}"
+                    HorizontalContentAlignment="Stretch">
+              <Grid ColumnDefinitions="Auto,*">
+                <PathIcon Data="{StaticResource IconSettings}" />
+                <TextBlock Grid.Column="1" Text="{loc:Loc NavSettings}" VerticalAlignment="Center" />
+              </Grid>
+            </Button>
+            <Separator Margin="16,8,16,8" Background="{StaticResource AppBorderBrush}" />
+            <Button Classes="nav small" Command="{Binding ShowAboutCommand}">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon Data="{StaticResource IconInfo}" />
+                <TextBlock Text="{loc:Loc MenuAbout}" />
+              </StackPanel>
+            </Button>
+            <Button Classes="nav small" Command="{Binding OpenGitHubCommand}">
+              <StackPanel Orientation="Horizontal">
+                <PathIcon Data="{StaticResource IconGitHub}" />
+                <TextBlock Text="{loc:Loc MenuGithub}" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- ===== 右: ページ ===== -->
+      <Panel Grid.Column="1">
+        <Panel IsVisible="{Binding IsSearchPage}">
+          <v:SearchPage DataContext="{Binding Search}" />
+        </Panel>
+        <Panel IsVisible="{Binding IsDownloadsPage}">
+          <v:DownloadsPage DataContext="{Binding Downloads}" />
+        </Panel>
+        <Panel IsVisible="{Binding IsSettingsPage}">
+          <v:SettingsPage DataContext="{Binding Settings}" />
+        </Panel>
+      </Panel>
+    </Grid>
+  </Grid>
+</Window>

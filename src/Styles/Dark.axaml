@@ -1,0 +1,323 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!--
+    Package Store 固定ダークテーマ。
+    FluentTheme (Dark) をベースにアクセントカラーと各コントロールの見た目を調整します。
+  -->
+  <Styles.Resources>
+    <ResourceDictionary>
+      <!-- アクセントカラー -->
+      <Color x:Key="SystemAccentColor">#FF3B82F6</Color>
+      <Color x:Key="SystemAccentColorDark1">#FF2F6FDB</Color>
+      <Color x:Key="SystemAccentColorDark2">#FF255CBF</Color>
+      <Color x:Key="SystemAccentColorDark3">#FF1C49A3</Color>
+      <Color x:Key="SystemAccentColorLight1">#FF5B96F8</Color>
+      <Color x:Key="SystemAccentColorLight2">#FF7CAAFA</Color>
+      <Color x:Key="SystemAccentColorLight3">#FF9DBFFC</Color>
+
+      <!-- アプリ固有パレット -->
+      <Color x:Key="AppBackgroundColor">#FF17181C</Color>
+      <Color x:Key="AppSurfaceColor">#FF1F2026</Color>
+      <Color x:Key="AppSurfaceAltColor">#FF262830</Color>
+      <Color x:Key="AppBorderColor">#FF34363F</Color>
+      <Color x:Key="AppTextColor">#FFE5E7EB</Color>
+      <Color x:Key="AppTextMutedColor">#FF9CA3AF</Color>
+
+      <SolidColorBrush x:Key="AppBackgroundBrush" Color="{StaticResource AppBackgroundColor}" />
+      <SolidColorBrush x:Key="AppSurfaceBrush" Color="{StaticResource AppSurfaceColor}" />
+      <SolidColorBrush x:Key="AppSurfaceAltBrush" Color="{StaticResource AppSurfaceAltColor}" />
+      <SolidColorBrush x:Key="AppBorderBrush" Color="{StaticResource AppBorderColor}" />
+      <SolidColorBrush x:Key="AppTextBrush" Color="{StaticResource AppTextColor}" />
+      <SolidColorBrush x:Key="AppTextMutedBrush" Color="{StaticResource AppTextMutedColor}" />
+
+      <FontFamily x:Key="AppFontFamily">fonts:Inter#Inter, $Default</FontFamily>
+
+      <!-- アイコン (Material Design Icons, Apache 2.0) -->
+      <StreamGeometry x:Key="IconSearch">M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z</StreamGeometry>
+      <StreamGeometry x:Key="IconExport">M6,2C4.89,2 4,2.9 4,4V20C4,21.11 4.89,22 6,22H18C19.11,22 20,21.11 20,20V8L14,2H6M13,3.5L18.5,9H13V3.5M8.93,12.22H16V19.29L13.88,17.17L11.05,20L8.22,17.17L11.05,14.35</StreamGeometry>
+      <StreamGeometry x:Key="IconFolder">M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z</StreamGeometry>
+      <StreamGeometry x:Key="IconHistory">M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3</StreamGeometry>
+      <StreamGeometry x:Key="IconInfo">M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z</StreamGeometry>
+      <StreamGeometry x:Key="IconGitHub">M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z</StreamGeometry>
+      <StreamGeometry x:Key="IconDownload">M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z</StreamGeometry>
+      <StreamGeometry x:Key="IconSettings">M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z</StreamGeometry>
+      <StreamGeometry x:Key="IconFolderOpen">M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z</StreamGeometry>
+      <StreamGeometry x:Key="IconRestore">M13,3A9,9 0 0,0 4,12H1L4.89,15.89L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3Z</StreamGeometry>
+      <StreamGeometry x:Key="IconBroom">M19.36,2.72L20.78,4.14L15.06,9.85C16.13,11.39 16.28,13.24 15.38,14.44L9.06,8.12C10.26,7.22 12.11,7.37 13.65,8.44L19.36,2.72M5.93,17.57C3.92,15.56 2.69,13.16 2.35,10.92L7.23,8.83L14.67,16.27L12.58,21.15C10.34,20.81 7.94,19.58 5.93,17.57Z</StreamGeometry>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{StaticResource AppBackgroundBrush}" />
+    <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
+    <Setter Property="FontSize" Value="13" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextBrush}" />
+  </Style>
+
+  <!-- メニューバー -->
+  <Style Selector="Menu">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="Padding" Value="4,2" />
+  </Style>
+
+  <!-- ステータスバー -->
+  <Style Selector="Border.statusbar">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,1,0,0" />
+    <Setter Property="Padding" Value="12,5" />
+  </Style>
+  <Style Selector="Border.statusbar TextBlock">
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- 検索バー -->
+  <Style Selector="Border.toolbar">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,0,1" />
+    <Setter Property="Padding" Value="12,10" />
+  </Style>
+
+  <!-- データグリッド -->
+  <Style Selector="DataGrid">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="VerticalGridLinesBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="RowBackground" Value="Transparent" />
+  </Style>
+  <Style Selector="DataGridColumnHeader">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="MinHeight" Value="32" />
+    <Setter Property="Padding" Value="10,0" />
+  </Style>
+  <Style Selector="DataGridRow">
+    <Setter Property="MinHeight" Value="30" />
+  </Style>
+  <Style Selector="DataGridCell">
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="FontSize" Value="13" />
+  </Style>
+  <Style Selector="DataGridCell TextBlock">
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- 等幅表示（ハッシュなど） -->
+  <Style Selector="TextBlock.mono">
+    <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Menlo, monospace" />
+  </Style>
+
+  <!-- 進捗バー -->
+  <Style Selector="ProgressBar.inline">
+    <Setter Property="MinHeight" Value="6" />
+    <Setter Property="Height" Value="6" />
+    <Setter Property="CornerRadius" Value="3" />
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+
+  <!-- アプリ全体の進捗バー（ウィンドウ上端） -->
+  <Style Selector="ProgressBar.global">
+    <Setter Property="MinHeight" Value="3" />
+    <Setter Property="Height" Value="3" />
+    <Setter Property="CornerRadius" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Minimum" Value="0" />
+    <Setter Property="Maximum" Value="100" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+  </Style>
+
+  <Style Selector="TextBlock.muted">
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+  </Style>
+
+  <!-- サイドバー -->
+  <Style Selector="Border.sidebar">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="BorderThickness" Value="0,0,1,0" />
+  </Style>
+  <Style Selector="TextBlock.section">
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="Margin" Value="12,0,12,6" />
+  </Style>
+
+  <!-- サイドバーのナビゲーションボタン -->
+  <Style Selector="Button.nav">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="Padding" Value="12,8" />
+    <Setter Property="Margin" Value="8,1" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextBrush}" />
+  </Style>
+  <Style Selector="Button.nav:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+  <Style Selector="Button.nav:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppBorderBrush}" />
+  </Style>
+  <Style Selector="Button.nav PathIcon">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+    <Setter Property="Margin" Value="0,0,10,0" />
+  </Style>
+  <Style Selector="Button.nav:pointerover PathIcon">
+    <Setter Property="Foreground" Value="{DynamicResource SystemAccentColorLight2}" />
+  </Style>
+  <Style Selector="Button.nav.selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+  <Style Selector="Button.nav.selected PathIcon">
+    <Setter Property="Foreground" Value="{DynamicResource SystemAccentColorLight2}" />
+  </Style>
+  <Style Selector="Button.nav.selected TextBlock">
+    <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+  <Style Selector="Button.nav.small">
+    <Setter Property="Padding" Value="12,6" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+  </Style>
+  <Style Selector="Button.nav.small PathIcon">
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
+  </Style>
+
+  <!-- ページ共通 -->
+  <Style Selector="TextBlock.pageTitle">
+    <Setter Property="FontSize" Value="20" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceBrush}" />
+    <Setter Property="BorderBrush" Value="{StaticResource AppBorderBrush}" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Padding" Value="18,16" />
+  </Style>
+  <Style Selector="TextBlock.cardTitle">
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+  </Style>
+  <Style Selector="TextBlock.hint">
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="TextWrapping" Value="Wrap" />
+  </Style>
+  <Style Selector="TextBox.readonly">
+    <Setter Property="IsReadOnly" Value="True" />
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+
+  <!-- サイドバーのダウンロードリスト -->
+  <Style Selector="ListBox.downloads">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="8,0" />
+  </Style>
+  <Style Selector="ListBox.downloads ListBoxItem">
+    <Setter Property="Padding" Value="10,8" />
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="CornerRadius" Value="6" />
+  </Style>
+  <Style Selector="ListBox.downloads ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+  <Style Selector="ListBox.downloads ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+
+  <!-- 小さなバッジ（件数表示） -->
+  <Style Selector="Border.badge">
+    <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+    <Setter Property="CornerRadius" Value="9" />
+    <Setter Property="MinWidth" Value="18" />
+    <Setter Property="Height" Value="18" />
+    <Setter Property="Padding" Value="6,0" />
+  </Style>
+  <Style Selector="Border.badge TextBlock">
+    <Setter Property="Foreground" Value="White" />
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="FontWeight" Value="SemiBold" />
+    <Setter Property="HorizontalAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+
+  <!-- 危険操作（設定の初期化）カード: 赤文字 -->
+  <Style Selector="Border.card.danger">
+    <Setter Property="BorderBrush" Value="#FF7F1D1D" />
+  </Style>
+  <Style Selector="Border.card.danger TextBlock.cardTitle">
+    <Setter Property="Foreground" Value="#FFF87171" />
+  </Style>
+  <Style Selector="Border.card.danger TextBlock.hint">
+    <Setter Property="Foreground" Value="#FFFCA5A5" />
+    <Setter Property="Opacity" Value="0.85" />
+  </Style>
+  <Style Selector="Button.danger">
+    <Setter Property="Foreground" Value="#FFF87171" />
+    <Setter Property="BorderBrush" Value="#FF7F1D1D" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="Background" Value="Transparent" />
+  </Style>
+  <Style Selector="Button.danger PathIcon">
+    <Setter Property="Foreground" Value="#FFF87171" />
+  </Style>
+  <Style Selector="Button.danger:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#FF3F1515" />
+    <Setter Property="BorderBrush" Value="#FFB91C1C" />
+    <Setter Property="Foreground" Value="#FFFCA5A5" />
+  </Style>
+  <Style Selector="Button.danger:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="#FF7F1D1D" />
+    <Setter Property="Foreground" Value="White" />
+  </Style>
+
+  <!-- アイコンのみの小ボタン -->
+  <Style Selector="Button.icon">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="4" />
+    <Setter Property="CornerRadius" Value="4" />
+  </Style>
+  <Style Selector="Button.icon PathIcon">
+    <Setter Property="Width" Value="14" />
+    <Setter Property="Height" Value="14" />
+    <Setter Property="Foreground" Value="{StaticResource AppTextMutedBrush}" />
+  </Style>
+  <Style Selector="Button.icon:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{StaticResource AppSurfaceAltBrush}" />
+  </Style>
+  <Style Selector="Button.icon:pointerover PathIcon">
+    <Setter Property="Foreground" Value="{StaticResource AppTextBrush}" />
+  </Style>
+  <Style Selector="Button.icon:disabled PathIcon">
+    <Setter Property="Opacity" Value="0.4" />
+  </Style>
+
+  <!-- カードのタイトル行 右上に並べるアイコンボタン -->
+  <Style Selector="StackPanel.cardActions">
+    <Setter Property="Orientation" Value="Horizontal" />
+    <Setter Property="Spacing" Value="2" />
+    <Setter Property="VerticalAlignment" Value="Center" />
+  </Style>
+  <Style Selector="StackPanel.cardActions Button.icon">
+    <Setter Property="Padding" Value="6" />
+  </Style>
+  <Style Selector="StackPanel.cardActions Button.icon PathIcon">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+  </Style>
+</Styles>

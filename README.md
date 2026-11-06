@@ -28,6 +28,17 @@
   </ol>
 </details>
 
+## 🖥️ Projects
+
+| Project | UI | Notes |
+| --- | --- | --- |
+| `src/PackageStore.csproj` | Windows Forms | Original Windows-only app |
+| `PackageStore.Avalonia/PackageStore.Avalonia.csproj` | [Avalonia UI](https://avaloniaui.net/) 12 | Cross-platform port, fixed dark theme |
+
+```sh
+dotnet run --project PackageStore.Avalonia
+```
+
 ## 👀 Featured
 
 - Package Search

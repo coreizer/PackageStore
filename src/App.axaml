@@ -1,0 +1,12 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PackageStore.App"
+             Name="Package Store"
+             RequestedThemeVariant="Dark">
+  <!-- ダークテーマ固定（切り替え機能なし） -->
+  <Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+    <StyleInclude Source="avares://PackageStore.Avalonia/Styles/Dark.axaml" />
+  </Application.Styles>
+</Application>

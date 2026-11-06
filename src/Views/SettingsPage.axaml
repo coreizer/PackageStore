@@ -1,0 +1,98 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PackageStore.ViewModels"
+             xmlns:loc="using:PackageStore.Localization"
+             x:Class="PackageStore.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel">
+  <DockPanel>
+    <!-- ヘッダー -->
+    <Border DockPanel.Dock="Top" Classes="toolbar">
+      <TextBlock Classes="pageTitle" Text="{loc:Loc NavSettings}" />
+    </Border>
+
+    <ScrollViewer>
+      <StackPanel Margin="16" Spacing="12" MaxWidth="760" HorizontalAlignment="Left">
+
+        <!-- 保存先フォルダー -->
+        <Border Classes="card">
+          <StackPanel Spacing="10">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <PathIcon Data="{StaticResource IconFolder}" Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource SystemAccentColorLight2}" />
+              <TextBlock Grid.Column="1" Classes="cardTitle" Text="{loc:Loc SaveFolderSection}" VerticalAlignment="Center" />
+              <StackPanel Grid.Column="2" Classes="cardActions">
+                <Button Classes="icon" Command="{Binding OpenSaveFolderCommand}" ToolTip.Tip="{loc:Loc OpenFolder}">
+                  <PathIcon Data="{StaticResource IconFolderOpen}" />
+                </Button>
+              </StackPanel>
+            </Grid>
+            <TextBlock Classes="hint" Text="{loc:Loc SaveFolderHint}" />
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+              <TextBox Classes="readonly"
+                       Text="{Binding SaveFolderPath}"
+                       PlaceholderText="{loc:Loc NotSet}"
+                       VerticalAlignment="Center" />
+              <Button Grid.Column="1" Command="{Binding BrowseSaveFolderCommand}" Classes="accent" MinWidth="96">
+                <TextBlock Text="{loc:Loc Browse}" />
+              </Button>
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <!-- 検索履歴 -->
+        <Border Classes="card">
+          <StackPanel Spacing="10">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <PathIcon Data="{StaticResource IconHistory}" Width="16" Height="16" Foreground="{DynamicResource SystemAccentColorLight2}" />
+              <TextBlock Classes="cardTitle" Text="{loc:Loc SuggestionsSection}" />
+            </StackPanel>
+            <TextBlock Classes="hint" Text="{loc:Loc SuggestionsHint}" />
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding SuggestionCountText}" VerticalAlignment="Center" />
+              <Button Grid.Column="1" Command="{Binding ResetSuggestionsCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <PathIcon Data="{StaticResource IconBroom}" Width="14" Height="14" />
+                  <TextBlock Text="{loc:Loc MenuResetSuggestion}" />
+                </StackPanel>
+              </Button>
+            </Grid>
+          </StackPanel>
+        </Border>
+
+        <!-- 設定ファイル -->
+        <Border Classes="card">
+          <StackPanel Spacing="10">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+              <PathIcon Data="{StaticResource IconSettings}" Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource SystemAccentColorLight2}" />
+              <TextBlock Grid.Column="1" Classes="cardTitle" Text="{loc:Loc SettingsFileSection}" VerticalAlignment="Center" />
+              <StackPanel Grid.Column="2" Classes="cardActions">
+                <Button Classes="icon" Command="{Binding OpenSettingsFileCommand}" ToolTip.Tip="{loc:Loc OpenSettingsFile}">
+                  <PathIcon Data="{StaticResource IconFolderOpen}" />
+                </Button>
+              </StackPanel>
+            </Grid>
+            <TextBlock Classes="hint" Text="{loc:Loc SettingsFileHint}" />
+            <SelectableTextBlock Text="{Binding SettingsFilePath}" FontSize="12" Classes="muted" TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+
+        <!-- 初期化（赤文字カード） -->
+        <Border Classes="card danger">
+          <StackPanel Spacing="10">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <PathIcon Data="{StaticResource IconRestore}" Width="16" Height="16" Foreground="#FFF87171" />
+              <TextBlock Classes="cardTitle" Text="{loc:Loc ResetSection}" />
+            </StackPanel>
+            <TextBlock Classes="hint" Text="{loc:Loc ResetSettingsHint}" />
+            <Button Classes="danger" Command="{Binding ResetSettingsCommand}" HorizontalAlignment="Left">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <PathIcon Data="{StaticResource IconRestore}" Width="14" Height="14" />
+                <TextBlock Text="{loc:Loc ResetSettings}" />
+              </StackPanel>
+            </Button>
+          </StackPanel>
+        </Border>
+
+      </StackPanel>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

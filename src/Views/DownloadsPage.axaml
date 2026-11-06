@@ -1,0 +1,81 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PackageStore.ViewModels"
+             xmlns:m="using:PackageStore.Models"
+             xmlns:c="using:PackageStore.Converters"
+             xmlns:loc="using:PackageStore.Localization"
+             x:Class="PackageStore.Views.DownloadsPage"
+             x:DataType="vm:DownloadViewModel">
+  <DockPanel>
+    <!-- ヘッダー -->
+    <Border DockPanel.Dock="Top" Classes="toolbar">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <StackPanel Spacing="2">
+          <TextBlock Classes="pageTitle" Text="{loc:Loc NavDownloads}" />
+          <TextBlock Classes="hint" Text="{Binding QueueText}" />
+        </StackPanel>
+        <Button Grid.Column="2"
+                Command="{Binding ClearFinishedCommand}"
+                VerticalAlignment="Center">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon Data="{StaticResource IconBroom}" Width="14" Height="14" />
+            <TextBlock Text="{loc:Loc ClearFinished}" />
+          </StackPanel>
+        </Button>
+      </Grid>
+    </Border>
+
+    <Panel>
+      <DataGrid x:Name="FileGrid"
+                Margin="12"
+                ItemsSource="{Binding Files}"
+                SelectedItem="{Binding SelectedItem}"
+                SelectionMode="Single"
+                IsReadOnly="True"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="True"
+                CanUserSortColumns="False"
+                GridLinesVisibility="Horizontal"
+                IsVisible="{Binding !!Files.Count}">
+        <DataGrid.ContextMenu>
+          <ContextMenu>
+            <MenuItem Header="{loc:Loc CtxOpenFile}" Command="{Binding OpenFileCommand}" />
+            <Separator />
+            <MenuItem Header="{loc:Loc CtxDownloadCancel}" Command="{Binding CancelDownloadCommand}" />
+          </ContextMenu>
+        </DataGrid.ContextMenu>
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="{loc:Loc ColFileName}" Binding="{Binding FileName}" x:DataType="m:DownloadItem" Width="2*" />
+          <DataGridTemplateColumn Header="{loc:Loc ColStatus}" Width="130">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate x:DataType="m:DownloadItem">
+                <TextBlock Text="{Binding Status}"
+                           Foreground="{Binding Status, Converter={x:Static c:StatusToBrushConverter.Instance}}"
+                           FontWeight="SemiBold" />
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn Header="{loc:Loc ColSize}" Binding="{Binding SizeText}" x:DataType="m:DownloadItem" Width="110" />
+          <DataGridTemplateColumn Header="{loc:Loc ColPercent}" Width="200">
+            <DataGridTemplateColumn.CellTemplate>
+              <DataTemplate x:DataType="m:DownloadItem">
+                <Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+                  <ProgressBar Classes="inline" Minimum="0" Maximum="100" Value="{Binding Percent}" VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="1" Text="{Binding PercentText}" Margin="8,0,0,0" MinWidth="36" TextAlignment="Right" Classes="muted" />
+                </Grid>
+              </DataTemplate>
+            </DataGridTemplateColumn.CellTemplate>
+          </DataGridTemplateColumn>
+          <DataGridTextColumn Header="{loc:Loc ColEstimatedTime}" Binding="{Binding EstimatedTimeText}" x:DataType="m:DownloadItem" Width="140" />
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <!-- 空のときの表示 -->
+      <StackPanel IsVisible="{Binding !Files.Count}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Opacity="0.6">
+        <PathIcon Data="{StaticResource IconDownload}" Width="40" Height="40" Foreground="{StaticResource AppTextMutedBrush}" />
+        <TextBlock Text="{loc:Loc NoDownloads}" Classes="muted" HorizontalAlignment="Center" />
+      </StackPanel>
+    </Panel>
+  </DockPanel>
+</UserControl>

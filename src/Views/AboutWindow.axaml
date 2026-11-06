@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:loc="using:PackageStore.Localization"
+        x:Class="PackageStore.Views.AboutWindow"
+        Title="{loc:Loc AboutTitle}"
+        Icon="/Assets/app.png"
+        Width="380"
+        SizeToContent="Height"
+        CanResize="False"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner">
+  <StackPanel Margin="20,18,20,14" Spacing="10">
+    <Grid ColumnDefinitions="Auto,*">
+      <Image Source="/Assets/app.png" Width="64" Height="64" VerticalAlignment="Top" Margin="0,0,16,0" />
+      <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+        <TextBlock Text="Package Store" FontSize="18" FontWeight="SemiBold" />
+        <TextBlock x:Name="VersionText" Classes="muted" />
+        <TextBlock Text="PS Store (CD only) package search tools" Classes="muted" FontSize="12" />
+      </StackPanel>
+    </Grid>
+    <TextBlock Text="{loc:Loc MadeBy}" FontSize="11" Classes="muted" HorizontalAlignment="Right" />
+  </StackPanel>
+</Window>

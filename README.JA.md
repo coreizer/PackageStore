@@ -28,6 +28,17 @@
   </ol>
 </details>
 
+## 🖥️ プロジェクト
+
+| プロジェクト | UI | 備考 |
+| --- | --- | --- |
+| `src/PackageStore.csproj` | Windows Forms | 従来の Windows 専用アプリ |
+| `PackageStore.Avalonia/PackageStore.Avalonia.csproj` | [Avalonia UI](https://avaloniaui.net/) 12 | クロスプラットフォーム移植版（ダークテーマ固定） |
+
+```sh
+dotnet run --project PackageStore.Avalonia
+```
+
 ## 👀 機能
 
 - パッケージ検索

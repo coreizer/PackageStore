@@ -7,7 +7,7 @@
 
   <h3 align="center">PackageStore</h3>
 
-  <p>PS Store(CD only) package search tools</p>
+  <p>PS Store (CD-only) package search tool</p>
 
   <p align="center">
     <a href="https://github.com/coreizer/PackageStore/issues">Report Bug</a>
@@ -21,38 +21,26 @@
   <ol>
     <li><a href="#👀-featured">Featured</a></li>
     <li><a href="#🖼️-screenshot">Screenshot</a></li>
-    <li><a href="#🙏-additional-resources-and-thanks">Additional resources and thanks</a></li>
+    <li><a href="#🙏-acknowledgements">Acknowledgements</a></li>
     <li><a href="#👷-author">Author</a></li>
     <li><a href="#🌏-stay-in-touch">Stay In Touch</a></li>
     <li><a href="#⚖️-license">License</a></li>
   </ol>
 </details>
 
-## 🖥️ Projects
-
-| Project | UI | Notes |
-| --- | --- | --- |
-| `src/PackageStore.csproj` | Windows Forms | Original Windows-only app |
-| `PackageStore.Avalonia/PackageStore.Avalonia.csproj` | [Avalonia UI](https://avaloniaui.net/) 12 | Cross-platform port, fixed dark theme |
-
-```sh
-dotnet run --project PackageStore.Avalonia
-```
-
 ## 👀 Featured
 
+## 👀 Featured
 - Package Search
-- Simple Download Manger
+- Simple Download Manager
 - Search history
-- Compensation of package Id using redump's database
-- Multilingual: English, Japanese (Form only)
+- Package ID completion using the Redump database
+- Multilingual support: English, Japanese (form only)
 
 ## 🖼️ Screenshot
-
 ![ScreenShot](docs/PackageStore.png)
 
-## 🙏 Additional resources and thanks
-
+## 🙏 Acknowledgements
 - [PS3 Developer Wiki - Environments](https://www.psdevwiki.com/ps3/Environments)
 - [ByteSize - Utility](https://github.com/omar/ByteSize)
 - [redump.org](http://redump.org/)
@@ -61,16 +49,16 @@ dotnet run --project PackageStore.Avalonia
 - [Fody](https://github.com/Fody/Fody)
 
 ## 🌏 Stay In Touch
-
 - [Website (coreizer.dev)](https://www.coreizer.dev)
 - [X](https://www.x.com/coreizer)
 
 ## 👷 Author
-
 - coreizer
 
 ## ⚖️ License
 
 This project is licensed under [GPL v3.0](https://opensource.org/license/lgpl-3-0/). See [License File](LICENSE) for details.
+
+---
 
 ![Alt](https://repobeats.axiom.co/api/embed/3eadd5b0eea3c6a47e03fbb06a56254be3a009d1.svg "Repobeats analytics image")
